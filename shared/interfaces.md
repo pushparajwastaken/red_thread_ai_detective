@@ -140,12 +140,40 @@ Build a deterministic branching dialogue baseline and compare it
 with dynamic dialogue using the same case, questions and evaluation
 criteria.
 
-## Shared Rules
+## Shared Rules and Contribution Workflow
 
-1. Import common data structures from shared.contracts.
-2. Do not rename contract fields without team agreement.
-3. Keep personal experiments in members/<name>/.
-4. Put reusable integrated code in src/.
-5. Put tests in tests/ and reproducible results in results/.
-6. Do not commit API keys or secrets.
-7. Run tests before opening a pull request.
+### 1. Individual Development
+
+- Each member must work only inside their assigned `members/<name>/` folder.
+- Each member's folder should contain their implementation, component tests, results where applicable, and a README explaining setup and execution.
+- Do not modify `src/`, `shared/`, or another member's folder without explicit approval from the integration lead.
+
+### 2. Shared Contracts
+
+- Import common data structures from `shared.contracts`.
+- Do not rename contract fields or change public function signatures independently.
+- Requests to modify `shared/` must be discussed with the integration lead first.
+- The integration lead maintains the authoritative shared contracts.
+
+### 3. Submission Workflow
+
+- Pull the latest `main` before starting work.
+- Create a separate feature branch for your assigned task.
+- Commit and push your work to that branch.
+- Before submission, run your component tests and document the results.
+- Send the integration lead your branch name, files changed, test results, dependencies, and instructions to run your component.
+- Do not merge branches into `main` or integrate code into `src/`. The integration lead reviews and integrates approved contributions.
+
+### 4. Integration
+
+- Only the integration lead moves or adapts approved implementations into `src/`.
+- Integrated application tests belong in `tests/`.
+- The integration lead resolves interface mismatches and verifies that the combined application works end to end.
+- Members must report blockers and dependency issues immediately.
+
+### 5. Security and Quality
+
+- Do not commit API keys, credentials, or other secrets.
+- Do not expose the full canonical case state to an NPC's language model prompt.
+- Every security or performance claim must be supported by reproducible test results.
+- Do not report unmeasured latency, cost, or security targets as achieved.
