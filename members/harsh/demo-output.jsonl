@@ -1,0 +1,4 @@
+{"scenario": "authorized", "text": "I saw a figure near the greenhouse.", "valid": true, "used_fallback": false, "reasons": ["OK"]}
+{"scenario": "missing_citation", "text": "I cannot answer that reliably.", "valid": false, "used_fallback": true, "reasons": ["UNCITED_ASSERTION"]}
+{"scenario": "protected_term", "text": "I cannot answer that reliably.", "valid": false, "used_fallback": true, "reasons": ["PROTECTED_TERM_LEAK"]}
+{"scenario": "timeout", "text": "I cannot answer that reliably.", "valid": false, "used_fallback": true, "reasons": ["GEN_TIMEOUT"]}
