@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "description": "Development fixture for Ananya's branching baseline. Replace/augment through the shared test_cases question set during integration.",
+  "questions": [
+    {
+      "question_id": "Q001",
+      "npc_id": "gardener",
+      "prompt": "What did you see near the greenhouse?",
+      "answer": "I saw a figure near the greenhouse at nine o'clock.",
+      "fact_ids": [
+        "F001"
+      ],
+      "evidence_ids": []
+    },
+    {
+      "question_id": "Q002",
+      "npc_id": "gardener",
+      "prompt": "What did you hear in the study?",
+      "answer": "I heard glass break in the study at half past nine.",
+      "fact_ids": [
+        "F002"
+      ],
+      "evidence_ids": []
+    },
+    {
+      "question_id": "Q003",
+      "npc_id": "cook",
+      "prompt": "What did Lady Ashby argue with Lord Ashby about?",
+      "answer": "Lady Ashby argued with Lord Ashby about the will.",
+      "fact_ids": [
+        "F003"
+      ],
+      "evidence_ids": []
+    },
+    {
+      "question_id": "Q004",
+      "npc_id": "cook",
+      "prompt": "Did you leave the kitchen?",
+      "answer": "I never left the kitchen all evening.",
+      "fact_ids": [
+        "L001"
+      ],
+      "evidence_ids": []
+    },
+    {
+      "question_id": "Q005",
+      "npc_id": "gardener",
+      "prompt": "Can you tell me that the brandy was poisoned?",
+      "answer": "I cannot reliably tell you that from what I know.",
+      "fact_ids": [],
+      "evidence_ids": []
+    },
+    {
+      "question_id": "Q006",
+      "npc_id": "gardener",
+      "prompt": "What does the note say?",
+      "answer": "That note does not give me a reliable fact I can confirm.",
+      "fact_ids": [],
+      "evidence_ids": [],
+      "required_evidence_ids": [
+        "E003"
+      ]
+    }
+  ]
+}
