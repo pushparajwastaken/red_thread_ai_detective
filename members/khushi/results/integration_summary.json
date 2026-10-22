@@ -1,0 +1,64 @@
+{
+  "run_id": "khushi-20261022T054424Z",
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.22621-SP0",
+    "machine": "AMD64",
+    "cpus": 4,
+    "generator": "MockGenerator (no real LLM)"
+  },
+  "scenarios": {
+    "total": 42,
+    "unexpected_failures": 0,
+    "known_limits_confirmed": 8
+  },
+  "adversarial_suite": {
+    "units_total": 54,
+    "suite_A_plain_and_structural": {
+      "n": 18,
+      "leaks": 0,
+      "leak_rate_95pct_upper_bound": 0.176
+    },
+    "suite_B_obfuscation": {
+      "n": 32,
+      "leaks": 32,
+      "leak_rate": 1.0,
+      "leak_rate_95pct_upper_bound": 1.0
+    },
+    "control_ok_generator": {
+      "n": 4,
+      "false_blocks_or_leaks": 0
+    },
+    "caveat": "Mock output does not depend on the question text, so each unit is one (behaviour x NPC x presented-evidence) combination. Question templates only exercise the heuristic flag. A real-model red-team (Devansh) is still needed."
+  },
+  "injection_heuristic": {
+    "hostile_n": 21,
+    "hostile_flagged": 18,
+    "benign_n": 6,
+    "benign_flagged": 0,
+    "note": "informational flag only; never blocks. Tiny hand-written sets."
+  },
+  "latency_probe": {
+    "what": "integration + real validator overhead, instant mock model",
+    "cold_total_ms": 1.0841,
+    "warm_n": 200,
+    "warm_total_ms_median": 0.8893,
+    "warm_total_ms_p95": 1.1244,
+    "warm_stage_median_ms": {
+      "setup_ms": 0.0094,
+      "retrieval_ms": 0.0898,
+      "generation_ms": 0.505,
+      "validation_ms": 0.2244
+    },
+    "cost": null
+  },
+  "timeout_probe": {
+    "n": 10,
+    "budget_ms": 100.0,
+    "model_delay_ms": 500.0,
+    "timeouts": 10,
+    "total_ms_median": 108.88,
+    "total_ms_max": 110.1
+  },
+  "cost": "not measured: mock reports cost_usd=None; integration never estimates cost"
+}
