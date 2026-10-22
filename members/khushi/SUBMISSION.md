@@ -1,12 +1,12 @@
 # Module 6 submission: Khushi
 
 - Branch: `khushi/integration-v2`
-- Tested implementation commit SHA: `<FILL: output of git rev-parse HEAD after the implementation commit>`
-- Base main commit: `dd1ecf4a0fa7ee60c522143a608cdaab0496098a` (`<FILL: update if main moved; see git merge-base HEAD origin/main>`)
+- Tested implementation commit SHA: `17ca20a8b8bb924a0cd9f76b15a14efbaa7a98bc`
+- Base main commit: `dd1ecf4a0fa7ee60c522143a608cdaab0496098a` 
 - This handoff file is a subsequent documentation-only commit. The implementation SHA above identifies the exact code, tests and captured outputs being submitted; it is intentionally not a self-referential hash of this file.
-- Test date: `<FILL: date you ran the commands below>`
+- Test date: 22 October 2026
 - Scope: only `members/khushi/`. Lead reviews/copies approved code into `src/` and owns shared interfaces. No PR into main and no merge.
-- Push status: `<FILL: "pushed to origin/khushi/integration-v2" or "pending: <reason>">`
+- Push status: pushed to origin/khushi/integration-v2
 
 ## Files
 
@@ -30,15 +30,14 @@
 
 | Dependency | Exact tested version | Already in root requirements.txt? |
 | --- | --- | --- |
-| Python (CPython runtime) | `Python == 3.12.3` (`<FILL: your version>`) | No; runtime. Root README requires Python 3.11+. |
+| Python (CPython runtime) | `Python == 3.11.9` | No; runtime. Root README requires Python 3.11+. |
 | Standard library (`unittest`, `dataclasses`, `concurrent.futures`, `re`, `unicodedata`, `csv`, `json`, `math`, `time`, `uuid`) | Bundled with Python | No external packages required. |
 | `pytest` (optional) | `pytest == 9.1.1` | Yes, unpinned. The suite is plain `unittest` and also collects under pytest. |
 | `shared.contracts`, `shared.fixture_case`, `members.harsh.validator` | Base commit above | Local project modules, not pip dependencies. |
 
 No new third-party dependency. Tests are offline, use no API key and make no LLM or network calls.
 
-Measured execution environment for the numbers below: assistant sandbox, Linux x86_64, 1 CPU, CPython 3.12.3.
-`<FILL: replace with your own OS / CPU / Python after re-running the commands on your machine>`
+Measured execution environment for the numbers below: Windows 10, AMD64, 4 CPUs, CPython 3.11.9 (the author's own machine).
 
 ## Exact commands
 
@@ -78,8 +77,8 @@ All runs use a MOCK model. They measure the integration layer plus Harsh's real 
 
 | Issue | Measurement | Result |
 | --- | --- | --- |
-| Latency | Integration + validator overhead with an instant mock model, warm n = 200 | median 0.29 ms, p95 0.52 ms (cold single call 0.36 ms); values vary slightly per run. The model dominates real latency. |
-| Latency | Deadline enforcement, n = 10, budget 100 ms, model delay 500 ms | 10 of 10 timed out; total_ms median 100.5, max 100.6 |
+| Latency | Integration + validator overhead with an instant mock model, warm n = 200 | median 0.89 ms, p95 1.12 ms (cold single call 1.08 ms); values vary slightly per run. The model dominates real latency. |
+| Latency | Deadline enforcement, n = 10, budget 100 ms, model delay 500 ms | 10 of 10 timed out; total_ms median 108.9, max 110.1 |
 | Cost | Mock reports no usage | `cost_usd = None` everywhere; not estimated. Needs a real backend. |
 | Injection | 42 scenarios (authorization, spoiler, unsupported claim, direct/indirect injection, malformed output, validator failure, timeout, fallback, e2e) | 0 unexpected failures; 8 known limits confirmed |
 | Injection | Adversarial suite, 50 distinct units + 4 controls | Plain/structural attacks: 0 of 18 leaked (95% upper bound 17.6%). Obfuscation/paraphrase attacks: 32 of 32 leaked. Controls: 0 false blocks. |
