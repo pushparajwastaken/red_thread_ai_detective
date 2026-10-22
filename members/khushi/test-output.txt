@@ -1,0 +1,44 @@
+test_evidence_not_permitted_for_this_npc_is_dropped_without_error (test_integration.TestEvidenceHandling.test_evidence_not_permitted_for_this_npc_is_dropped_without_error) ... ok
+test_future_evidence_is_dropped_and_never_sent (test_integration.TestEvidenceHandling.test_future_evidence_is_dropped_and_never_sent) ... ok
+test_presented_discovered_evidence_reaches_request (test_integration.TestEvidenceHandling.test_presented_discovered_evidence_reaches_request) ... ok
+test_request_does_not_alias_case_objects (test_integration.TestEvidenceHandling.test_request_does_not_alias_case_objects) ... ok
+test_retrieval_cannot_smuggle_unpermitted_evidence (test_integration.TestEvidenceHandling.test_retrieval_cannot_smuggle_unpermitted_evidence) ... ok
+test_returned_evidence_content_is_never_trusted (test_integration.TestEvidenceHandling.test_returned_evidence_content_is_never_trusted) ... ok
+test_unknown_and_duplicate_ids_are_exact_match_only (test_integration.TestEvidenceHandling.test_unknown_and_duplicate_ids_are_exact_match_only) ... ok
+test_cook_prompt_has_no_poison_content_at_all (test_integration.TestExclusionByConstruction.test_cook_prompt_has_no_poison_content_at_all) ... ok
+test_facts_are_exactly_the_authorized_ones (test_integration.TestExclusionByConstruction.test_facts_are_exactly_the_authorized_ones) ... ok
+test_future_fact_appears_only_after_progression (test_integration.TestExclusionByConstruction.test_future_fact_appears_only_after_progression) ... ok
+test_gardener_prompt_has_no_future_or_unauthorized_content (test_integration.TestExclusionByConstruction.test_gardener_prompt_has_no_future_or_unauthorized_content) ... ok
+test_benign_not_flagged (test_integration.TestInjectionHeuristic.test_benign_not_flagged) ... ok
+test_flag_never_blocks_a_legitimate_answer (test_integration.TestInjectionHeuristic.test_flag_never_blocks_a_legitimate_answer) ... ok
+test_hostile_flagged (test_integration.TestInjectionHeuristic.test_hostile_flagged) ... ok
+test_hostile_text_inside_evidence_is_flagged_but_not_blocked (test_integration.TestInjectionHeuristic.test_hostile_text_inside_evidence_is_flagged_but_not_blocked) ... ok
+test_non_strings_do_not_crash (test_integration.TestInjectionHeuristic.test_non_strings_do_not_crash) ... ok
+test_cost_is_passed_through_never_estimated (test_integration.TestMetrics.test_cost_is_passed_through_never_estimated) ... ok
+test_latency_equals_total_ms_on_every_scenario (test_integration.TestMetrics.test_latency_equals_total_ms_on_every_scenario) ... ok
+test_stage_timings_are_recorded (test_integration.TestMetrics.test_stage_timings_are_recorded) ... ok
+test_summarize_traces (test_integration.TestMetrics.test_summarize_traces) ... ok
+test_total_covers_generation_and_validation (test_integration.TestMetrics.test_total_covers_generation_and_validation) ... ok
+test_ttft_is_model_side_and_not_replaced_by_total (test_integration.TestMetrics.test_ttft_is_model_side_and_not_replaced_by_total) ... ok
+test_bad_timeout_values_fall_back_to_default (test_integration.TestNeverRaises.test_bad_timeout_values_fall_back_to_default) ... ok
+test_default_deps_work_out_of_the_box (test_integration.TestNeverRaises.test_default_deps_work_out_of_the_box) ... ok
+test_garbage_inputs_always_return_fallback (test_integration.TestNeverRaises.test_garbage_inputs_always_return_fallback) ... ok
+test_garbage_presented_evidence_is_ignored_not_trusted (test_integration.TestNeverRaises.test_garbage_presented_evidence_is_ignored_not_trusted) ... ok
+test_fallback_text_identical_for_every_failure (test_integration.TestNoOracle.test_fallback_text_identical_for_every_failure) ... ok
+test_reasons_and_text_never_contain_ids (test_integration.TestNoOracle.test_reasons_and_text_never_contain_ids) ... ok
+test_trace_never_stores_player_text (test_integration.TestNoOracle.test_trace_never_stores_player_text) ... ok
+test_all_scenarios (test_integration.TestScenarioTable.test_all_scenarios) ... ok
+test_scenario_ids_unique (test_integration.TestScenarioTable.test_scenario_ids_unique) ... ok
+test_deadline_enforced_even_if_generator_ignores_timeout (test_integration.TestSingleCallAndDeadline.test_deadline_enforced_even_if_generator_ignores_timeout) ... ok
+test_exactly_one_generator_call_even_when_validation_fails (test_integration.TestSingleCallAndDeadline.test_exactly_one_generator_call_even_when_validation_fails) ... ok
+test_long_question_is_truncated_before_the_model (test_integration.TestSingleCallAndDeadline.test_long_question_is_truncated_before_the_model) ... ok
+test_request_timeout_is_remaining_budget (test_integration.TestSingleCallAndDeadline.test_request_timeout_is_remaining_budget) ... ok
+test_advance_progression_is_monotonic (test_integration.TestStateRules.test_advance_progression_is_monotonic) ... ok
+test_discover_evidence_rules (test_integration.TestStateRules.test_discover_evidence_rules) ... ok
+test_interrogate_never_mutates_the_case (test_integration.TestStateRules.test_interrogate_never_mutates_the_case) ... ok
+test_request_id_propagates (test_integration.TestStateRules.test_request_id_propagates) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.944s
+
+OK
