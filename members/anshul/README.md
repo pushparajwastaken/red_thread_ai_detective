@@ -1,9 +1,13 @@
 # Module 4 — Dialogue Generator
 
 **Owner:** Anshul Prajapati
+
 **Project:** Red Thread — AI Detective Game
+
 **Contract:** `generate_dialogue(DialogueRequest) -> DialogueDraft`
+
 **Status:** implementation complete — test evidence in [`SUBMISSION.md`](SUBMISSION.md)
+
 
 The Dialogue Generator turns a **trusted, pre-authorized** interrogation request
 into an **untrusted** draft NPC reply. It is the only place where authorized
