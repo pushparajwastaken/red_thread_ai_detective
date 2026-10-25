@@ -1,0 +1,40 @@
+test_bad_case_type (test_retriever.RetrieverTests.test_bad_case_type) ... ok
+test_bad_permitted_types (test_retriever.RetrieverTests.test_bad_permitted_types) ... ok
+test_bad_question_types (test_retriever.RetrieverTests.test_bad_question_types) ... ok
+test_bad_top_k (test_retriever.RetrieverTests.test_bad_top_k) ... ok
+test_case_insensitive_question (test_retriever.RetrieverTests.test_case_insensitive_question) ... ok
+test_content_word_match_without_terms (test_retriever.RetrieverTests.test_content_word_match_without_terms) ... ok
+test_default_top_k_is_three (test_retriever.RetrieverTests.test_default_top_k_is_three) ... ok
+test_deterministic_repeat_calls (test_retriever.RetrieverTests.test_deterministic_repeat_calls) ... ok
+test_duplicate_permitted_ids_returned_once (test_retriever.RetrieverTests.test_duplicate_permitted_ids_returned_once) ... ok
+test_empty_permitted_returns_empty (test_retriever.RetrieverTests.test_empty_permitted_returns_empty) ... ok
+test_empty_question_returns_empty (test_retriever.RetrieverTests.test_empty_question_returns_empty) ... ok
+test_future_evidence_gated_by_progression (test_retriever.RetrieverTests.test_future_evidence_gated_by_progression) ... ok
+test_hostile_evidence_content_returned_as_data_unchanged (test_retriever.RetrieverTests.test_hostile_evidence_content_returned_as_data_unchanged) ... ok
+test_ids_are_exact_case_sensitive (test_retriever.RetrieverTests.test_ids_are_exact_case_sensitive) ... ok
+test_inputs_not_mutated (test_retriever.RetrieverTests.test_inputs_not_mutated) ... ok
+test_keyword_only_case_argument (test_retriever.RetrieverTests.test_keyword_only_case_argument) ... ok
+test_known_limit_inflection_not_matched (test_retriever.RetrieverTests.test_known_limit_inflection_not_matched) ... ok
+test_malformed_evidence_item_does_not_raise (test_retriever.RetrieverTests.test_malformed_evidence_item_does_not_raise) ... ok
+test_mentioning_an_id_does_not_select_it (test_retriever.RetrieverTests.test_mentioning_an_id_does_not_select_it) ... ok
+test_no_match_returns_empty_list (test_retriever.RetrieverTests.test_no_match_returns_empty_list) ... ok
+test_non_string_permitted_entries_skipped (test_retriever.RetrieverTests.test_non_string_permitted_entries_skipped) ... ok
+test_order_independent_of_permitted_order (test_retriever.RetrieverTests.test_order_independent_of_permitted_order) ... ok
+test_output_builds_a_valid_dialogue_request (test_retriever.RetrieverTests.test_output_builds_a_valid_dialogue_request) ... ok
+test_question_cannot_grant_permission (test_retriever.RetrieverTests.test_question_cannot_grant_permission) ... ok
+test_results_are_copies_not_aliases (test_retriever.RetrieverTests.test_results_are_copies_not_aliases) ... ok
+test_returns_evidence_item_objects (test_retriever.RetrieverTests.test_returns_evidence_item_objects) ... ok
+test_sorted_score_desc (test_retriever.RetrieverTests.test_sorted_score_desc) ... ok
+test_term_match_returns_item (test_retriever.RetrieverTests.test_term_match_returns_item) ... ok
+test_tie_broken_by_id_ascending (test_retriever.RetrieverTests.test_tie_broken_by_id_ascending) ... ok
+test_top_k_limits_results (test_retriever.RetrieverTests.test_top_k_limits_results) ... ok
+test_unicode_normalization_nfkc (test_retriever.RetrieverTests.test_unicode_normalization_nfkc) ... ok
+test_unknown_id_skipped (test_retriever.RetrieverTests.test_unknown_id_skipped) ... ok
+test_unpermitted_item_not_returned (test_retriever.RetrieverTests.test_unpermitted_item_not_returned) ... ok
+test_very_long_question_is_bounded (test_retriever.RetrieverTests.test_very_long_question_is_bounded) ... ok
+test_whole_word_only (test_retriever.RetrieverTests.test_whole_word_only) ... ok
+
+----------------------------------------------------------------------
+Ran 35 tests in 0.003s
+
+OK
