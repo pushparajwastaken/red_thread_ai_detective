@@ -11,6 +11,7 @@ from members.chhavi.benchmark import (
     create_benchmark_record,
     calculate_median,
     calculate_p95,
+    summarize_results,
 )
 
 
@@ -67,6 +68,62 @@ class TestBenchmark(unittest.TestCase):
         self.assertEqual(record.mode, "dynamic")
         self.assertTrue(record.valid)
         self.assertIsNone(record.cost_usd)
+
+        def test_summary_groups_and_missing_ttft(self):
+        records = []
+
+        samples = [
+            ("dynamic", "mock-a", 100.0, None),
+            ("dynamic", "mock-a", 300.0, 50.0),
+            ("branching", "fixed", 10.0, None),
+            ("dynamic", "mock-b", 500.0, None),
+        ]
+
+        for index, (mode, model, total, ttft) in enumerate(samples):
+            result = DialogueResult(
+                npc_id="gardener",
+                text="Test response.",
+                cited_fact_ids=[],
+                valid=True,
+                used_fallback=False,
+                latency_ms=total,
+                reasons=["OK"],
+                metrics=TurnMetrics(
+                    mode=mode,
+                    model=model,
+                    total_ms=total,
+                    ttft_ms=ttft,
+                ),
+            )
+
+            records.append(create_benchmark_record(
+                result,
+                f"test_{index}",
+                "Q001",
+                "test-hardware",
+            ))
+
+        summaries = {
+            (item["mode"], item["model"]): item
+            for item in summarize_results(records)
+        }
+
+        self.assertEqual(len(summaries), 3)
+
+        dynamic = summaries[("dynamic", "mock-a")]
+        self.assertEqual(dynamic["n"], 2)
+        self.assertEqual(dynamic["total_median_ms"], 200.0)
+        self.assertAlmostEqual(dynamic["total_p95_ms"], 290.0)
+        self.assertEqual(dynamic["ttft_n"], 1)
+        self.assertEqual(dynamic["ttft_median_ms"], 50.0)
+        self.assertEqual(dynamic["fallback_count"], 0)
+
+        branching = summaries[("branching", "fixed")]
+        self.assertEqual(branching["ttft_n"], 0)
+        self.assertIsNone(branching["ttft_median_ms"])
+        self.assertIsNone(branching["ttft_p95_ms"])
+
+        self.assertEqual(summarize_results([]), [])
 
     def test_missing_metrics(self):
         result = DialogueResult(
