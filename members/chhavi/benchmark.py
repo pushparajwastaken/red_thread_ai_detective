@@ -1,4 +1,3 @@
-
 """
 Red Thread AI Detective
 Module 8: Performance Benchmarking
@@ -16,19 +15,14 @@ from shared.contracts import BenchmarkRecord, DialogueResult
 
 
 def save_results(records, filename):
-    """Save benchmark records in CSV format."""
-
+    """Save benchmark records using the contract's CSV column order."""
     path = Path(filename)
     path.parent.mkdir(parents=True, exist_ok=True)
 
-    columns = [
-        field.name for field in fields(BenchmarkRecord)
-    ]
+    columns = [field.name for field in fields(BenchmarkRecord)]
 
     with path.open("w", newline="", encoding="utf-8") as file:
-        writer = csv.DictWriter(
-            file, fieldnames=columns
-        )
+        writer = csv.DictWriter(file, fieldnames=columns)
         writer.writeheader()
 
         for record in records:
@@ -36,16 +30,15 @@ def save_results(records, filename):
 
 
 def calculate_median(values):
-    """Return the median of recorded latencies."""
-
+    """Return the median, or None when no measurements exist."""
     if not values:
         return None
 
     return statistics.median(values)
-  
-def calculate_p95(values):
-    """Calculate the 95th percentile latency."""
 
+
+def calculate_p95(values):
+    """Calculate the 95th percentile using linear interpolation."""
     if not values:
         return None
 
@@ -57,14 +50,14 @@ def calculate_p95(values):
     position = (len(sorted_values) - 1) * 0.95
     lower = int(position)
     upper = min(lower + 1, len(sorted_values) - 1)
-
     fraction = position - lower
 
     return (
         sorted_values[lower] * (1 - fraction)
         + sorted_values[upper] * fraction
     )
-    
+
+
 def create_benchmark_record(
     result: DialogueResult,
     run_id: str,
@@ -72,7 +65,6 @@ def create_benchmark_record(
     hardware: str,
 ):
     """Convert an interrogation result into a benchmark record."""
-
     metrics = result.metrics
 
     if metrics is None:
@@ -100,9 +92,10 @@ def create_benchmark_record(
         answer_correct=None,
         leaked_protected_fact=None,
     )
-    def summarize_results(records):
-    """Summarize latency separately for each mode and model."""
 
+
+def summarize_results(records):
+    """Summarize latency separately for each mode and model."""
     groups = {}
 
     for record in records:
@@ -134,5 +127,3 @@ def create_benchmark_record(
         })
 
     return summaries
-
-
