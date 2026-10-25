@@ -2,7 +2,7 @@
 
 **Member:** Chhavi Sharma  
 **Branch:** chhavi/benchmarking  
-**Status:** Mock workflow verified; final benchmarking pending.
+**Status:** Benchmark tool implemented; separate mock cold/warm groups verified. Real evaluation and integration-lead review pending.
 
 ## Reference commit
 
@@ -22,6 +22,10 @@ All paths below are relative to `members/chhavi/`.
 - `mock-20261025T141514Z-931f6331/benchmark_results.csv`
 - `mock-20261025T141514Z-931f6331/summary.json`
 - `SUBMISSION.md`
+- `mock-20261025T151640Z-05bd5428/cold/benchmark_results.csv`
+- `mock-20261025T151640Z-05bd5428/cold/summary.json`
+- `mock-20261025T151640Z-05bd5428/warm/benchmark_results.csv`
+- `mock-20261025T151640Z-05bd5428/warm/summary.json`
 
 ## Environment and dependencies
 
@@ -91,17 +95,25 @@ real model latency, game performance or security.
 
 ## Known limits and remaining work
 
-- Cold and warm runs are not yet separated.
-- Real integration measurements remain pending.
-- Branching baseline comparison remains pending.
+- Separate cold/warm output groups are implemented and exercised in mock
+  mode. Actual cold/warm model measurements remain pending.
+- Real runs require a synchronous reset hook, reset description and
+  backend configuration. Reset behavior needs integration-lead review.
+- Reset duration is excluded from request latency. Model loading is
+  included only when it occurs inside the measured target call.
+- Runner-specific tests for reset/warmup order, output separation and
+  failure logging remain to be added. The six existing tests cover
+  benchmark helper functions.
+- Real integration measurements and branching comparison remain pending.
 - Final questions and scoring rubric need alignment with Ananya.
-- Model/backend configuration must be recorded for real runs.
-- The current runner stops on target exceptions or missing metrics;
-  those failures do not become completed benchmark records.
-- The integration lead's review is pending.
+- Answer correctness and protected-fact leakage remain unscored.
+- Target exceptions are recorded in summary.json before the run stops.
+  Failed attempts are not converted into BenchmarkRecords.
+- Warmup calls are excluded from measured records and reported costs.
+- Integration-lead review is pending.
 
-No claim is made that Module 8 is fully Done or that any real-model
-latency target has been achieved.
+Module 8 is not yet fully Done. No real-model latency or security
+target is claimed as achieved.
 
 ## Contribution workflow
 
@@ -109,3 +121,36 @@ Work is contained under `members/chhavi/`.
 No PR or merge is required under the current workflow.
 The integration lead reviews and copies approved artifacts into
 central locations.
+
+## Latest mock workflow verification
+
+Run ID: `mock-20261025T151640Z-05bd5428`
+
+Hardware: MacBook Air (Mac14,2), Apple M2, 16 GB RAM.
+
+Command:
+
+```bash
+python3 -m members.chhavi.run_benchmark --mock --hardware "MacBook Air (Mac14,2), Apple M2, 16 GB RAM"
+```
+
+Observed output:
+
+```text
+cold: 120 records
+warm: 120 records
+```
+
+The existing helper test suite also passed:
+
+```text
+6 passed in 0.01s
+```
+
+The 240 measured mock records verify the runner's output workflow.
+They do not establish real cold/warm model performance or security.
+The mock intentionally returns synthetic fallbacks.
+
+The earlier reference commit identifies the initial implementation
+snapshot; it does not include this later runner update. The updated
+submission commit can be identified through this file's Git history.
