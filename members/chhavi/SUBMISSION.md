@@ -4,7 +4,6 @@
 **Branch:** chhavi/benchmarking  
 **Status:** Benchmark tool implemented; separate mock cold/warm groups verified. Real evaluation and integration-lead review pending.
 
-## Reference commit
 
 ## Reference commit
 
@@ -13,8 +12,8 @@ Latest implementation and archived mock-evidence snapshot:
 `3cd3cabe7162ad729ce0a83d06b551400ef471da`
 
 This snapshot includes the updated runner, separate cold/warm mock
-evidence, report and submission status. Runner-specific tests and
-real evaluation remain pending.
+evidence, report and submission status. 
+Nine focused tests passed. Real evaluation remains pending.
 
 ## Files
 
@@ -32,6 +31,8 @@ All paths below are relative to `members/chhavi/`.
 - `mock-20261025T151640Z-05bd5428/cold/summary.json`
 - `mock-20261025T151640Z-05bd5428/warm/benchmark_results.csv`
 - `mock-20261025T151640Z-05bd5428/warm/summary.json`
+- `test_run_benchmark.py`
+
 
 ## Environment and dependencies
 
@@ -107,9 +108,6 @@ real model latency, game performance or security.
   backend configuration. Reset behavior needs integration-lead review.
 - Reset duration is excluded from request latency. Model loading is
   included only when it occurs inside the measured target call.
-- Runner-specific tests for reset/warmup order, output separation and
-  failure logging remain to be added. The six existing tests cover
-  benchmark helper functions.
 - Real integration measurements and branching comparison remain pending.
 - Final questions and scoring rubric need alignment with Ananya.
 - Answer correctness and protected-fact leakage remain unscored.
@@ -157,3 +155,12 @@ The 240 measured mock records verify the runner's output workflow.
 They do not establish real cold/warm model performance or security.
 The mock intentionally returns synthetic fallbacks.
 
+## Latest test verification
+
+Command:
+`python3 -m pytest members/chhavi/test_benchmark.py members/chhavi/test_run_benchmark.py -v`
+
+Result: 9 passed.
+
+Coverage includes statistics, record conversion, cold reset order,
+warmup exclusion, separate outputs and failure logging.
