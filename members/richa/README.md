@@ -4,44 +4,25 @@ Author: Richa Bharti
 
 ## Overview
 
-This module is responsible for loading mystery case data into the system.
+`load_case(case_id: str) -> CaseState` loads the deterministic `case_001` case
+fixture. The returned public case contract contains canonical facts, fact
+metadata, evidence, and NPC grants for exactly three suspects.
 
-The Case Engine loads a case using a case ID and returns a valid CaseState object.
+## Case contents
 
-## Features
+- One victim and a coherent ground-truth timeline.
+- Ten internal clues with references to valid facts, evidence, and suspects.
+- Lowercase fact metadata terms with relevant word inflections.
+- An authored in-world lie marked with `kind="cover_story"`.
+- Fresh case data for each call; no mutable state is shared across loads.
 
-- Loads case data
-- Stores canonical facts
-- Stores fact metadata
-- Stores evidence records
-- Stores NPC grants
-- Handles invalid case IDs
+The `clues` and `timeline` fields are for the Case Engine only. Other modules
+must not read them.
 
-## Main Function
+## Running tests
 
-load_case(case_id: str)
-
-Returns a valid CaseState object.
-
-## Files Included
-
-- case_engine.py
-- test_case_engine.py
-
-## Running Tests
-
+```powershell
 python -m pytest members/richa/test_case_engine.py
+```
 
-## Test Status
-
-5 passed
-
-## Limitations
-
-- Only CASE_001 is implemented.
-- Timeline data is minimal.
-- More cases can be added later.
-
-## Notes
-
-This implementation follows the shared contracts provided for the Red Thread project.
+See [SUBMISSION.md](./SUBMISSION.md) for the integrity report and test result.
