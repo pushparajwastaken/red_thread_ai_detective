@@ -100,5 +100,39 @@ def create_benchmark_record(
         answer_correct=None,
         leaked_protected_fact=None,
     )
+    def summarize_results(records):
+    """Summarize latency separately for each mode and model."""
+
+    groups = {}
+
+    for record in records:
+        key = (record.mode, record.model)
+        groups.setdefault(key, []).append(record)
+
+    summaries = []
+
+    for (mode, model), group in sorted(groups.items()):
+        total_values = [record.total_ms for record in group]
+        ttft_values = [
+            record.ttft_ms
+            for record in group
+            if record.ttft_ms is not None
+        ]
+
+        summaries.append({
+            "mode": mode,
+            "model": model,
+            "n": len(group),
+            "total_median_ms": calculate_median(total_values),
+            "total_p95_ms": calculate_p95(total_values),
+            "ttft_n": len(ttft_values),
+            "ttft_median_ms": calculate_median(ttft_values),
+            "ttft_p95_ms": calculate_p95(ttft_values),
+            "fallback_count": sum(
+                record.used_fallback for record in group
+            ),
+        })
+
+    return summaries
 
 
