@@ -6,9 +6,15 @@
 
 ## Reference commit
 
-Implementation and evidence snapshot before adding this submission:
+## Reference commit
 
-`fdb4bbd5a7d85520f07a5037ed5d1b02ef9f8665`
+Latest implementation and archived mock-evidence snapshot:
+
+`3cd3cabe7162ad729ce0a83d06b551400ef471da`
+
+This snapshot includes the updated runner, separate cold/warm mock
+evidence, report and submission status. Runner-specific tests and
+real evaluation remain pending.
 
 ## Files
 
@@ -151,6 +157,3 @@ The 240 measured mock records verify the runner's output workflow.
 They do not establish real cold/warm model performance or security.
 The mock intentionally returns synthetic fallbacks.
 
-The earlier reference commit identifies the initial implementation
-snapshot; it does not include this later runner update. The updated
-submission commit can be identified through this file's Git history.
