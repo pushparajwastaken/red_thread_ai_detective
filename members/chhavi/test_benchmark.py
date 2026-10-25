@@ -1,129 +1,152 @@
 """
-Red Thread AI Detective
-Module 8: Performance Benchmarking
+Tests for Module 8: Performance Benchmarking
 Developer: Chhavi Sharma
-
-Benchmark result storage and latency statistics.
 """
 
-import csv
-import statistics
-from dataclasses import asdict, fields
-from pathlib import Path
+import unittest
 
-from shared.contracts import BenchmarkRecord, DialogueResult
-
-
-def save_results(records, filename):
-    """Save benchmark records in CSV format."""
-    path = Path(filename)
-    path.parent.mkdir(parents=True, exist_ok=True)
-
-    columns = [field.name for field in fields(BenchmarkRecord)]
-
-    with path.open("w", newline="", encoding="utf-8") as file:
-        writer = csv.DictWriter(file, fieldnames=columns)
-        writer.writeheader()
-
-        for record in records:
-            writer.writerow(asdict(record))
+from shared.contracts import DialogueResult, TurnMetrics
+from members.chhavi.benchmark import (
+    create_benchmark_record,
+    calculate_median,
+    calculate_p95,
+    summarize_results,
+)
 
 
-def calculate_median(values):
-    """Return the median of recorded latencies."""
-    if not values:
-        return None
+class TestBenchmark(unittest.TestCase):
 
-    return statistics.median(values)
-
-
-def calculate_p95(values):
-    """Calculate p95 using linear interpolation."""
-    if not values:
-        return None
-
-    sorted_values = sorted(values)
-
-    if len(sorted_values) == 1:
-        return sorted_values[0]
-
-    position = (len(sorted_values) - 1) * 0.95
-    lower = int(position)
-    upper = min(lower + 1, len(sorted_values) - 1)
-    fraction = position - lower
-
-    return (
-        sorted_values[lower] * (1 - fraction)
-        + sorted_values[upper] * fraction
-    )
-
-
-def create_benchmark_record(
-    result: DialogueResult,
-    run_id: str,
-    question_id: str,
-    hardware: str,
-):
-    """Convert an interrogation result into a benchmark record."""
-    metrics = result.metrics
-
-    if metrics is None:
-        raise ValueError(
-            "Cannot benchmark a result without TurnMetrics"
+    def test_median(self):
+        self.assertEqual(
+            calculate_median([100, 200, 300, 400, 500]),
+            300,
         )
 
-    return BenchmarkRecord(
-        run_id=run_id,
-        mode=metrics.mode,
-        model=metrics.model,
-        hardware=hardware,
-        question_id=question_id,
-        npc_id=result.npc_id,
-        ttft_ms=metrics.ttft_ms,
-        generation_ms=metrics.generation_ms,
-        validation_ms=metrics.validation_ms,
-        total_ms=metrics.total_ms,
-        prompt_tokens=metrics.prompt_tokens,
-        completion_tokens=metrics.completion_tokens,
-        cost_usd=metrics.cost_usd,
-        valid=result.valid,
-        used_fallback=result.used_fallback,
-        reasons=";".join(result.reasons),
-        answer_correct=None,
-        leaked_protected_fact=None,
-    )
+    def test_p95(self):
+        self.assertAlmostEqual(
+            calculate_p95([100, 200, 300, 400, 500]),
+            480,
+        )
 
+    def test_empty_values(self):
+        self.assertIsNone(calculate_median([]))
+        self.assertIsNone(calculate_p95([]))
 
-def summarize_results(records):
-    """Summarize latency separately for each mode and model."""
-    groups = {}
+    def test_create_benchmark_record(self):
+        metrics = TurnMetrics(
+            mode="dynamic",
+            model="test-model",
+            ttft_ms=120.0,
+            generation_ms=300.0,
+            validation_ms=20.0,
+            total_ms=450.0,
+            prompt_tokens=100,
+            completion_tokens=50,
+            cost_usd=None,
+        )
 
-    for record in records:
-        key = (record.mode, record.model)
-        groups.setdefault(key, []).append(record)
+        result = DialogueResult(
+            npc_id="npc_test",
+            text="I was at home.",
+            cited_fact_ids=[],
+            valid=True,
+            used_fallback=False,
+            latency_ms=450.0,
+            reasons=["OK"],
+            metrics=metrics,
+        )
 
-    summaries = []
+        record = create_benchmark_record(
+            result=result,
+            run_id="test_run_001",
+            question_id="Q001",
+            hardware="test-hardware",
+        )
 
-    for (mode, model), group in sorted(groups.items()):
-        total_values = [record.total_ms for record in group]
-        ttft_values = [
-            record.ttft_ms
-            for record in group
-            if record.ttft_ms is not None
+        self.assertEqual(record.total_ms, 450.0)
+        self.assertEqual(record.ttft_ms, 120.0)
+        self.assertEqual(record.model, "test-model")
+        self.assertEqual(record.mode, "dynamic")
+        self.assertTrue(record.valid)
+        self.assertIsNone(record.cost_usd)
+
+    def test_summary_groups_and_missing_ttft(self):
+        records = []
+
+        samples = [
+            ("dynamic", "mock-a", 100.0, None),
+            ("dynamic", "mock-a", 300.0, 50.0),
+            ("branching", "fixed", 10.0, None),
+            ("dynamic", "mock-b", 500.0, None),
         ]
 
-        summaries.append({
-            "mode": mode,
-            "model": model,
-            "n": len(group),
-            "total_median_ms": calculate_median(total_values),
-            "total_p95_ms": calculate_p95(total_values),
-            "ttft_n": len(ttft_values),
-            "ttft_median_ms": calculate_median(ttft_values),
-            "ttft_p95_ms": calculate_p95(ttft_values),
-            "fallback_count": sum(
-                record.used_fallback for record in group
-            ),
-        })
+        for index, (mode, model, total, ttft) in enumerate(samples):
+            result = DialogueResult(
+                npc_id="gardener",
+                text="Test response.",
+                cited_fact_ids=[],
+                valid=True,
+                used_fallback=False,
+                latency_ms=total,
+                reasons=["OK"],
+                metrics=TurnMetrics(
+                    mode=mode,
+                    model=model,
+                    total_ms=total,
+                    ttft_ms=ttft,
+                ),
+            )
 
-    return summaries
+            records.append(
+                create_benchmark_record(
+                    result,
+                    f"test_{index}",
+                    "Q001",
+                    "test-hardware",
+                )
+            )
+
+        summaries = {
+            (item["mode"], item["model"]): item
+            for item in summarize_results(records)
+        }
+
+        self.assertEqual(len(summaries), 3)
+
+        dynamic = summaries[("dynamic", "mock-a")]
+        self.assertEqual(dynamic["n"], 2)
+        self.assertEqual(dynamic["total_median_ms"], 200.0)
+        self.assertAlmostEqual(dynamic["total_p95_ms"], 290.0)
+        self.assertEqual(dynamic["ttft_n"], 1)
+        self.assertEqual(dynamic["ttft_median_ms"], 50.0)
+        self.assertEqual(dynamic["fallback_count"], 0)
+
+        branching = summaries[("branching", "fixed")]
+        self.assertEqual(branching["ttft_n"], 0)
+        self.assertIsNone(branching["ttft_median_ms"])
+        self.assertIsNone(branching["ttft_p95_ms"])
+
+        self.assertEqual(summarize_results([]), [])
+
+    def test_missing_metrics(self):
+        result = DialogueResult(
+            npc_id="npc_test",
+            text="I cannot answer that reliably.",
+            cited_fact_ids=[],
+            valid=False,
+            used_fallback=True,
+            latency_ms=0.0,
+            metrics=None,
+        )
+
+        with self.assertRaises(ValueError):
+            create_benchmark_record(
+                result,
+                "test_run_002",
+                "Q002",
+                "test-hardware",
+            )
+
+
+if __name__ == "__main__":
+    unittest.main()
