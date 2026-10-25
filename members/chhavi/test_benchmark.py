@@ -1,4 +1,3 @@
-
 """
 Tests for Module 8: Performance Benchmarking
 Developer: Chhavi Sharma
@@ -23,9 +22,7 @@ class TestBenchmark(unittest.TestCase):
 
     def test_p95(self):
         values = [100, 200, 300, 400, 500]
-        self.assertAlmostEqual(
-            calculate_p95(values), 480
-        )
+        self.assertAlmostEqual(calculate_p95(values), 480)
 
     def test_empty_values(self):
         self.assertIsNone(calculate_median([]))
@@ -69,7 +66,7 @@ class TestBenchmark(unittest.TestCase):
         self.assertTrue(record.valid)
         self.assertIsNone(record.cost_usd)
 
-        def test_summary_groups_and_missing_ttft(self):
+    def test_summary_groups_and_missing_ttft(self):
         records = []
 
         samples = [
@@ -96,12 +93,14 @@ class TestBenchmark(unittest.TestCase):
                 ),
             )
 
-            records.append(create_benchmark_record(
-                result,
-                f"test_{index}",
-                "Q001",
-                "test-hardware",
-            ))
+            records.append(
+                create_benchmark_record(
+                    result,
+                    f"test_{index}",
+                    "Q001",
+                    "test-hardware",
+                )
+            )
 
         summaries = {
             (item["mode"], item["model"]): item
@@ -147,3 +146,5 @@ class TestBenchmark(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+       
+      
