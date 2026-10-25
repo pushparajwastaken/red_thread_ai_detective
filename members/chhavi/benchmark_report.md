@@ -33,7 +33,7 @@ All work is contained under `members/chhavi/`.
 | Python | 3.9.6 |
 | pytest | 8.4.2 |
 | OS reported by runner | macOS-27.0.1-arm64-arm-64bit |
-| Hardware | MacBook; exact chip and RAM pending |
+| Hardware | MacBook Air (Mac14,2), Apple M2, 16 GB RAM |
 | Case | case_001 |
 | Starting progression | 0 |
 | Questions | 12 |
@@ -113,7 +113,7 @@ originally generated them beneath its `results/` directory.
 
 ## Remaining work
 
-- Record the exact hardware chip and RAM.
+
 - Connect the reviewed integration implementation.
 - Implement and document separate cold and warm measurements.
 - Record model version, backend configuration and available usage.
