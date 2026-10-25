@@ -1,0 +1,7 @@
+$ python -m pytest tests/test_npc_knowledge.py -q --disable-warnings --ignore=test_output.txt
+........                                                                 [100%]
+8 passed in 0.13s
+
+$ python -m pytest -q --disable-warnings --ignore=test_output.txt
+........                                                                 [100%]
+8 passed in 0.07s
