@@ -115,7 +115,7 @@ originally generated them beneath its `results/` directory.
 
 
 - Connect the reviewed integration implementation.
-- Implement and document separate cold and warm measurements.
+- Verify the reset hook and collect actual cold/warm model measurements.
 - Record model version, backend configuration and available usage.
 - Align the final question set and scoring rubric with Ananya.
 - Run the branching baseline under matching conditions.
@@ -134,3 +134,32 @@ report it; no silent estimates are used.
 
 The twelve-question set is provisional. Final comparisons must use the
 same questions, NPCs, presented evidence and starting case state.
+
+## Update: Separate cold/warm workflow
+
+Run ID: `mock-20261025T151640Z-05bd5428`
+
+The updated runner completed:
+- Cold-labelled mock group: 120 records.
+- Warm-labelled mock group: 120 records.
+- Six existing helper tests passed.
+
+Evidence:
+- `mock-20261025T151640Z-05bd5428/cold/benchmark_results.csv`
+- `mock-20261025T151640Z-05bd5428/cold/summary.json`
+- `mock-20261025T151640Z-05bd5428/warm/benchmark_results.csv`
+- `mock-20261025T151640Z-05bd5428/warm/summary.json`
+
+These groups verify output separation only. The mock has no model
+to unload or warm up, so these are not real cold/warm measurements.
+
+For real runs, the runner requires a synchronous reset hook,
+a reset description and backend configuration. Each cold sample
+follows a reset. Each warm sample follows a reset and warmup calls.
+Reset duration is excluded from request timing.
+
+Target exceptions are recorded in summary.json before the run stops.
+They are not converted into successful BenchmarkRecords.
+
+Real integration measurements, reset-hook verification, branching
+comparison and correctness/leakage scoring remain pending.
