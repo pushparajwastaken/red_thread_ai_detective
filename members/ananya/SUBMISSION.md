@@ -48,7 +48,5 @@ Development test suite: 10 tests passing in 0.13s against the current shared/fix
 
 ## Branch / commit
 
-Fill these in after creating the personal feature branch and committing:
-
-- Branch: feature/ananya-branching-baseline
-- Commit: pending documentation update
+- Branch: `feature/ananya-branching-baseline`
+- Commit: `8cb02ab`
