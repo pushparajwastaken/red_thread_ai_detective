@@ -1,0 +1,9 @@
+test_id,file,function,class,status,duration_ms,message,category
+TC_PROGRESSION_001,test_progression.py,test_TC_PROG_001_reveal_at_values,,PASSED,0.27,,progression
+TC_PROGRESSION_002,test_progression.py,test_TC_PROG_002_f004_grant_blocked_before_reveal[0],,PASSED,0.47,,progression
+TC_PROGRESSION_003,test_progression.py,test_TC_PROG_002_f004_grant_blocked_before_reveal[1],,PASSED,0.57,,progression
+TC_PROGRESSION_004,test_progression.py,test_TC_PROG_003_f004_allowed_from_reveal[2],,PASSED,0.72,,progression
+TC_PROGRESSION_005,test_progression.py,test_TC_PROG_003_f004_allowed_from_reveal[3],,PASSED,0.52,,progression
+TC_PROGRESSION_006,test_progression.py,test_TC_PROG_004_e009_boundary[1-True],,PASSED,0.68,,progression
+TC_PROGRESSION_007,test_progression.py,test_TC_PROG_004_e009_boundary[2-False],,PASSED,0.79,,progression
+TC_PROGRESSION_008,test_progression.py,test_TC_PROG_005_progression_alone_does_not_grant,,PASSED,0.43,,progression

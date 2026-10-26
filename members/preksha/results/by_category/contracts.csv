@@ -1,0 +1,15 @@
+test_id,file,function,class,status,duration_ms,message,category
+TC_CONTRACTS_001,test_contracts.py,test_TC_CONTRACT_001_baseline_case_constructs,,PASSED,0.95,,contracts
+TC_CONTRACTS_002,test_contracts.py,test_TC_CONTRACT_002_negative_progression,,PASSED,0.3,,contracts
+TC_CONTRACTS_003,test_contracts.py,test_TC_CONTRACT_003_fact_meta_unknown_fact,,PASSED,0.5,,contracts
+TC_CONTRACTS_004,test_contracts.py,test_TC_CONTRACT_004_evidence_key_mismatch,,PASSED,0.24,,contracts
+TC_CONTRACTS_005,test_contracts.py,test_TC_CONTRACT_005_evidence_supports_unknown_fact,,PASSED,0.26,,contracts
+TC_CONTRACTS_006,test_contracts.py,test_TC_CONTRACT_006_grant_unknown_fact,,PASSED,1.66,,contracts
+TC_CONTRACTS_007,test_contracts.py,test_TC_CONTRACT_007_grant_unknown_evidence,,PASSED,0.48,,contracts
+TC_CONTRACTS_008,test_contracts.py,test_TC_CONTRACT_008_discovered_unknown_evidence,,PASSED,6.11,,contracts
+TC_CONTRACTS_009,test_contracts.py,test_TC_CONTRACT_009_negative_latency,,PASSED,0.41,,contracts
+TC_CONTRACTS_010,test_contracts.py,test_TC_CONTRACT_010_valid_xor_used_fallback[True-True],,PASSED,0.91,,contracts
+TC_CONTRACTS_011,test_contracts.py,test_TC_CONTRACT_010_valid_xor_used_fallback[False-False],,PASSED,0.76,,contracts
+TC_CONTRACTS_012,test_contracts.py,test_TC_CONTRACT_011_fallback_carries_no_citations[citations0],,PASSED,0.6,,contracts
+TC_CONTRACTS_013,test_contracts.py,test_TC_CONTRACT_011_fallback_carries_no_citations[citations1],,PASSED,0.41,,contracts
+TC_CONTRACTS_014,test_contracts.py,test_TC_CONTRACT_012_valid_result_may_cite,,PASSED,0.61,,contracts

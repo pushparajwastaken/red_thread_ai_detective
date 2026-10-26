@@ -1,0 +1,723 @@
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_contracts.py -v
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 14 items                                                                                                      
+
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_001_baseline_case_constructs PASSED                     [  7%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_002_negative_progression PASSED                         [ 14%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_003_fact_meta_unknown_fact PASSED                       [ 21%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_004_evidence_key_mismatch PASSED                        [ 28%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_005_evidence_supports_unknown_fact PASSED               [ 35%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_006_grant_unknown_fact PASSED                           [ 42%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_007_grant_unknown_evidence PASSED                       [ 50%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_008_discovered_unknown_evidence PASSED                  [ 57%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_009_negative_latency PASSED                             [ 64%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_010_valid_xor_used_fallback[True-True] PASSED           [ 71%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_010_valid_xor_used_fallback[False-False] PASSED         [ 78%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_011_fallback_carries_no_citations[citations0] PASSED    [ 85%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_011_fallback_carries_no_citations[citations1] PASSED    [ 92%]
+members/preksha/tests/test_contracts.py::test_TC_CONTRACT_012_valid_result_may_cite PASSED                        [100%]
+
+================================================== 14 passed in 0.24s ==================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_fixture.py
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 16 items                                                                                                      
+
+members\preksha\tests\test_fixture.py ................                                                            [100%]
+
+================================================== 16 passed in 0.21s ==================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_malformed_output.py -v
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 26 items                                                                                                      
+
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_001_non_ok_status_maps_to_reason[malformed-GEN_MALFORMED] PASSED [  3%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_001_non_ok_status_maps_to_reason[timeout-GEN_TIMEOUT] PASSED [  7%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_001_non_ok_status_maps_to_reason[error-GEN_ERROR] PASSED [ 11%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[status0] PASSED             [ 15%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[status1] PASSED             [ 19%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[text0] PASSED               [ 23%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[text1] PASSED               [ 26%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[text2] PASSED               [ 30%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[text3] PASSED               [ 34%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[cited_fact_ids0] PASSED     [ 38%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[cited_fact_ids1] PASSED     [ 42%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[cited_fact_ids2] PASSED     [ 46%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[cited_evidence_ids] PASSED  [ 50%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[npc_id] PASSED              [ 53%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[error] PASSED               [ 57%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[metrics0] PASSED            [ 61%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[metrics1] PASSED            [ 65%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_002_bad_draft_shape[metrics2] PASSED            [ 69%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_003_draft_not_a_dataclass PASSED                [ 73%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_004_length_boundary PASSED                      [ 76%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_005_generator_failures_become_fallback[not_json] PASSED [ 80%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_005_generator_failures_become_fallback[missing_field] PASSED [ 84%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_005_generator_failures_become_fallback[cites_absent_id] PASSED [ 88%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_005_generator_failures_become_fallback[timeout] PASSED [ 92%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_005_generator_failures_become_fallback[error] PASSED [ 96%]
+members/preksha/tests/test_malformed_output.py::test_TC_MALFORMED_006_default_mock_reply_is_valid PASSED          [100%]
+
+================================================== 26 passed in 0.32s ==================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_progression.py -v
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 8 items                                                                                                       
+
+members/preksha/tests/test_progression.py::test_TC_PROG_001_reveal_at_values PASSED                               [ 12%]
+members/preksha/tests/test_progression.py::test_TC_PROG_002_f004_grant_blocked_before_reveal[0] PASSED            [ 25%]
+members/preksha/tests/test_progression.py::test_TC_PROG_002_f004_grant_blocked_before_reveal[1] PASSED            [ 37%]
+members/preksha/tests/test_progression.py::test_TC_PROG_003_f004_allowed_from_reveal[2] PASSED                    [ 50%]
+members/preksha/tests/test_progression.py::test_TC_PROG_003_f004_allowed_from_reveal[3] PASSED                    [ 62%]
+members/preksha/tests/test_progression.py::test_TC_PROG_004_e009_boundary[1-True] PASSED                          [ 75%]
+members/preksha/tests/test_progression.py::test_TC_PROG_004_e009_boundary[2-False] PASSED                         [ 87%]
+members/preksha/tests/test_progression.py::test_TC_PROG_005_progression_alone_does_not_grant PASSED               [100%]
+
+================================================== 8 passed in 0.17s ===================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_progression.py   
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 8 items                                                                                                       
+
+members\preksha\tests\test_progression.py ........                                                                [100%]
+
+================================================== 8 passed in 0.10s ===================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_request_security.py -v
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 10 items                                                                                                      
+
+members/preksha/tests/test_request_security.py::test_TC_REQSEC_001_post_init_cross_field[fact_not_authorized] PASSED [ 10%]
+members/preksha/tests/test_request_security.py::test_TC_REQSEC_001_post_init_cross_field[evidence_not_permitted] PASSED [ 20%]
+members/preksha/tests/test_request_security.py::test_TC_REQSEC_001_post_init_cross_field[presented_not_permitted] PASSED [ 30%]
+members/preksha/tests/test_request_security.py::test_TC_REQSEC_002_question_cannot_enlarge_authority PASSED       [ 40%]
+members/preksha/tests/test_request_security.py::test_TC_REQSEC_003_indirect_injection_via_evidence_cannot_leak PASSED [ 50%]
+members/preksha/tests/test_request_security.py::test_TC_REQSEC_004_forged_fact_text_rejected PASSED               [ 60%]
+members/preksha/tests/test_request_security.py::test_TC_REQSEC_005_forged_evidence_content_rejected PASSED        [ 70%]
+members/preksha/tests/test_request_security.py::test_TC_REQSEC_006_self_authorized_spoiler_rejected PASSED        [ 80%]
+members/preksha/tests/test_request_security.py::test_TC_REQSEC_007_request_npc_must_match_context PASSED          [ 90%]
+members/preksha/tests/test_request_security.py::test_TC_REQSEC_008_draft_npc_must_match_context PASSED            [100%]
+
+================================================== 10 passed in 0.12s ==================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_spoiler.py -v 
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 13 items                                                                                                      
+
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_001_cite_unauthorized_fact[0] PASSED                       [  7%]
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_001_cite_unauthorized_fact[1] PASSED                       [ 15%]
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_001_cite_unauthorized_fact[2] PASSED                       [ 23%]
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_002_protected_term_without_citation[The drink was poisoned.] PASSED [ 30%]
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_002_protected_term_without_citation[It was poison.] PASSED [ 38%]
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_002_protected_term_without_citation[Somebody used the BRANDY.] PASSED [ 46%]
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_002_protected_term_without_citation[Look at the decanter.] PASSED [ 53%]
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_002_protected_term_without_citation[There was arsenic in it.] PASSED [ 61%]
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_002_protected_term_without_citation[\uff22\uff32\uff21\uff2e\uff24\uff39 was involved.] PASSED [ 69%]
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_003_cite_and_speak_spoiler_reports_both PASSED             [ 76%]
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_004_cite_unpermitted_evidence PASSED                       [ 84%]
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_005_cook_cannot_leak_either PASSED                         [ 92%]
+members/preksha/tests/test_spoiler.py::test_TC_SPOILER_006_fallback_does_not_echo_leaked_text PASSED              [100%]
+
+================================================== 13 passed in 0.16s ==================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_unsupported_claim.py -v
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 9 items                                                                                                       
+
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_001_authorized_term_without_citation PASSED      [ 11%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_002_wrong_authorized_citation PASSED             [ 22%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_003_term_matching_is_case_insensitive PASSED     [ 33%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_004_evidence_term_needs_evidence_citation PASSED [ 44%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_005_cook_cover_story_needs_citation PASSED       [ 55%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_006_supported_or_termless_replies_pass[fact_cited] PASSED [ 66%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_006_supported_or_termless_replies_pass[evidence_cited] PASSED [ 77%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_006_supported_or_termless_replies_pass[cover_story_cited] PASSED [ 88%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_006_supported_or_termless_replies_pass[no_terms_no_cites] PASSED [100%]
+
+================================================== 9 passed in 0.20s ===================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_authorization.py -v 
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 0 items                                                                                                       
+
+================================================ no tests ran in 0.03s =================================================
+ERROR: file or directory not found: members/preksha/tests/test_authorization.py
+
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_authorization.py -v 
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 11 items                                                                                                      
+
+members/preksha/tests/test_authorization.py::test_TC_AUTH_001_request_rejects_extra_fact PASSED                   [  9%]
+members/preksha/tests/test_authorization.py::test_TC_AUTH_002_request_rejects_extra_evidence PASSED               [ 18%]
+members/preksha/tests/test_authorization.py::test_TC_AUTH_003_request_rejects_unpermitted_presented_id PASSED     [ 27%]
+members/preksha/tests/test_authorization.py::test_TC_AUTH_004_consistent_request_constructs[gardener] PASSED      [ 36%]
+members/preksha/tests/test_authorization.py::test_TC_AUTH_004_consistent_request_constructs[cook] PASSED          [ 45%]
+members/preksha/tests/test_authorization.py::test_TC_AUTH_005_request_must_match_npc_context[widened_facts] PASSED [ 54%]
+members/preksha/tests/test_authorization.py::test_TC_AUTH_005_request_must_match_npc_context[narrowed_facts] PASSED [ 63%]
+members/preksha/tests/test_authorization.py::test_TC_AUTH_005_request_must_match_npc_context[narrowed_evidence] PASSED [ 72%]
+members/preksha/tests/test_authorization.py::test_TC_AUTH_006_npc_context_cannot_exceed_grant PASSED              [ 81%]
+members/preksha/tests/test_authorization.py::test_TC_AUTH_007_presented_evidence_must_be_discovered PASSED        [ 90%]
+members/preksha/tests/test_authorization.py::test_TC_AUTH_008_authorized_reply_is_accepted PASSED                 [100%]
+
+================================================== 11 passed in 0.18s ==================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 108 items                                                                                                     
+
+members\preksha\tests\test_authorization.py ...........                                                           [ 10%]
+members\preksha\tests\test_contracts.py ..............                                                            [ 23%]
+members\preksha\tests\test_demo.py .                                                                              [ 24%]
+members\preksha\tests\test_fixture.py ................                                                            [ 38%]
+members\preksha\tests\test_malformed_output.py ..........................                                         [ 62%]
+members\preksha\tests\test_progression.py ........                                                                [ 70%]
+members\preksha\tests\test_request_security.py ..........                                                         [ 79%]
+members\preksha\tests\test_spoiler.py .............                                                               [ 91%]
+members\preksha\tests\test_unsupported_claim.py .........                                                         [100%]
+
+================================================= 108 passed in 0.44s ==================================================
+
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_timeout.py -v
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache                                                         
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 7 items                                                                                                       
+
+members/preksha/tests/test_timeout.py::test_TC_TIMEOUT_001_scripted_timeout_gives_timeout_draft PASSED            [ 14%]
+members/preksha/tests/test_timeout.py::test_TC_TIMEOUT_002_timeout_draft_carries_no_content PASSED                [ 28%]
+members/preksha/tests/test_timeout.py::test_TC_TIMEOUT_003_validator_maps_timeout_to_gen_timeout PASSED           [ 42%]
+members/preksha/tests/test_timeout.py::test_TC_TIMEOUT_004_fallback_latency_is_non_negative PASSED                [ 57%]
+members/preksha/tests/test_timeout.py::test_TC_TIMEOUT_005_cook_timeout_also_falls_back PASSED                    [ 71%]
+members/preksha/tests/test_timeout.py::test_TC_TIMEOUT_006_script_is_scoped_to_request_id PASSED                  [ 85%]
+members/preksha/tests/test_timeout.py::test_TC_TIMEOUT_007_cleared_script_no_longer_times_out PASSED              [100%]
+
+================================================== 7 passed in 0.13s ===================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_unsupported_claim.py -v   
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 9 items                                                                                                       
+
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_001_authorized_term_without_citation PASSED      [ 11%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_002_wrong_authorized_citation PASSED             [ 22%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_003_term_matching_is_case_insensitive PASSED     [ 33%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_004_evidence_term_needs_evidence_citation PASSED [ 44%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_005_cook_cover_story_needs_citation PASSED       [ 55%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_006_supported_or_termless_replies_pass[fact_cited] PASSED [ 66%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_006_supported_or_termless_replies_pass[evidence_cited] PASSED [ 77%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_006_supported_or_termless_replies_pass[cover_story_cited] PASSED [ 88%]
+members/preksha/tests/test_unsupported_claim.py::test_TC_UNCITED_006_supported_or_termless_replies_pass[no_terms_no_cites] PASSED [100%]
+
+================================================== 9 passed in 0.11s ===================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_validator_failclosed.py -v
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 52 items                                                                                                      
+
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_001_garbage_draft_object[none] PASSED      [  1%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_001_garbage_draft_object[dict] PASSED      [  3%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_001_garbage_draft_object[str] PASSED       [  5%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_001_garbage_draft_object[int] PASSED       [  7%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_001_garbage_draft_object[list] PASSED      [  9%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_001_garbage_draft_object[object] PASSED    [ 11%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[text-] PASSED   [ 13%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[text-   ] PASSED [ 15%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[text-None] PASSED [ 17%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[text-123] PASSED [ 19%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[text-value4] PASSED [ 21%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[text-I saw nothing.] PASSED [ 23%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[cited_fact_ids-None] PASSED [ 25%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[cited_fact_ids-F001] PASSED [ 26%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[cited_fact_ids-value8] PASSED [ 28%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[cited_fact_ids-value9] PASSED [ 30%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[cited_fact_ids-value10] PASSED [ 32%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[cited_fact_ids-value11] PASSED [ 34%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[cited_evidence_ids-None] PASSED [ 36%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[cited_evidence_ids-E001] PASSED [ 38%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[cited_evidence_ids-value14] PASSED [ 40%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[cited_evidence_ids-value15] PASSED [ 42%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[npc_id-None] PASSED [ 44%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[npc_id-] PASSED [ 46%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[npc_id-5] PASSED [ 48%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[status-None] PASSED [ 50%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[status-0] PASSED [ 51%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[status-weird] PASSED [ 53%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[error-None] PASSED [ 55%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[metrics-None] PASSED [ 57%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_002_malformed_draft_fields[metrics-fast] PASSED [ 59%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_003_garbage_request[none] PASSED           [ 61%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_003_garbage_request[dict] PASSED           [ 63%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_003_garbage_request[str] PASSED            [ 65%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_003_garbage_request[int] PASSED            [ 67%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_003_garbage_request[object] PASSED         [ 69%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_004_garbage_case_or_npc[none] PASSED       [ 71%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_004_garbage_case_or_npc[dict] PASSED       [ 73%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_004_garbage_case_or_npc[str] PASSED        [ 75%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_004_garbage_case_or_npc[object] PASSED     [ 76%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_005_corrupt_case_field[progression-0] PASSED [ 78%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_005_corrupt_case_field[progression--1] PASSED [ 80%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_005_corrupt_case_field[canonical_facts-None] PASSED [ 82%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_005_corrupt_case_field[evidence-None] PASSED [ 84%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_005_corrupt_case_field[npc_grants-value4] PASSED [ 86%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_006_corrupt_npc_fact_list[None] PASSED     [ 88%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_006_corrupt_npc_fact_list[F001] PASSED     [ 90%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_006_corrupt_npc_fact_list[value2] PASSED   [ 92%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_006_corrupt_npc_fact_list[value3] PASSED   [ 94%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_007_everything_garbage_still_returns PASSED [ 96%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_008_internal_crash_gives_validator_error PASSED [ 98%]
+members/preksha/tests/test_validator_failclosed.py::test_TC_FAILCLOSED_009_valid_inputs_still_pass PASSED         [100%]
+
+================================================== 52 passed in 0.27s ==================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_npc_shim.py -v            
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 14 items                                                                                                      
+
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_001_gardener_returns_contract_context PASSED                 [  7%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_002_cook_returns_contract_context PASSED                     [ 14%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_003_gardener_authorized_facts_exact PASSED                   [ 21%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_004_cook_includes_cover_story PASSED                         [ 28%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_005_permitted_evidence_matches_grant[gardener-evidence0] PASSED [ 35%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_005_permitted_evidence_matches_grant[cook-evidence1] PASSED  [ 42%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_006_persona_is_copied_from_grant[gardener-A blunt old gardener.] PASSED [ 50%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_006_persona_is_copied_from_grant[cook-A nervous cook.] PASSED [ 57%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_007_spoilers_are_never_authorized[gardener] PASSED           [ 64%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_007_spoilers_are_never_authorized[cook] PASSED               [ 71%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_008_lists_are_independent_copies PASSED                      [ 78%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_009_unknown_npc_raises_key_error PASSED                      [ 85%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_010_shim_context_is_accepted_by_validator[gardener-I saw a figure by the greenhouse.-facts0] PASSED [ 92%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_010_shim_context_is_accepted_by_validator[cook-I stayed in the kitchen.-facts1] PASSED [100%]
+
+================================================== 14 passed in 0.14s ==================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_case_engine_load.py -v
+C:\msys64\ucrt64\bin\python.exe: No module named pytest
+PS C:\Users\Dell\Desktop\Red_thread> ./venv/Scripts/Activate.ps1
+./venv/Scripts/Activate.ps1 : The term './venv/Scripts/Activate.ps1' is not recognized as the name of a cmdlet, 
+function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the 
+path is correct and try again.
+At line:1 char:1
++ ./venv/Scripts/Activate.ps1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (./venv/Scripts/Activate.ps1:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+PS C:\Users\Dell\Desktop\Red_thread> ./venv/bin/Activate.ps1                                               
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_case_engine_load.py -v 
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 9 items                                                                                                       
+
+members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_001_returns_case_state ERROR                      [ 11%]
+members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_002_case_id_is_uppercase ERROR                    [ 22%]
+members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_003_rohan_has_a_grant ERROR                       [ 33%]
+members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_004_all_three_npcs_are_granted[NPC_ROHAN] ERROR   [ 44%]
+members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_004_all_three_npcs_are_granted[NPC_WITNESS] ERROR [ 55%]
+members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_004_all_three_npcs_are_granted[NPC_FORENSIC] ERROR [ 66%]
+members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_005_evidence_e001_and_e002_exist ERROR            [ 77%]
+members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_006_evidence_items_are_keyed_correctly[E001] ERROR [ 88%]
+members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_006_evidence_items_are_keyed_correctly[E002] ERROR [100%]
+
+======================================================== ERRORS ========================================================
+_______________________________ ERROR at setup of test_TC_CASEENG_001_returns_case_state _______________________________
+
+    @pytest.fixture
+    def case():
+        """Fresh CASE_001 from the real case engine."""
+>       return load_case("CASE_001")
+               ^^^^^^^^^^^^^^^^^^^^^
+
+members\preksha\tests\test_case_engine_load.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_id = 'CASE_001'
+
+    def load_case(case_id: str) -> CaseState:
+        """Load the authored case, raising ContractError for unknown or invalid IDs."""
+        if not isinstance(case_id, str) or case_id != CASE_ID:
+>           raise ContractError(f"Unknown case id: {case_id!r}")
+E           shared.contracts.ContractError: Unknown case id: 'CASE_001'
+
+members\richa\case_engine.py:216: ContractError
+______________________________ ERROR at setup of test_TC_CASEENG_002_case_id_is_uppercase ______________________________
+
+    @pytest.fixture
+    def case():
+        """Fresh CASE_001 from the real case engine."""
+>       return load_case("CASE_001")
+               ^^^^^^^^^^^^^^^^^^^^^
+
+members\preksha\tests\test_case_engine_load.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_id = 'CASE_001'
+
+    def load_case(case_id: str) -> CaseState:
+        """Load the authored case, raising ContractError for unknown or invalid IDs."""
+        if not isinstance(case_id, str) or case_id != CASE_ID:
+>           raise ContractError(f"Unknown case id: {case_id!r}")
+E           shared.contracts.ContractError: Unknown case id: 'CASE_001'
+
+members\richa\case_engine.py:216: ContractError
+_______________________________ ERROR at setup of test_TC_CASEENG_003_rohan_has_a_grant ________________________________
+
+    @pytest.fixture
+    def case():
+        """Fresh CASE_001 from the real case engine."""
+>       return load_case("CASE_001")
+               ^^^^^^^^^^^^^^^^^^^^^
+
+members\preksha\tests\test_case_engine_load.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_id = 'CASE_001'
+
+    def load_case(case_id: str) -> CaseState:
+        """Load the authored case, raising ContractError for unknown or invalid IDs."""
+        if not isinstance(case_id, str) or case_id != CASE_ID:
+>           raise ContractError(f"Unknown case id: {case_id!r}")
+E           shared.contracts.ContractError: Unknown case id: 'CASE_001'
+
+members\richa\case_engine.py:216: ContractError
+_____________________ ERROR at setup of test_TC_CASEENG_004_all_three_npcs_are_granted[NPC_ROHAN] ______________________
+
+    @pytest.fixture
+    def case():
+        """Fresh CASE_001 from the real case engine."""
+>       return load_case("CASE_001")
+               ^^^^^^^^^^^^^^^^^^^^^
+
+members\preksha\tests\test_case_engine_load.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_id = 'CASE_001'
+
+    def load_case(case_id: str) -> CaseState:
+        """Load the authored case, raising ContractError for unknown or invalid IDs."""
+        if not isinstance(case_id, str) or case_id != CASE_ID:
+>           raise ContractError(f"Unknown case id: {case_id!r}")
+E           shared.contracts.ContractError: Unknown case id: 'CASE_001'
+
+members\richa\case_engine.py:216: ContractError
+____________________ ERROR at setup of test_TC_CASEENG_004_all_three_npcs_are_granted[NPC_WITNESS] _____________________
+
+    @pytest.fixture
+    def case():
+        """Fresh CASE_001 from the real case engine."""
+>       return load_case("CASE_001")
+               ^^^^^^^^^^^^^^^^^^^^^
+
+members\preksha\tests\test_case_engine_load.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_id = 'CASE_001'
+
+    def load_case(case_id: str) -> CaseState:
+        """Load the authored case, raising ContractError for unknown or invalid IDs."""
+        if not isinstance(case_id, str) or case_id != CASE_ID:
+>           raise ContractError(f"Unknown case id: {case_id!r}")
+E           shared.contracts.ContractError: Unknown case id: 'CASE_001'
+
+members\richa\case_engine.py:216: ContractError
+____________________ ERROR at setup of test_TC_CASEENG_004_all_three_npcs_are_granted[NPC_FORENSIC] ____________________
+
+    @pytest.fixture
+    def case():
+        """Fresh CASE_001 from the real case engine."""
+>       return load_case("CASE_001")
+               ^^^^^^^^^^^^^^^^^^^^^
+
+members\preksha\tests\test_case_engine_load.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_id = 'CASE_001'
+
+    def load_case(case_id: str) -> CaseState:
+        """Load the authored case, raising ContractError for unknown or invalid IDs."""
+        if not isinstance(case_id, str) or case_id != CASE_ID:
+>           raise ContractError(f"Unknown case id: {case_id!r}")
+E           shared.contracts.ContractError: Unknown case id: 'CASE_001'
+
+members\richa\case_engine.py:216: ContractError
+__________________________ ERROR at setup of test_TC_CASEENG_005_evidence_e001_and_e002_exist __________________________
+
+    @pytest.fixture
+    def case():
+        """Fresh CASE_001 from the real case engine."""
+>       return load_case("CASE_001")
+               ^^^^^^^^^^^^^^^^^^^^^
+
+members\preksha\tests\test_case_engine_load.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_id = 'CASE_001'
+
+    def load_case(case_id: str) -> CaseState:
+        """Load the authored case, raising ContractError for unknown or invalid IDs."""
+        if not isinstance(case_id, str) or case_id != CASE_ID:
+>           raise ContractError(f"Unknown case id: {case_id!r}")
+E           shared.contracts.ContractError: Unknown case id: 'CASE_001'
+
+members\richa\case_engine.py:216: ContractError
+____________________ ERROR at setup of test_TC_CASEENG_006_evidence_items_are_keyed_correctly[E001] ____________________
+
+    @pytest.fixture
+    def case():
+        """Fresh CASE_001 from the real case engine."""
+>       return load_case("CASE_001")
+               ^^^^^^^^^^^^^^^^^^^^^
+
+members\preksha\tests\test_case_engine_load.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_id = 'CASE_001'
+
+    def load_case(case_id: str) -> CaseState:
+        """Load the authored case, raising ContractError for unknown or invalid IDs."""
+        if not isinstance(case_id, str) or case_id != CASE_ID:
+>           raise ContractError(f"Unknown case id: {case_id!r}")
+E           shared.contracts.ContractError: Unknown case id: 'CASE_001'
+
+members\richa\case_engine.py:216: ContractError
+____________________ ERROR at setup of test_TC_CASEENG_006_evidence_items_are_keyed_correctly[E002] ____________________
+
+    @pytest.fixture
+    def case():
+        """Fresh CASE_001 from the real case engine."""
+>       return load_case("CASE_001")
+               ^^^^^^^^^^^^^^^^^^^^^
+
+members\preksha\tests\test_case_engine_load.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_id = 'CASE_001'
+
+    def load_case(case_id: str) -> CaseState:
+        """Load the authored case, raising ContractError for unknown or invalid IDs."""
+        if not isinstance(case_id, str) or case_id != CASE_ID:
+>           raise ContractError(f"Unknown case id: {case_id!r}")
+E           shared.contracts.ContractError: Unknown case id: 'CASE_001'
+
+members\richa\case_engine.py:216: ContractError
+=============================================== short test summary info ================================================
+ERROR members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_001_returns_case_state - shared.contracts.ContractError: Unknown case id: 'CASE_001'
+ERROR members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_002_case_id_is_uppercase - shared.contracts.ContractError: Unknown case id: 'CASE_001'
+ERROR members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_003_rohan_has_a_grant - shared.contracts.ContractError: Unknown case id: 'CASE_001'
+ERROR members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_004_all_three_npcs_are_granted[NPC_ROHAN] - shared.contracts.ContractError: Unknown case id: 'CASE_001'
+ERROR members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_004_all_three_npcs_are_granted[NPC_WITNESS] - shared.contracts.ContractError: Unknown case id: 'CASE_001'
+ERROR members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_004_all_three_npcs_are_granted[NPC_FORENSIC] - shared.contracts.ContractError: Unknown case id: 'CASE_001'
+ERROR members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_005_evidence_e001_and_e002_exist - shared.contracts.ContractError: Unknown case id: 'CASE_001'
+ERROR members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_006_evidence_items_are_keyed_correctly[E001] - shared.contracts.ContractError: Unknown case id: 'CASE_001'
+ERROR members/preksha/tests/test_case_engine_load.py::test_TC_CASEENG_006_evidence_items_are_keyed_correctly[E002] - shared.contracts.ContractError: Unknown case id: 'CASE_001'
+================================================== 9 errors in 0.51s ===================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_npc_shim.py -v         
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 14 items                                                                                                      
+
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_001_gardener_returns_contract_context PASSED                 [  7%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_002_cook_returns_contract_context PASSED                     [ 14%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_003_gardener_authorized_facts_exact PASSED                   [ 21%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_004_cook_includes_cover_story PASSED                         [ 28%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_005_permitted_evidence_matches_grant[gardener-evidence0] PASSED [ 35%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_005_permitted_evidence_matches_grant[cook-evidence1] PASSED  [ 42%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_006_persona_is_copied_from_grant[gardener-A blunt old gardener.] PASSED [ 50%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_006_persona_is_copied_from_grant[cook-A nervous cook.] PASSED [ 57%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_007_spoilers_are_never_authorized[gardener] PASSED           [ 64%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_007_spoilers_are_never_authorized[cook] PASSED               [ 71%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_008_lists_are_independent_copies PASSED                      [ 78%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_009_unknown_npc_raises_key_error PASSED                      [ 85%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_010_shim_context_is_accepted_by_validator[gardener-I saw a figure by the greenhouse.-facts0] PASSED [ 92%]
+members/preksha/tests/test_npc_shim.py::test_TC_SHIM_010_shim_context_is_accepted_by_validator[cook-I stayed in the kitchen.-facts1] PASSED [100%]
+
+================================================== 14 passed in 0.19s ==================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_validator_terms.py -v  
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 20 items                                                                                                      
+
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_001_term_inside_longer_word_is_not_a_hit[willful-gardener] PASSED [  5%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_001_term_inside_longer_word_is_not_a_hit[willful-cook] PASSED [ 10%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_001_term_inside_longer_word_is_not_a_hit[willow-gardener] PASSED [ 15%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_001_term_inside_longer_word_is_not_a_hit[willow-cook] PASSED [ 20%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_001_term_inside_longer_word_is_not_a_hit[goodwill-gardener] PASSED [ 25%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_001_term_inside_longer_word_is_not_a_hit[goodwill-cook] PASSED [ 30%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_001_term_inside_longer_word_is_not_a_hit[unwilling-gardener] PASSED [ 35%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_001_term_inside_longer_word_is_not_a_hit[unwilling-cook] PASSED [ 40%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_002_multiword_term_uncited_is_uncited_assertion PASSED [ 45%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_003_multiword_term_is_protected_for_gardener PASSED  [ 50%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_004_multiword_term_cited_is_accepted PASSED          [ 55%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_005_multiword_term_survives_formatting_tricks[spaces] PASSED [ 60%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_005_multiword_term_survives_formatting_tricks[newline] PASSED [ 65%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_005_multiword_term_survives_formatting_tricks[tab] PASSED [ 70%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_005_multiword_term_survives_formatting_tricks[uppercase] PASSED [ 75%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_005_multiword_term_survives_formatting_tricks[fullwidth] PASSED [ 80%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_006_partial_multiword_term_is_not_a_hit PASSED       [ 85%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_007_nfkc_fullwidth_will_is_folded PASSED             [ 90%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_008_cyrillic_homoglyph_must_not_evade_terms[gardener_protected] FAILED [ 95%]
+members/preksha/tests/test_validator_terms.py::test_TC_TERMS_008_cyrillic_homoglyph_must_not_evade_terms[cook_uncited] FAILED [100%]
+
+======================================================= FAILURES =======================================================
+____________________ test_TC_TERMS_008_cyrillic_homoglyph_must_not_evade_terms[gardener_protected] _____________________
+
+npc_id = 'gardener', reason = 'PROTECTED_TERM_LEAK'
+
+    @pytest.mark.parametrize("npc_id,reason", [
+        ("gardener", Reason.PROTECTED_TERM_LEAK),
+        ("cook", Reason.UNCITED_ASSERTION),
+    ], ids=["gardener_protected", "cook_uncited"])
+    def test_TC_TERMS_008_cyrillic_homoglyph_must_not_evade_terms(npc_id, reason):
+        """'wіll' (Cyrillic U+0456) must still trigger the 'will' check.
+    
+        NOTE: NFKC has no mapping for Cyrillic 'i', so a plain NFKC+casefold
+        normalizer leaves it unchanged and this check can fail. A failure here
+        is a real validator gap (homoglyph bypass), not a test error.
+        """
+        result = _validate(npc_id, "Somebody changed the wіll.")
+>       _assert_fallback(result, reason)
+
+members\preksha\tests\test_validator_terms.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = DialogueResult(npc_id='gardener', text='Somebody changed the wіll.', cited_fact_ids=[], valid=True, used_fallback=Fals...dation_ms=3.6291000433266163, total_ms=0.0, prompt_tokens=None, completion_tokens=None, cost_usd=None, prompt_chars=0))
+reason = 'PROTECTED_TERM_LEAK'
+
+    def _assert_fallback(result, reason):
+>       assert reason in result.reasons, f"expected {reason}, got {result.reasons}"
+E       AssertionError: expected PROTECTED_TERM_LEAK, got ['OK']
+E       assert 'PROTECTED_TERM_LEAK' in ['OK']
+E        +  where ['OK'] = DialogueResult(npc_id='gardener', text='Somebody changed the wіll.', cited_fact_ids=[], valid=True, used_fallback=False, latency_ms=0.0, cited_evidence_ids=[], reasons=['OK'], metrics=TurnMetrics(mode='dynamic', model='', ttft_ms=None, generation_ms=0.0, validation_ms=3.6291000433266163, total_ms=0.0, prompt_tokens=None, completion_tokens=None, cost_usd=None, prompt_chars=0)).reasons
+
+members\preksha\tests\test_validator_terms.py:36: AssertionError
+_______________________ test_TC_TERMS_008_cyrillic_homoglyph_must_not_evade_terms[cook_uncited] ________________________
+
+npc_id = 'cook', reason = 'UNCITED_ASSERTION'
+
+    @pytest.mark.parametrize("npc_id,reason", [
+        ("gardener", Reason.PROTECTED_TERM_LEAK),
+        ("cook", Reason.UNCITED_ASSERTION),
+    ], ids=["gardener_protected", "cook_uncited"])
+    def test_TC_TERMS_008_cyrillic_homoglyph_must_not_evade_terms(npc_id, reason):
+        """'wіll' (Cyrillic U+0456) must still trigger the 'will' check.
+    
+        NOTE: NFKC has no mapping for Cyrillic 'i', so a plain NFKC+casefold
+        normalizer leaves it unchanged and this check can fail. A failure here
+        is a real validator gap (homoglyph bypass), not a test error.
+        """
+        result = _validate(npc_id, "Somebody changed the wіll.")
+>       _assert_fallback(result, reason)
+
+members\preksha\tests\test_validator_terms.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = DialogueResult(npc_id='cook', text='Somebody changed the wіll.', cited_fact_ids=[], valid=True, used_fallback=False, l...ation_ms=0.20320015028119087, total_ms=0.0, prompt_tokens=None, completion_tokens=None, cost_usd=None, prompt_chars=0))
+reason = 'UNCITED_ASSERTION'
+
+    def _assert_fallback(result, reason):
+>       assert reason in result.reasons, f"expected {reason}, got {result.reasons}"
+E       AssertionError: expected UNCITED_ASSERTION, got ['OK']
+E       assert 'UNCITED_ASSERTION' in ['OK']
+E        +  where ['OK'] = DialogueResult(npc_id='cook', text='Somebody changed the wіll.', cited_fact_ids=[], valid=True, used_fallback=False, latency_ms=0.0, cited_evidence_ids=[], reasons=['OK'], metrics=TurnMetrics(mode='dynamic', model='', ttft_ms=None, generation_ms=0.0, validation_ms=0.20320015028119087, total_ms=0.0, prompt_tokens=None, completion_tokens=None, cost_usd=None, prompt_chars=0)).reasons
+
+members\preksha\tests\test_validator_terms.py:36: AssertionError
+=============================================== short test summary info ================================================
+FAILED members/preksha/tests/test_validator_terms.py::test_TC_TERMS_008_cyrillic_homoglyph_must_not_evade_terms[gardener_protected] - AssertionError: expected PROTECTED_TERM_LEAK, got ['OK']
+FAILED members/preksha/tests/test_validator_terms.py::test_TC_TERMS_008_cyrillic_homoglyph_must_not_evade_terms[cook_uncited] - AssertionError: expected UNCITED_ASSERTION, got ['OK']
+============================================= 2 failed, 18 passed in 0.44s =============================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_validator_metrics.py -v 
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 12 items                                                                                                      
+
+members/preksha/tests/test_validator_metrics.py::test_TC_METRICS_001_accepted_result_carries_metrics PASSED       [  8%]
+members/preksha/tests/test_validator_metrics.py::test_TC_METRICS_002_latency_equals_total_ms PASSED               [ 16%]
+members/preksha/tests/test_validator_metrics.py::test_TC_METRICS_003_validation_ms_is_measured PASSED             [ 25%]
+members/preksha/tests/test_validator_metrics.py::test_TC_METRICS_004_metrics_are_copied_not_aliased PASSED        [ 33%]
+members/preksha/tests/test_validator_metrics.py::test_TC_METRICS_005_fallback_keeps_metrics_and_latency PASSED    [ 41%]
+members/preksha/tests/test_validator_metrics.py::test_TC_METRICS_006_non_ok_draft_still_reports_validation_ms PASSED [ 50%]
+members/preksha/tests/test_validator_metrics.py::test_TC_METRICS_007_malformed_metrics_are_dropped[negative] PASSED [ 58%]
+members/preksha/tests/test_validator_metrics.py::test_TC_METRICS_007_malformed_metrics_are_dropped[nan] PASSED    [ 66%]
+members/preksha/tests/test_validator_metrics.py::test_TC_METRICS_007_malformed_metrics_are_dropped[bad_mode] PASSED [ 75%]
+members/preksha/tests/test_validator_metrics.py::test_TC_METRICS_007_malformed_metrics_are_dropped[string] PASSED [ 83%]
+members/preksha/tests/test_validator_metrics.py::test_TC_METRICS_007_malformed_metrics_are_dropped[none] PASSED   [ 91%]
+members/preksha/tests/test_validator_metrics.py::test_TC_METRICS_008_non_draft_has_explicit_none_metrics PASSED   [100%]
+
+================================================== 12 passed in 0.16s ==================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> python -m pytest members/preksha/tests/test_validator_ids.py -v     
+================================================= test session starts ==================================================
+platform win32 -- Python 3.14.5, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Dell\Desktop\Red_thread\venv\bin\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Dell\Desktop\Red_thread
+configfile: pytest.ini
+collected 14 items                                                                                                      
+
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_001_fact_ids_are_case_and_whitespace_exact[lowercase] PASSED [  7%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_001_fact_ids_are_case_and_whitespace_exact[trailing_space] PASSED [ 14%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_001_fact_ids_are_case_and_whitespace_exact[leading_space] PASSED [ 21%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_001_fact_ids_are_case_and_whitespace_exact[hyphen] PASSED [ 28%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_002_unknown_fact_id PASSED                               [ 35%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_003_unknown_evidence_id[absent] PASSED                   [ 42%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_003_unknown_evidence_id[lowercase] PASSED                [ 50%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_003_unknown_evidence_id[trailing_space] PASSED           [ 57%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_004_unknown_id_beside_valid_id_still_fails PASSED        [ 64%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_005_duplicate_fact_citation_is_schema_invalid PASSED     [ 71%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_006_duplicate_evidence_citation_is_schema_invalid PASSED [ 78%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_007_empty_string_id_is_schema_invalid[facts] PASSED      [ 85%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_007_empty_string_id_is_schema_invalid[evidence] PASSED   [ 92%]
+members/preksha/tests/test_validator_ids.py::test_TC_IDS_008_exact_ids_are_accepted PASSED                        [100%]
+
+================================================== 14 passed in 0.21s ==================================================
+(venv) PS C:\Users\Dell\Desktop\Red_thread> 

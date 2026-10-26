@@ -1,0 +1,15 @@
+test_id,file,function,class,status,duration_ms,message,category
+TC_VALIDATOR_IDS_001,test_validator_ids.py,test_TC_IDS_001_fact_ids_are_case_and_whitespace_exact[lowercase],,PASSED,0.4,,validator_ids
+TC_VALIDATOR_IDS_002,test_validator_ids.py,test_TC_IDS_001_fact_ids_are_case_and_whitespace_exact[trailing_space],,PASSED,0.51,,validator_ids
+TC_VALIDATOR_IDS_003,test_validator_ids.py,test_TC_IDS_001_fact_ids_are_case_and_whitespace_exact[leading_space],,PASSED,0.62,,validator_ids
+TC_VALIDATOR_IDS_004,test_validator_ids.py,test_TC_IDS_001_fact_ids_are_case_and_whitespace_exact[hyphen],,PASSED,0.46,,validator_ids
+TC_VALIDATOR_IDS_005,test_validator_ids.py,test_TC_IDS_002_unknown_fact_id,,PASSED,0.93,,validator_ids
+TC_VALIDATOR_IDS_006,test_validator_ids.py,test_TC_IDS_003_unknown_evidence_id[absent],,PASSED,0.45,,validator_ids
+TC_VALIDATOR_IDS_007,test_validator_ids.py,test_TC_IDS_003_unknown_evidence_id[lowercase],,PASSED,0.39,,validator_ids
+TC_VALIDATOR_IDS_008,test_validator_ids.py,test_TC_IDS_003_unknown_evidence_id[trailing_space],,PASSED,0.74,,validator_ids
+TC_VALIDATOR_IDS_009,test_validator_ids.py,test_TC_IDS_004_unknown_id_beside_valid_id_still_fails,,PASSED,0.62,,validator_ids
+TC_VALIDATOR_IDS_010,test_validator_ids.py,test_TC_IDS_005_duplicate_fact_citation_is_schema_invalid,,PASSED,0.49,,validator_ids
+TC_VALIDATOR_IDS_011,test_validator_ids.py,test_TC_IDS_006_duplicate_evidence_citation_is_schema_invalid,,PASSED,0.59,,validator_ids
+TC_VALIDATOR_IDS_012,test_validator_ids.py,test_TC_IDS_007_empty_string_id_is_schema_invalid[facts],,PASSED,0.39,,validator_ids
+TC_VALIDATOR_IDS_013,test_validator_ids.py,test_TC_IDS_007_empty_string_id_is_schema_invalid[evidence],,PASSED,0.4,,validator_ids
+TC_VALIDATOR_IDS_014,test_validator_ids.py,test_TC_IDS_008_exact_ids_are_accepted,,PASSED,0.43,,validator_ids

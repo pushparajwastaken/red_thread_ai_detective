@@ -1,0 +1,17 @@
+test_id,file,function,class,status,duration_ms,message,category
+TC_FIXTURE_001,test_fixture.py,test_TC_FIXTURE_001_identity_and_inventory,,PASSED,0.5,,fixture
+TC_FIXTURE_002,test_fixture.py,test_TC_FIXTURE_002_progression_passthrough[0],,PASSED,0.5,,fixture
+TC_FIXTURE_003,test_fixture.py,test_TC_FIXTURE_002_progression_passthrough[1],,PASSED,0.35,,fixture
+TC_FIXTURE_004,test_fixture.py,test_TC_FIXTURE_002_progression_passthrough[2],,PASSED,1.68,,fixture
+TC_FIXTURE_005,test_fixture.py,test_TC_FIXTURE_002_progression_passthrough[5],,PASSED,0.47,,fixture
+TC_FIXTURE_006,test_fixture.py,test_TC_FIXTURE_003_fact_reveal_at[F001-0],,PASSED,0.23,,fixture
+TC_FIXTURE_007,test_fixture.py,test_TC_FIXTURE_003_fact_reveal_at[F002-0],,PASSED,0.73,,fixture
+TC_FIXTURE_008,test_fixture.py,test_TC_FIXTURE_003_fact_reveal_at[F003-0],,PASSED,1.1,,fixture
+TC_FIXTURE_009,test_fixture.py,test_TC_FIXTURE_003_fact_reveal_at[F004-2],,PASSED,0.26,,fixture
+TC_FIXTURE_010,test_fixture.py,test_TC_FIXTURE_003_fact_reveal_at[L001-0],,PASSED,0.33,,fixture
+TC_FIXTURE_011,test_fixture.py,test_TC_FIXTURE_004_evidence_reveal_and_inventory,,PASSED,0.32,,fixture
+TC_FIXTURE_012,test_fixture.py,test_TC_FIXTURE_005_cover_story_kind,,PASSED,0.55,,fixture
+TC_FIXTURE_013,test_fixture.py,test_TC_FIXTURE_006_no_dangling_ids,,PASSED,0.29,,fixture
+TC_FIXTURE_014,test_fixture.py,test_TC_FIXTURE_007_spoilers_are_never_granted,,PASSED,0.4,,fixture
+TC_FIXTURE_015,test_fixture.py,test_TC_FIXTURE_008_hostile_evidence_is_inert_data,,PASSED,0.24,,fixture
+TC_FIXTURE_016,test_fixture.py,test_TC_FIXTURE_009_calls_return_independent_objects,,PASSED,0.24,,fixture
