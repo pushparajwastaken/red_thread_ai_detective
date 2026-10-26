@@ -104,7 +104,12 @@ def _is_evidence_available(case: CaseState, evidence_id: str, npc_id: str) -> bo
     )
 
 
-def _render_answer(case: CaseState, question: dict[str, Any], npc_id: str) -> DialogueResult:
+def _render_answer(
+    case: CaseState,
+    question: dict[str, Any],
+    npc_id: str,
+    start: float,
+) -> DialogueResult:
     """Build a trusted result from authored fixed-dialogue data.
 
     A fixed branch is only allowed to cite facts/evidence that are currently
@@ -135,7 +140,7 @@ def _render_answer(case: CaseState, question: dict[str, Any], npc_id: str) -> Di
         if any(term.lower() in answer_lower for term in meta.terms):
             raise PermissionError("branch text contains unavailable fact term")
 
-    elapsed = 0.0
+    elapsed = (time.perf_counter() - start) * 1000.0
     metrics = TurnMetrics(
         mode="branching",
         model="fixed-tree",
@@ -198,7 +203,7 @@ def answer_branching(
         if not required.issubset(set(presented)):
             return _fallback(npc_id, start, reason="UNAUTHORIZED_EVIDENCE")
 
-        return _render_answer(case, question, npc_id)
+        return _render_answer(case, question, npc_id, start)
 
     except (OSError, json.JSONDecodeError, ValueError, TypeError):
         return _fallback(npc_id, start, reason="SETUP_ERROR")

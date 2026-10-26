@@ -37,7 +37,7 @@ python -m pytest members/ananya/test_branching_baseline.py -q
 
 ## Test status
 
-Development test suite: 10 tests passing in 0.05s against the current `shared/fixture_case.py` fixture.
+Development test suite: 10 tests passing in 0.13s against the current shared/fixture_case.py fixture.
 
 ## Known limitations
 
@@ -51,4 +51,4 @@ Development test suite: 10 tests passing in 0.05s against the current `shared/fi
 Fill these in after creating the personal feature branch and committing:
 
 - Branch: feature/ananya-branching-baseline
-- Commit: to be added after commit
+- Commit: pending documentation update
