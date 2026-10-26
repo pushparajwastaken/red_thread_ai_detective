@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Red Thread Sprint 1 benchmark question set",
+  "type": "object",
+  "required": ["schema_version", "benchmark_id", "case_id", "fixture_factory", "questions"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "benchmark_id": {"type": "string"},
+    "case_id": {"type": "string"},
+    "fixture_factory": {"type": "string"},
+    "harness_notes": {"type": "string"},
+    "questions": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/question"}}
+  },
+  "$defs": {
+    "ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "question": {
+      "type": "object",
+      "required": ["question_id", "case_id", "npc_id", "question", "category", "progression",
+                   "presented_evidence_ids", "expected_behavior", "expected_behavior_description",
+                   "expected_answer_facts", "expected_answer_facts_match", "expected_evidence_ids",
+                   "protected_fact_ids", "protected_evidence_ids", "expected_fallback",
+                   "scoring_rubric", "answer", "fact_ids", "evidence_ids", "required_evidence_ids"],
+      "additionalProperties": false,
+      "properties": {
+        "question_id": {"type": "string", "pattern": "^BQ[0-9]{3}$"},
+        "case_id": {"type": "string"},
+        "npc_id": {"type": "string", "minLength": 1},
+        "question": {"type": "string", "minLength": 1},
+        "category": {"enum": ["authorized_fact", "unauthorized_fact", "future_fact", "evidence_grounded",
+                              "cover_story", "direct_injection", "indirect_injection",
+                              "unsupported_claim", "fallback", "general_interrogation"]},
+        "progression": {"type": "integer", "minimum": 0},
+        "presented_evidence_ids": {"$ref": "#/$defs/ids"},
+        "expected_behavior": {"enum": ["ANSWER_WITH_FACTS", "ANSWER_COVER_STORY", "REFUSE_UNAUTHORIZED",
+                                       "RESIST_INJECTION", "NO_UNSUPPORTED_ASSERTION",
+                                       "EVIDENCE_REJECTED_SAFELY"]},
+        "expected_behavior_description": {"type": "string"},
+        "expected_answer_facts": {"$ref": "#/$defs/ids"},
+        "expected_answer_facts_match": {"enum": ["all", "any"]},
+        "expected_evidence_ids": {"$ref": "#/$defs/ids"},
+        "protected_fact_ids": {"$ref": "#/$defs/ids"},
+        "protected_evidence_ids": {"$ref": "#/$defs/ids"},
+        "expected_fallback": {"type": ["boolean", "null"]},
+        "scoring_rubric": {
+          "type": "object", "required": ["rule", "requires_human_review"], "additionalProperties": false,
+          "properties": {"rule": {"enum": ["R1", "R2"]}, "requires_human_review": {"type": "boolean"}}
+        },
+        "mode_expectations": {
+          "type": "object",
+          "properties": {
+            "branching": {"type": "object"},
+            "dynamic": {"type": "object"}
+          },
+          "additionalProperties": false
+        },
+        "answer": {"type": "string", "minLength": 1},
+        "fact_ids": {"$ref": "#/$defs/ids"},
+        "evidence_ids": {"$ref": "#/$defs/ids"},
+        "required_evidence_ids": {"$ref": "#/$defs/ids"}
+      }
+    }
+  }
+}
