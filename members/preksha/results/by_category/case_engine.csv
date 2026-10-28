@@ -1,10 +1,11 @@
 test_id,file,function,class,status,duration_ms,message,category
-TC_CASE_ENGINE_LOAD_001,test_case_engine_load.py,test_TC_CASEENG_001_returns_case_state,,FAILED,1.85,shared.contracts.ContractError: Unknown case id: 'CASE_001',case_engine
-TC_CASE_ENGINE_LOAD_002,test_case_engine_load.py,test_TC_CASEENG_002_case_id_is_uppercase,,FAILED,0.5,shared.contracts.ContractError: Unknown case id: 'CASE_001',case_engine
-TC_CASE_ENGINE_LOAD_003,test_case_engine_load.py,test_TC_CASEENG_003_rohan_has_a_grant,,FAILED,0.64,shared.contracts.ContractError: Unknown case id: 'CASE_001',case_engine
-TC_CASE_ENGINE_LOAD_004,test_case_engine_load.py,test_TC_CASEENG_004_all_three_npcs_are_granted[NPC_ROHAN],,FAILED,0.59,shared.contracts.ContractError: Unknown case id: 'CASE_001',case_engine
-TC_CASE_ENGINE_LOAD_005,test_case_engine_load.py,test_TC_CASEENG_004_all_three_npcs_are_granted[NPC_WITNESS],,FAILED,0.61,shared.contracts.ContractError: Unknown case id: 'CASE_001',case_engine
-TC_CASE_ENGINE_LOAD_006,test_case_engine_load.py,test_TC_CASEENG_004_all_three_npcs_are_granted[NPC_FORENSIC],,FAILED,0.65,shared.contracts.ContractError: Unknown case id: 'CASE_001',case_engine
-TC_CASE_ENGINE_LOAD_007,test_case_engine_load.py,test_TC_CASEENG_005_evidence_e001_and_e002_exist,,FAILED,0.58,shared.contracts.ContractError: Unknown case id: 'CASE_001',case_engine
-TC_CASE_ENGINE_LOAD_008,test_case_engine_load.py,test_TC_CASEENG_006_evidence_items_are_keyed_correctly[E001],,FAILED,1.27,shared.contracts.ContractError: Unknown case id: 'CASE_001',case_engine
-TC_CASE_ENGINE_LOAD_009,test_case_engine_load.py,test_TC_CASEENG_006_evidence_items_are_keyed_correctly[E002],,FAILED,0.61,shared.contracts.ContractError: Unknown case id: 'CASE_001',case_engine
+TC_CASE_ENGINE_LOAD_001,test_case_engine_load.py,test_TC_CASEENG_001_returns_case_state,,PASSED,0.18,,case_engine
+TC_CASE_ENGINE_LOAD_002,test_case_engine_load.py,test_TC_CASEENG_002_case_id_is_case_001,,PASSED,0.15,,case_engine
+TC_CASE_ENGINE_LOAD_003,test_case_engine_load.py,test_TC_CASEENG_003_rohan_has_a_grant,,PASSED,0.22,,case_engine
+TC_CASE_ENGINE_LOAD_004,test_case_engine_load.py,test_TC_CASEENG_004_all_npcs_are_granted[aman],,PASSED,0.22,,case_engine
+TC_CASE_ENGINE_LOAD_005,test_case_engine_load.py,test_TC_CASEENG_004_all_npcs_are_granted[neha],,PASSED,0.21,,case_engine
+TC_CASE_ENGINE_LOAD_006,test_case_engine_load.py,test_TC_CASEENG_004_all_npcs_are_granted[rohan],,PASSED,0.17,,case_engine
+TC_CASE_ENGINE_LOAD_007,test_case_engine_load.py,test_TC_CASEENG_005_evidence_e001_and_e002_exist,,PASSED,0.17,,case_engine
+TC_CASE_ENGINE_LOAD_008,test_case_engine_load.py,test_TC_CASEENG_006_full_evidence_inventory,,PASSED,0.22,,case_engine
+TC_CASE_ENGINE_LOAD_009,test_case_engine_load.py,test_TC_CASEENG_007_evidence_items_are_keyed_correctly[E001],,PASSED,0.21,,case_engine
+TC_CASE_ENGINE_LOAD_010,test_case_engine_load.py,test_TC_CASEENG_007_evidence_items_are_keyed_correctly[E002],,PASSED,0.26,,case_engine

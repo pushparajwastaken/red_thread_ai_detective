@@ -3,5 +3,5 @@
 ## it has no link with project test
 
 
-def test_my_setup():
-    assert 1+1==2
+# def test_my_setup():
+#     assert 1+1==2

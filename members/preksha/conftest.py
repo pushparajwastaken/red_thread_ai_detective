@@ -1,29 +1,3 @@
-# import sys
-# from pathlib import Path
-# import pytest
-# ROOT = Path(__file__).resolve().parent.parent.parent
-# sys.path.insert(0, str(ROOT))
-# for f in (ROOT / "members").iterdir():
-#     if f.is_dir() and f.name != "__pycache__":
-#         sys.path.insert(0, str(f))
-# from shared.contracts import NPCContext
-# from dialogue_generator import clear_mock_scripts
-
-# def make_npc_context(case, npc_id):
-#     g = case.npc_grants[npc_id]
-#     return NPCContext(
-#         npc_id=npc_id,
-#         authorized_fact_ids=list(g.fact_ids),
-#         permitted_evidence_ids=list(g.evidence_ids),
-#         persona=g.persona,
-#     )
-
-# @pytest.fixture
-# def mock_cleanup():
-#     clear_mock_scripts()
-#     yield
-#     clear_mock_scripts()
-
 
 """
 conftest.py — Preksha QA test suite.

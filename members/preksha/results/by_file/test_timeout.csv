@@ -1,8 +1,8 @@
 test_id,file,function,class,status,duration_ms,message,category
-TC_TIMEOUT_001,test_timeout.py,test_TC_TIMEOUT_001_scripted_timeout_gives_timeout_draft,,PASSED,0.67,,timeout
-TC_TIMEOUT_002,test_timeout.py,test_TC_TIMEOUT_002_timeout_draft_carries_no_content,,PASSED,0.46,,timeout
-TC_TIMEOUT_003,test_timeout.py,test_TC_TIMEOUT_003_validator_maps_timeout_to_gen_timeout,,PASSED,2.07,,timeout
+TC_TIMEOUT_001,test_timeout.py,test_TC_TIMEOUT_001_scripted_timeout_gives_timeout_draft,,PASSED,0.54,,timeout
+TC_TIMEOUT_002,test_timeout.py,test_TC_TIMEOUT_002_timeout_draft_carries_no_content,,PASSED,0.38,,timeout
+TC_TIMEOUT_003,test_timeout.py,test_TC_TIMEOUT_003_validator_maps_timeout_to_gen_timeout,,PASSED,0.5,,timeout
 TC_TIMEOUT_004,test_timeout.py,test_TC_TIMEOUT_004_fallback_latency_is_non_negative,,PASSED,0.68,,timeout
-TC_TIMEOUT_005,test_timeout.py,test_TC_TIMEOUT_005_cook_timeout_also_falls_back,,PASSED,0.69,,timeout
-TC_TIMEOUT_006,test_timeout.py,test_TC_TIMEOUT_006_script_is_scoped_to_request_id,,PASSED,0.72,,timeout
+TC_TIMEOUT_005,test_timeout.py,test_TC_TIMEOUT_005_cook_timeout_also_falls_back,,PASSED,0.52,,timeout
+TC_TIMEOUT_006,test_timeout.py,test_TC_TIMEOUT_006_script_is_scoped_to_request_id,,PASSED,0.86,,timeout
 TC_TIMEOUT_007,test_timeout.py,test_TC_TIMEOUT_007_cleared_script_no_longer_times_out,,PASSED,0.55,,timeout

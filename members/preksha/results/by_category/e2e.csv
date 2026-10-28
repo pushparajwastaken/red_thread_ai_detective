@@ -1,0 +1,6 @@
+test_id,file,function,class,status,duration_ms,message,category
+TC_E2E_001,test_e2e.py,test_TC_E2E_001_happy_path_is_accepted,,FAILED,1.26,AssertionError: reasons=['AUTH_FUTURE'],e2e
+TC_E2E_002,test_e2e.py,test_TC_E2E_002_accepted_result_is_not_the_fallback,,FAILED,28.31,AssertionError: player text must be the draft,e2e
+TC_E2E_003,test_e2e.py,test_TC_E2E_003_citations_stay_inside_the_grant,,FAILED,1.05,AssertionError: reasons=['AUTH_FUTURE'],e2e
+TC_E2E_004,test_e2e.py,test_TC_E2E_004_metrics_and_latency_are_consistent,,PASSED,0.68,,e2e
+TC_E2E_005,test_e2e.py,test_TC_E2E_005_pipeline_does_not_mutate_the_case,,PASSED,1.71,,e2e
