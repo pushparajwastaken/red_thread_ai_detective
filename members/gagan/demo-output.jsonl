@@ -1,0 +1,6 @@
+{"scenario": "term_match", "progression": 0, "returned_ids": ["E001"]}
+{"scenario": "content_match", "progression": 0, "returned_ids": ["E003"]}
+{"scenario": "no_match", "progression": 0, "returned_ids": []}
+{"scenario": "future_gated", "progression": 0, "returned_ids": []}
+{"scenario": "future_revealed", "progression": 2, "returned_ids": ["E009"]}
+{"scenario": "injection_in_question", "progression": 0, "returned_ids": ["E003"]}
