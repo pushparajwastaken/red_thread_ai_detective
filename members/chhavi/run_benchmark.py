@@ -121,8 +121,8 @@ def load_questions():
 
 def call_target(target, item):
     # Fresh case prevents one trial from advancing another's state.
-    case = make_case_001(progression=0)
-
+   case = make_case_001(progression=item.get("progression", 0))
+    
     start = perf_counter()
     result = target(
         case,
@@ -165,7 +165,10 @@ def run_group(condition, target, reset, questions, args, root):
         "os": platform.platform(),
         "python": platform.python_version(),
         "case_id": "case_001",
-        "progression": 0,
+        "progression_by_question": {
+    item["question_id"]: item.get("progression", 0)
+    for item in questions
+},
         "repeats_per_question": args.repeats,
         "concurrency": 1,
         "questions": questions,
