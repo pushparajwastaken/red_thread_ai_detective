@@ -83,3 +83,13 @@ The tests cover authorization mismatches, future grants, exact ID matching, unkn
 - Root README has outdated PR/merge instructions and `.env.example` is empty at the reviewed base. The proposed lead-owned corrections are in `LEAD_NOTES.md`; those root files were not edited.
 
 Implementation, tests and documentation were prepared with AI assistance. The lead should review the implementation and run integration acceptance before copying it into the application.
+
+## Lead integration update (claim-support audit)
+
+Audit finding UNSUP-03: an unsupported claim next to a valid citation passed. `validate_dialogue` now also runs a deterministic
+claim-support check (`_support_check`, see `docs/security-residual-risks.md`). The shared contract, `Reason` codes, fallback text
+and `used_fallback` semantics are unchanged; unsupported content is reported as `UNCITED_ASSERTION`. Default scope keeps the v2
+rule "text with no case terms needs no citation" (`SUPPORT_SCOPE="grounded"`); `"all"` is implemented but off pending approval.
+One existing test was edited and flagged in-file: `test_known_limit_false_combination_of_visible_terms_can_pass` (its example
+sentence is now rejected; the documented limitation is preserved with a sentence built only from cited words).
+Tests: `python -m pytest members/harsh tests/test_validator_claim_support.py -q`.

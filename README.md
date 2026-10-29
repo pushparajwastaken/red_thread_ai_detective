@@ -1,7 +1,10 @@
-﻿# Red Thread - AI Detective Game
+# Red Thread - AI Detective Game
 
-A prototype detective game using dynamic dialogue, evidence-based
-interrogation, restricted NPC knowledge, and response validation.
+A prototype detective game using dynamic dialogue, evidence-based interrogation, restricted NPC
+knowledge, and response validation.
+
+**Central principle:** the case engine owns canonical truth; NPCs have bounded knowledge; the LLM
+provides expression; the validator enforces authorization; integration controls trusted state and recovery.
 
 ## Project Goals
 
@@ -12,47 +15,64 @@ interrogation, restricted NPC knowledge, and response validation.
 
 ## Setup
 
-Use Python 3.11 or newer.
-
-Create a virtual environment:
+Python 3.11 or newer (verified on 3.12).
 
     python -m venv .venv
-
-Activate it in Windows PowerShell:
-
-    .\.venv\Scripts\Activate.ps1
-
-Install dependencies:
-
+    # Windows PowerShell:  .\.venv\Scripts\Activate.ps1      Linux/macOS: source .venv/bin/activate
     python -m pip install -r requirements.txt
 
-Run contract tests from the repository root:
+## Run the tests (offline, deterministic, no credentials)
 
-    python -m pytest tests/test_contracts.py -q
+From the repository root:
+
+    python -m pytest                     # root acceptance suite (tests/) AND all member suites (members/)
+    python -m pytest tests/test_reference_flow.py -q     # the Sprint 1 acceptance suite only
+
+`tests/test_reference_flow.py` runs the REAL modules end to end (no stubs) with the offline mock generator.
+Live-LLM smoke tests are optional and skipped unless you start Ollama and set `RUN_LLM_SMOKE=1`.
+`jsonschema` is optional; without it one schema test is skipped.
+
+## Regenerate evidence artifacts (from real runs)
+
+    python scripts/run_security_suite.py                                   # -> results/security_test_log.csv
+    python scripts/validate_benchmark_questions.py                         # validates test_cases/benchmark_questions.json
+    python scripts/run_benchmark.py --all --warm-passes 20                 # -> results/benchmark_results.csv
+    python scripts/make_benchmark_report.py                                # -> docs/benchmark-report.md
+    python scripts/run_tests.py                                            # pytest + question-set validator
+
+Real-model run (needs Ollama; NOT executed in this repo's evidence): `docs/real-model-validation.md`.
+Security limits and residual risks: `docs/security-residual-risks.md`. Acceptance checklist: `docs/sprint1-acceptance.md`.
+
+## Production entry point
+
+`src.pipeline.interrogate(case, npc_id, question, *, presented_evidence_ids=())` is the one production entry point and uses
+the real modules. `members.khushi.integration.interrogate` without `deps` uses member-dev **stubs** (kept so members can work
+in isolation); `tests/test_production_entry_point.py` fails if `src/` or `scripts/` ever depend on it.
+
+## Runtime flow
+
+    load_case (Richa) -> build_npc_context (Anand) -> retrieve_evidence (Gagan)
+    -> DialogueRequest -> generate_dialogue (Anshul) -> validate_dialogue / make_fallback (Harsh)
+    -> DialogueResult      orchestrated by interrogate() (Khushi/Pushparaj); real wiring: src/pipeline.py
 
 ## Repository Structure
 
-- shared/: common data structures and interfaces
-- members/: individual working areas and experiments
-- src/: integrated application modules
-- tests/: unit, integration and adversarial tests
-- test_cases/: reusable security test cases
-- results/: measured benchmark and test results
-- docs/: architecture, decisions and reports
-- scripts/: application and test entry points
+- shared/: contracts and fixture (source of truth: `shared/interfaces.md`; only the integration lead edits)
+- members/: each member's module, tests and `SUBMISSION.md`
+- src/: integration glue wiring the real modules (`src/pipeline.py`)
+- tests/: acceptance, contract, benchmark-set and NPC-knowledge tests
+- test_cases/: shared benchmark questions (`benchmark_questions.json`) + schema
+- results/: measured outputs (`security_test_log.csv`, `benchmark_results.csv`)
+- docs/: benchmark report, contributions, acceptance record
+- scripts/: test and evidence entry points
 
 ## Team Workflow
 
-1. Pull the latest main branch.
-2. Create a feature branch for your assigned task.
-3. Implement and test your component.
-4. Open a pull request.
-5. Obtain review before merging into main.
-
-See shared/interfaces.md before implementing a module.
+See `CONTRIBUTING.md`. In short: work only in `members/<name>/`, push your own branch, do NOT open a
+pull request into `main` and do NOT merge. The integration lead reviews and copies approved work.
 
 ## Security Notice
 
-NPC prompts must contain only authorized facts and evidence.
-Never expose the entire canonical case state to the LLM.
-Do not commit credentials, API keys or private configuration files.
+NPC prompts must contain only authorized facts and evidence. Never expose the entire canonical case
+state to the LLM. Do not commit credentials, API keys or private configuration files (copy
+`.env.example` to `.env`, which is git-ignored). Lexical validation is a control, not hallucination prevention.

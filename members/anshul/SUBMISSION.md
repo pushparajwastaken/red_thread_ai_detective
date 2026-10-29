@@ -47,3 +47,17 @@ ollama pull qwen2.5:3b-instruct
 RUN_LLM_SMOKE=1 LLM_MODEL=qwen2.5:3b-instruct \
     python -m pytest members/anshul/test_dialogue_generator.py -q
 # writes members/anshul/results/ollama_smoke.json and injection_attempt_ollama.json
+
+## Lead integration update
+
+- The filename defect from the earlier audit is not present in this snapshot (`dialogue_generator.py` imports normally).
+- The one failing test asserted the exact word "reliably" against the mock's incidental wording
+  ("...reliable..."); the contract fixes only the JSON schema, not mock wording. The assertion now checks behaviour
+  (non-empty text within `MAX_DIALOGUE_CHARS`, status ok, no citations). Result: 38 passed, 2 skipped (live-Ollama smoke tests, opt-in).
+- Observed layering: a citation to an ID absent from the request is rejected by this module's parser as `GEN_MALFORMED`
+  before the validator sees it. Both layers fail closed with the same fallback text.
+- No real-provider (Ollama) run was performed by the lead; real-model behaviour is unverified.
+
+- Mock default text now quotes the first authorized fact verbatim (and mentions an evidence term only when it cites that evidence),
+  so the offline default passes the validator's claim-support check. Previously "<npc> considers the question and answers cautiously."
+  cited a fact it did not reflect.

@@ -31,7 +31,9 @@ from shared.contracts import (
 
 MODULE_DIR = Path(__file__).resolve().parent
 LOCAL_QUESTION_SET = MODULE_DIR / "branching_questions.json"
-SHARED_QUESTION_SET = MODULE_DIR.parents[2] / "test_cases" / "branching_questions.json"
+# Canonical shared set (same file the dynamic benchmark uses). Previously this pointed at a
+# non-existent branching_questions.json, so the shared set was never loaded.
+SHARED_QUESTION_SET = MODULE_DIR.parents[1] / "test_cases" / "benchmark_questions.json"
 
 
 def _load_question_set() -> dict[str, dict[str, Any]]:

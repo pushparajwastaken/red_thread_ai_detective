@@ -254,8 +254,13 @@ class ValidatorTests(unittest.TestCase):
         self.assertTrue(self.run_draft().valid)
 
     def test_known_limit_false_combination_of_visible_terms_can_pass(self):
-        self.draft = DialogueDraft('gardener', 'The figure broke the glass in the greenhouse.', ['F001', 'F002'])
+        # Lead edit (claim-support audit): the original sentence ("...broke the glass...") is now rejected
+        # because "broke" appears in no cited statement. The documented limitation is unchanged for
+        # recombinations that use ONLY words from the cited statements:
+        self.draft = DialogueDraft('gardener', 'The figure heard glass break in the greenhouse.', ['F001', 'F002'])
         self.assertTrue(self.run_draft().valid)  # Explicit limitation, not semantic proof.
+        self.draft = DialogueDraft('gardener', 'The figure broke the glass in the greenhouse.', ['F001', 'F002'])
+        self.assertFalse(self.run_draft().valid)  # now caught: unsupported wording
 
     def test_generation_failure_codes(self):
         for status, code in [('timeout', Reason.GEN_TIMEOUT), ('error', Reason.GEN_ERROR), ('malformed', Reason.GEN_MALFORMED)]:

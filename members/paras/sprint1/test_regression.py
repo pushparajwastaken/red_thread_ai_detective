@@ -601,7 +601,7 @@ class TestReferenceFlowSignatures:
     def test_retrieve_evidence_signature(self):
         """retrieve_evidence(question, permitted_evidence_ids, *, case, top_k=3) -> list"""
         mod = pytest.importorskip(
-            "members.gagan.evidence_retrieval",
+            "members.gagan.retriever",
             reason="Evidence Retrieval (Gagan) not yet implemented",
         )
         fn = getattr(mod, "retrieve_evidence", None)
@@ -664,7 +664,7 @@ class TestReferenceFlowSignatures:
     def test_interrogate_signature(self):
         """interrogate(case, npc_id, question, *, presented_evidence_ids=()) -> DialogueResult"""
         mod = pytest.importorskip(
-            "members.pushparaj.integration",
+            "members.khushi.integration",
             reason="Integration (Pushparaj) not yet implemented",
         )
         fn = getattr(mod, "interrogate", None)

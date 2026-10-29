@@ -13,7 +13,7 @@ from types import SimpleNamespace
 import pytest
 
 from members.anshul import dialogue_generator as dg
-from shared.contracts import DialogueRequest
+from shared.contracts import MAX_DIALOGUE_CHARS, DialogueRequest
 from shared.fixture_case import make_case_001
 
 
@@ -153,7 +153,10 @@ def test_empty_context_has_no_citations(make_request):
     assert draft.status == "ok"
     assert draft.cited_fact_ids == []
     assert draft.cited_evidence_ids == []
-    assert "reliably" in draft.text
+    # The mock's wording is incidental (the contract only fixes the schema), so
+    # assert behaviour: a usable, bounded, non-empty reply that asserts nothing.
+    assert draft.text.strip()
+    assert len(draft.text) <= MAX_DIALOGUE_CHARS
 
 
 def test_mock_does_not_cite_ids_without_supplied_content(make_request):

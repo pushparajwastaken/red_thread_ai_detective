@@ -194,12 +194,19 @@ def _mock_completion(request: DialogueRequest) -> str:
         return scripted
 
     fact_id = sorted(request.facts)[0] if request.facts else None
-    evidence_id = request.evidence[0].evidence_id if request.evidence else None
+    # Cite evidence only when it has case terms the reply can actually mention. The mock never echoes
+    # evidence content (it may be hostile data) and never cites an item it does not reflect.
+    evidence = next((e for e in request.evidence if e.terms), None)
+    evidence_id = evidence.evidence_id if (evidence is not None and fact_id is not None) else None
 
     if fact_id is None:
         text = "I cannot say anything reliable about that."
     else:
-        text = f"{request.npc_id} considers the question and answers cautiously."
+        # Quote the first authorized statement verbatim: always supported by its own citation, so the
+        # offline default passes the validator's claim-support check without trusting any model output.
+        text = request.facts[fact_id]
+        if evidence_id is not None:
+            text += f" About that {evidence.terms[0]}."
 
     return json.dumps({
         "text": text,

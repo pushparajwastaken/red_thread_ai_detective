@@ -47,3 +47,15 @@ Focused tests cover successful loading, unknown and invalid IDs, fixture
 validation, reference integrity, duplicate IDs, the required case counts,
 lowercase inflection terms, cover-story distinction, and repeated-load
 equivalence.
+
+## Lead integration update (case_001 vs case_002)
+
+The original `case_001` (NPCs aman/neha/rohan, 12 facts) did not match the approved shared fixture
+`make_case_001()` (NPCs gardener/cook, facts F001-F004 + L001), which the benchmark set, branching baseline and
+integration all use. With the lead's approval (Option A):
+
+- `load_case("case_001")` now equals `make_case_001()` (asserted by `test_case_001_equals_shared_fixture`).
+- Richa's richer ten-clue / three-suspect / 12-fact case is preserved unchanged as **`case_002`**.
+- Validation is per case; IDs remain exact and case-sensitive.
+
+Test result after the change: `python -m pytest members/richa -q` -> 19 passed (was 13).

@@ -61,3 +61,17 @@ All tests passed with no skipped or failed tests after installing the required `
 
 - Branch: `feature/ananya-branching-baseline`
 - Integration commit: `50ce755` — Merge `origin/main` into `feature/ananya-branching-baseline`
+
+## Lead integration update (applied on top of merged PR #7, commit 44126a9)
+
+- PR #7 already fixed the hard-coded `0.0` latency on successful branches (`elapsed` measured from `start`). That change is kept
+  exactly as merged; the integration patch does not touch it.
+- `SHARED_QUESTION_SET` still pointed at a non-existent `test_cases/branching_questions.json`, so the shared set was never loaded and
+  the module silently used its local dev fixture. It now points at the canonical `test_cases/benchmark_questions.json`; the local
+  Q001..Q006 fixture remains the fallback and the unit tests pin to it explicitly (autouse fixture).
+- All 30 shared questions run through `answer_branching`: 30/30 correct under the shared rubric, 0 leaks, 3 evidence-rejection
+  questions return the safe fallback by design (`UNAUTHORIZED_EVIDENCE`).
+- Unit tests in this folder: 11 passed (10 original + 1 latency regression test added by the lead).
+- Human playtest results: **still pending** (protocol and template are in this folder).
+- Note for the owner: the "Dependencies" section above says the benchmark schema validation uses `jsonschema`, but `requirements.txt`
+  does not list it, so on a clean install that one test is skipped (it passes once `jsonschema` is installed).

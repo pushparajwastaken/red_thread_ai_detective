@@ -1,46 +1,24 @@
-# NPC Knowledge Module
+# Sprint 1 Submission - Module 2: NPC Knowledge
 
-This project implements the NPC knowledge retrieval flow for the repository's case model. The goal is to produce a safe, filtered context for a specific NPC without exposing unrelated or unauthorized information.
+**Owner:** Anand Kumar Sahni
+**Contract:** `build_npc_context(case: CaseState, npc_id: str) -> NPCContext`
+**Branch / commit SHA:** not recorded in the reviewed snapshot (unverified).
 
-## What I implemented
+> **Lead integration update.** The original submission implemented its own `NPCContext` /
+> `UnknownNPCError` and parsed a dict-shaped case (`npcs`, `known_facts`, `authorized_for`) that the
+> shared contract never defined. Against the real `CaseState` it raised `UnknownNPCError` for every NPC.
+> The module was refactored by the integration lead onto the shared types; the original dict-shaped
+> test (which passed only because it tested that invented shape) was replaced.
 
-- Added `members/anand/npc_knowledge.py` with `build_npc_context(case, npc_id)`.
-- Added `UnknownNPCError` and `NPCContext` to enforce the repository contract.
-- Resolved NPCs by exact canonical ID and raised `UnknownNPCError` for invalid IDs.
-- Applied authorization and progression-based filtering before returning any knowledge.
-- Kept epistemic categories separated so the result distinguishes:
-  - `known_facts`
-  - `suspected_facts`
-  - `cover_story`
-- Ensured the input `case` is not mutated and that mutable collections are returned as independent copies.
+## Implementation (current)
 
-## Behavior and safety checks
+- Uses `shared.contracts.NPCContext` and `shared.contracts.UnknownNPCError`; no private duplicates.
+- Raises `UnknownNPCError` for any `npc_id` not exactly in `case.npc_grants` (case-sensitive; non-strings too).
+- Returns only granted facts/evidence with `reveal_at <= case.progression`; cover stories are ordinary grants.
+- Returns fresh lists; never mutates `case`; never reads `clues` / `timeline`; `beliefs`/`suspicions` left empty (deprecated in v2).
 
-The implementation enforces the following rules:
+## Tests
 
-- Fact authorization is checked against the fact's `authorized_for` / `authorized_npcs`-style metadata and any case-level access map.
-- Progression gating is honored for facts tied to discovery or threshold requirements.
-- Facts remain hidden until required discoveries or progression thresholds are available.
-- The function never leaks the full case into an NPC context.
-- False or deceptive explanations are preserved separately from actual case knowledge.
-
-## Validation
-
-I validated the change with the following test commands:
-
-1. `python -m pytest tests/test_npc_knowledge.py -v`
-2. `python -m pytest -v`
-
-Result: both commands passed successfully, with the focused NPC knowledge test file passing and the full repository test suite passing.
-
-## Notes and limitations
-
-- The repository's shared interface is intentionally permissive, so the implementation follows flexible case-state parsing rather than a rigid schema.
-- No unresolved contract discrepancies were present in the working repository, and the shared contract was treated as authoritative.
-
-## Files involved
-
-- `members/anand/npc_knowledge.py`
-- `tests/test_npc_knowledge.py`
-
-This work completes the NPC knowledge module behavior requested by the task and keeps the implementation aligned with the repository contract.
+`python -m pytest tests/test_npc_knowledge.py -q` - 19 passed (fixture AND the real Case Engine; progression gating,
+future-fact protection, exact IDs, non-mutation, independence, determinism).
+Dependencies: none.

@@ -149,3 +149,9 @@ members/paras/test_regression.py::TestProgressionBoundary::test_all_fact_meta_re
 - Activate and expand Section 5 (signature tests) once all module owners have committed their implementations.
 - Add end-to-end regression tests over the full `interrogate()` pipeline once Integration (Pushparaj) is available.
 - Cross-reference failing reason codes from the full suite to confirm Section 6 progression-gate logic aligns with live `retrieve_evidence()` and `build_npc_context()` filtering.
+
+## Lead integration update
+
+Two signature tests were silently skipping ("not yet implemented") because their `importorskip` targets
+(`members.gagan.evidence_retrieval`, `members.pushparaj.integration`) do not exist. They now point at the delivered
+modules (`members.gagan.retriever`, `members.khushi.integration`) and pass: 67 passed, 0 skipped.

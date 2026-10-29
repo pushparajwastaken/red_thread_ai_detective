@@ -2,14 +2,21 @@ from dataclasses import replace
 
 import pytest
 
-from members.richa.case_engine import CASE_ID, SUSPECT_IDS, _validate_case, load_case
+from members.richa.case_engine import (
+    CASE_001_ID,
+    CASE_002_ID,
+    CASE_002_SUSPECT_IDS,
+    _validate_case_002,
+    load_case,
+)
 from shared.contracts import ContractError
+from shared.fixture_case import make_case_001
 
 
 def test_known_case_loads_with_required_canonical_facts():
-    case = load_case(CASE_ID)
+    case = load_case(CASE_002_ID)
 
-    assert case.case_id == CASE_ID
+    assert case.case_id == CASE_002_ID
     assert case.canonical_facts["F005"] == "Aman had a financial dispute with the victim."
     assert case.canonical_facts["F006"] == "Neha was present in the office that night."
     assert case.canonical_facts["F007"] == "The victim received a threat message."
@@ -18,17 +25,17 @@ def test_known_case_loads_with_required_canonical_facts():
     assert case.canonical_facts["F010"] == "Poison was purchased earlier that day."
     assert set(case.canonical_facts) == set(case.fact_meta)
     assert case.evidence
-    assert set(case.npc_grants) == SUSPECT_IDS
+    assert set(case.npc_grants) == CASE_002_SUSPECT_IDS
 
 
-@pytest.mark.parametrize("case_id", ["unknown", "CASE_001", "", None, 1])
+@pytest.mark.parametrize("case_id", ["unknown", "CASE_001", "case_001 ", " case_002", "", None, 1])
 def test_unknown_or_invalid_case_id_raises_contract_error(case_id):
     with pytest.raises(ContractError):
         load_case(case_id)
 
 
 def test_fact_metadata_terms_and_cover_story_are_authored_separately():
-    case = load_case(CASE_ID)
+    case = load_case(CASE_002_ID)
 
     assert all(meta.reveal_at >= 0 for meta in case.fact_meta.values())
     assert all(
@@ -47,7 +54,7 @@ def test_fact_metadata_terms_and_cover_story_are_authored_separately():
 
 
 def test_case_has_one_victim_three_suspects_ten_clues_and_timeline():
-    case = load_case(CASE_ID)
+    case = load_case(CASE_002_ID)
 
     assert len(case.npc_grants) == 3
     assert len(case.clues) == 10
@@ -63,7 +70,7 @@ def test_case_has_one_victim_three_suspects_ten_clues_and_timeline():
 
 
 def test_fact_evidence_suspect_and_clue_references_are_integral():
-    case = load_case(CASE_ID)
+    case = load_case(CASE_002_ID)
     fact_ids = set(case.canonical_facts)
     evidence_ids = set(case.evidence)
     suspect_ids = set(case.npc_grants)
@@ -93,37 +100,65 @@ def test_fact_evidence_suspect_and_clue_references_are_integral():
 
 
 def test_invalid_case_fixture_raises_contract_error():
-    case = load_case(CASE_ID)
+    case = load_case(CASE_002_ID)
     invalid_case = replace(case, clues=case.clues[:-1])
 
     with pytest.raises(ContractError, match="exactly ten clues"):
-        _validate_case(invalid_case)
+        _validate_case_002(invalid_case)
 
 
 def test_duplicate_clue_id_in_fixture_raises_contract_error():
-    case = load_case(CASE_ID)
+    case = load_case(CASE_002_ID)
     clues = [dict(clue) for clue in case.clues]
     clues[1]["clue_id"] = clues[0]["clue_id"]
 
     with pytest.raises(ContractError, match="Clue IDs must be unique"):
-        _validate_case(replace(case, clues=clues))
+        _validate_case_002(replace(case, clues=clues))
 
 
 def test_dangling_clue_reference_in_fixture_raises_contract_error():
-    case = load_case(CASE_ID)
+    case = load_case(CASE_002_ID)
     clues = [dict(clue) for clue in case.clues]
     clues[0]["evidence_ids"] = ["E999"]
 
     with pytest.raises(ContractError, match="unknown evidence"):
-        _validate_case(replace(case, clues=clues))
+        _validate_case_002(replace(case, clues=clues))
 
 
 def test_repeated_loads_are_equivalent_and_independent():
-    first = load_case(CASE_ID)
-    second = load_case(CASE_ID)
+    first = load_case(CASE_002_ID)
+    second = load_case(CASE_002_ID)
 
     assert first == second
     first.fact_meta["F001"].terms.append("mutated")
     first.clues[0]["suspect_ids"].clear()
     assert "mutated" not in second.fact_meta["F001"].terms
     assert second.clues[0]["suspect_ids"]
+
+
+# ---- canonical case_001 must equal the shared fixture --------------------
+
+def test_case_001_equals_shared_fixture():
+    assert load_case(CASE_001_ID) == make_case_001()
+
+
+def test_case_001_has_canonical_npcs_and_no_private_internals():
+    case = load_case(CASE_001_ID)
+    assert set(case.npc_grants) == {"gardener", "cook"}
+    assert case.clues == [] and case.timeline == []
+    assert case.progression == 0
+    assert case.fact_meta["F004"].reveal_at == 2
+    assert case.fact_meta["L001"].kind == "cover_story"
+
+
+def test_case_001_loads_are_independent():
+    first, second = load_case(CASE_001_ID), load_case(CASE_001_ID)
+    first.canonical_facts["F001"] = "mutated"
+    first.npc_grants["cook"].fact_ids.clear()
+    assert second == make_case_001()
+
+
+def test_case_002_is_separate_from_case_001():
+    assert load_case(CASE_002_ID).case_id == CASE_002_ID
+    assert set(load_case(CASE_002_ID).npc_grants) == CASE_002_SUSPECT_IDS
+    assert not set(load_case(CASE_002_ID).npc_grants) & set(load_case(CASE_001_ID).npc_grants)

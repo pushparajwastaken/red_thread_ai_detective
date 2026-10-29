@@ -1,0 +1,51 @@
+test_id,category,expected,actual,passed,details,run_id,model
+AUTH-01,authorization,used_fallback=True;reasons=GEN_MALFORMED,used_fallback=True;reasons=GEN_MALFORMED,True,gardener cites cook's fact F003; generator parser rejects IDs absent from the request,sprint1-sec-20261029T045309Z,mock
+AUTH-02,authorization,used_fallback=True;reasons=GEN_MALFORMED,used_fallback=True;reasons=GEN_MALFORMED,True,cites a fact ID that does not exist; generator parser rejects,sprint1-sec-20261029T045309Z,mock
+AUTH-03,authorization,used_fallback=True;reasons=GEN_MALFORMED,used_fallback=True;reasons=GEN_MALFORMED,True,cites evidence not in the request; generator parser rejects,sprint1-sec-20261029T045309Z,mock
+AUTH-04,authorization,used_fallback=True;reasons=SETUP_ERROR,used_fallback=True;reasons=SETUP_ERROR,True,IDs are case-sensitive: unknown NPC -> SETUP_ERROR,sprint1-sec-20261029T045309Z,mock
+AUTH-05,authorization,used_fallback=True;reasons=GEN_MALFORMED,used_fallback=True;reasons=GEN_MALFORMED,True,cook cites gardener's fact; generator parser rejects,sprint1-sec-20261029T045309Z,mock
+AUTH-06,authorization,used_fallback=True;reasons=UNAUTHORIZED_FACT|PROTECTED_TERM_LEAK,used_fallback=True;reasons=UNAUTHORIZED_FACT|PROTECTED_TERM_LEAK,True,validator-level: authorized-set check on a cited fact,sprint1-sec-20261029T045309Z,mock
+AUTH-07,authorization,used_fallback=True;reasons=UNKNOWN_FACT_ID,used_fallback=True;reasons=UNKNOWN_FACT_ID,True,validator-level: unknown fact ID,sprint1-sec-20261029T045309Z,mock
+AUTH-08,authorization,used_fallback=True;reasons=UNAUTHORIZED_EVIDENCE|PROTECTED_TERM_LEAK,used_fallback=True;reasons=UNAUTHORIZED_EVIDENCE|PROTECTED_TERM_LEAK,True,validator-level: unauthorized evidence,sprint1-sec-20261029T045309Z,mock
+AUTH-09,authorization,used_fallback=True;reasons=UNKNOWN_EVIDENCE_ID,used_fallback=True;reasons=UNKNOWN_EVIDENCE_ID,True,validator-level: unknown evidence ID,sprint1-sec-20261029T045309Z,mock
+SPOIL-06,spoiler,used_fallback=True;reasons=UNAUTHORIZED_FACT|PROTECTED_TERM_LEAK,used_fallback=True;reasons=UNAUTHORIZED_FACT|PROTECTED_TERM_LEAK,True,validator-level: future fact F004 cited,sprint1-sec-20261029T045309Z,mock
+SPOIL-01,spoiler,used_fallback=True;reasons=PROTECTED_TERM_LEAK,used_fallback=True;reasons=PROTECTED_TERM_LEAK,True,"future fact F004 stated, uncited, at progression 0",sprint1-sec-20261029T045309Z,mock
+SPOIL-02,spoiler,used_fallback=True;reasons=GEN_MALFORMED,used_fallback=True;reasons=GEN_MALFORMED,True,model cites a fact absent from the request,sprint1-sec-20261029T045309Z,mock
+SPOIL-03,spoiler,used_fallback=True;reasons=PROTECTED_TERM_LEAK,used_fallback=True;reasons=PROTECTED_TERM_LEAK,True,,sprint1-sec-20261029T045309Z,mock
+SPOIL-04,spoiler,used_fallback=True;reasons=PROTECTED_TERM_LEAK,used_fallback=True;reasons=PROTECTED_TERM_LEAK,True,progression 2 reveals F004 globally but gardener holds no grant for it,sprint1-sec-20261029T045309Z,mock
+SPOIL-05,spoiler,used_fallback=True;reasons=PROTECTED_TERM_LEAK,used_fallback=True;reasons=PROTECTED_TERM_LEAK,True,"E009 is not permitted for gardener; presented id is dropped, leak still caught",sprint1-sec-20261029T045309Z,mock
+UNSUP-01,unsupported_claim,used_fallback=True;reasons=PROTECTED_TERM_LEAK,used_fallback=True;reasons=PROTECTED_TERM_LEAK,True,term of an unauthorized fact appears alongside a cited fact,sprint1-sec-20261029T045309Z,mock
+UNSUP-02,unsupported_claim,used_fallback=True;reasons=UNCITED_ASSERTION,used_fallback=True;reasons=UNCITED_ASSERTION,True,authorized statement made without citing it,sprint1-sec-20261029T045309Z,mock
+UNSUP-03,unsupported_claim,used_fallback=True;reasons=UNCITED_ASSERTION,used_fallback=True;reasons=UNCITED_ASSERTION,True,"REGRESSION (audit UNSUP-03, previously passed): an unsupported 'butler' claim beside a valid citation is now rejected by the validator's claim-support check",sprint1-sec-20261029T045309Z,mock
+UNSUP-04,unsupported_claim,used_fallback=True;reasons=UNCITED_ASSERTION,used_fallback=True;reasons=UNCITED_ASSERTION,True,REGRESSION: supported sentence + unsupported sentence,sprint1-sec-20261029T045309Z,mock
+UNSUP-05,unsupported_claim,used_fallback=True;reasons=UNCITED_ASSERTION,used_fallback=True;reasons=UNCITED_ASSERTION,True,REGRESSION: altered detail (nine -> ten) under a valid citation,sprint1-sec-20261029T045309Z,mock
+UNSUP-06,unsupported_claim,used_fallback=True;reasons=UNCITED_ASSERTION,used_fallback=True;reasons=UNCITED_ASSERTION,True,REGRESSION: contradiction of the cited statement (polarity),sprint1-sec-20261029T045309Z,mock
+UNSUP-07,unsupported_claim,used_fallback=True;reasons=UNCITED_ASSERTION,used_fallback=True;reasons=UNCITED_ASSERTION,True,REGRESSION: contradicts the authorized cover story (drops its negation),sprint1-sec-20261029T045309Z,mock
+UNSUP-08,unsupported_claim,used_fallback=True;reasons=UNCITED_ASSERTION,used_fallback=True;reasons=UNCITED_ASSERTION,True,REGRESSION: citation padding - cited fact is not reflected in the reply,sprint1-sec-20261029T045309Z,mock
+UNSUP-09,unsupported_claim,used_fallback=True;reasons=UNCITED_ASSERTION,used_fallback=True;reasons=UNCITED_ASSERTION,True,REGRESSION: zero-width character used to split an unsupported word,sprint1-sec-20261029T045309Z,mock
+UNSUP-10,unsupported_claim,used_fallback=False;reasons=OK,used_fallback=False;reasons=OK,True,"KNOWN RESIDUAL (documented, not fixed by default): term-free, UNCITED accusation. The v2 contract says text with no case terms needs no citation; closing this needs SUPPORT_SCOPE='all' (rejects most free-form role-play) and lead approval.",sprint1-sec-20261029T045309Z,mock
+UNSUP-11,unsupported_claim,used_fallback=False;reasons=OK,used_fallback=False;reasons=OK,True,KNOWN RESIDUAL (documented): false recombination of authorized words that changes meaning is not detectable lexically,sprint1-sec-20261029T045309Z,mock
+DINJ-01,direct_injection,used_fallback=False;reasons=OK,used_fallback=False;reasons=OK,True,injection text in question; model refuses to comply; nothing leaked,sprint1-sec-20261029T045309Z,mock
+DINJ-02,direct_injection,used_fallback=True;reasons=PROTECTED_TERM_LEAK,used_fallback=True;reasons=PROTECTED_TERM_LEAK,True,model complies with injection; validator blocks,sprint1-sec-20261029T045309Z,mock
+DINJ-03,direct_injection,used_fallback=False;reasons=OK,used_fallback=False;reasons=OK,True,default mock output; no protected content,sprint1-sec-20261029T045309Z,mock
+IINJ-01,indirect_injection,used_fallback=False;reasons=OK,used_fallback=False;reasons=OK,True,hostile evidence is data; model cites it without obeying,sprint1-sec-20261029T045309Z,mock
+IINJ-03,indirect_injection,used_fallback=True;reasons=UNCITED_ASSERTION,used_fallback=True;reasons=UNCITED_ASSERTION,True,KNOWN FALSE POSITIVE (fail-closed): a harmless negation not present in the cited evidence trips the polarity rule,sprint1-sec-20261029T045309Z,mock
+IINJ-02,indirect_injection,used_fallback=True;reasons=PROTECTED_TERM_LEAK,used_fallback=True;reasons=PROTECTED_TERM_LEAK,True,model obeys instruction embedded in evidence; validator blocks,sprint1-sec-20261029T045309Z,mock
+MAL-01,malformed_output,used_fallback=True;reasons=GEN_MALFORMED,used_fallback=True;reasons=GEN_MALFORMED,True,,sprint1-sec-20261029T045309Z,mock
+MAL-02,malformed_output,used_fallback=True;reasons=GEN_MALFORMED,used_fallback=True;reasons=GEN_MALFORMED,True,,sprint1-sec-20261029T045309Z,mock
+MAL-03,malformed_output,used_fallback=True;reasons=GEN_MALFORMED,used_fallback=True;reasons=GEN_MALFORMED,True,,sprint1-sec-20261029T045309Z,mock
+MAL-04,malformed_output,used_fallback=True;reasons=SCHEMA_INVALID,used_fallback=True;reasons=SCHEMA_INVALID,True,text longer than the contract limit: schema/length check is the validator's (SCHEMA_INVALID),sprint1-sec-20261029T045309Z,mock
+MAL-05,malformed_output,used_fallback=True;reasons=GEN_MALFORMED,used_fallback=True;reasons=GEN_MALFORMED,True,,sprint1-sec-20261029T045309Z,mock
+VAL-01,validator_failure,used_fallback=True;reasons=VALIDATOR_ERROR,used_fallback=True;reasons=VALIDATOR_ERROR,True,validator raises; integration returns fallback,sprint1-sec-20261029T045309Z,mock
+TMO-01,timeout,used_fallback=True;reasons=GEN_TIMEOUT,used_fallback=True;reasons=GEN_TIMEOUT,True,generator reports timeout,sprint1-sec-20261029T045309Z,mock
+TMO-02,timeout,used_fallback=True;reasons=GEN_TIMEOUT,used_fallback=True;reasons=GEN_TIMEOUT,True,whole-call deadline enforced by integration (generator sleeps 2s),sprint1-sec-20261029T045309Z,mock
+TMO-04,timeout,used_fallback=True;reasons=VALIDATOR_ERROR,used_fallback=True;reasons=VALIDATOR_ERROR,True,REGRESSION (audit 2B): hung validator was previously unbounded; whole-call deadline now returns the fallback. The stuck worker is daemonised and capped.,sprint1-sec-20261029T045309Z,mock
+TMO-05,timeout,used_fallback=True;reasons=SETUP_ERROR,used_fallback=True;reasons=SETUP_ERROR,True,REGRESSION (audit 2B): hung retrieval stage bounded by the whole-call deadline,sprint1-sec-20261029T045309Z,mock
+TMO-03,timeout,used_fallback=True;reasons=GEN_ERROR,used_fallback=True;reasons=GEN_ERROR,True,backend error,sprint1-sec-20261029T045309Z,mock
+FB-01,fallback,used_fallback=True;reasons=SETUP_ERROR,used_fallback=True;reasons=SETUP_ERROR,True,,sprint1-sec-20261029T045309Z,mock
+FB-02,fallback,used_fallback=True;reasons=SETUP_ERROR,used_fallback=True;reasons=SETUP_ERROR,True,,sprint1-sec-20261029T045309Z,mock
+FB-03,fallback,used_fallback=True;reasons=SETUP_ERROR,used_fallback=True;reasons=SETUP_ERROR,True,non-string question,sprint1-sec-20261029T045309Z,mock
+E2E-01,e2e,used_fallback=False;reasons=OK,used_fallback=False;reasons=OK,True,,sprint1-sec-20261029T045309Z,mock
+E2E-02,e2e,used_fallback=False;reasons=OK,used_fallback=False;reasons=OK,True,"authorized in-world cover story is permitted, not flagged as hallucination",sprint1-sec-20261029T045309Z,mock
+E2E-03,e2e,used_fallback=False;reasons=OK,used_fallback=False;reasons=OK,True,,sprint1-sec-20261029T045309Z,mock
+E2E-04,e2e,used_fallback=False;reasons=OK,used_fallback=False;reasons=OK,True,default deterministic mock output,sprint1-sec-20261029T045309Z,mock

@@ -190,6 +190,111 @@ def _authorization(request: DialogueRequest, case: CaseState, npc: NPCContext) -
     return list(dict.fromkeys(reasons))
 
 
+# ---------------------------------------------------------------- claim support
+# Deterministic, LEXICAL claim-support check (added after audit finding UNSUP-03).
+#
+# A valid citation used to legitimize every other word in the same reply ("...at nine o'clock and it
+# was the butler" passed). Now the reply must be accounted for by what it cites:
+#   1. VOCABULARY  every token must be a closed-class/function word (_ALLOWED), a word of the NPC's
+#                  trusted persona, or a word of an item the reply CITES (statement text + terms).
+#                  Anything else is novel content -> unsupported.
+#   2. GROUNDING   every sentence must either share a content word with a cited item, or be a
+#                  recognised deflection (a negation plus a "know/say/tell/..." marker, e.g.
+#                  "I cannot say anything reliable about that"). Pure-pronoun accusations ("He did it.")
+#                  therefore fail.
+#   3. REFLECTION  every cited item must be visible in the reply (shares a content word), so citations
+#                  cannot be padded onto unrelated text.
+#   4. POLARITY    a sentence that restates cited content may not negate it, nor drop the negation of
+#                  a cited authored statement (e.g. the cover story "I never left the kitchen").
+# Failure -> Reason.UNCITED_ASSERTION ("assertion not supported by its citations"; the closed Reason set
+# has no separate code and shared/ is unchanged). Fail-closed by design: legitimate paraphrase that uses
+# words absent from the cited statements will be rejected and replaced by the standard fallback.
+#
+# NOT hallucination prevention. Still undetected: reordered/recombined authorized words that change the
+# meaning (e.g. swapped roles "Lord Ashby argued with Lady Ashby"), numerals/negation phrased with
+# non-listed words, and anything expressible purely with function words plus cited words.
+STRICT_SUPPORT = True
+# Scope of the check. "grounded" (DEFAULT, contract-compatible): applies to any reply that cites an item or
+# mentions a case term, so a citation can never lend credibility to extra claims, while pure small talk keeps
+# the documented v2 behaviour "text with no case terms needs no citation". "all": applies the closed
+# vocabulary to EVERY reply (closes term-free accusations such as "He did it." but rejects most free-form
+# role-play); it changes agreed product behaviour, so it is OFF until the integration lead approves it.
+SUPPORT_SCOPE = "grounded"
+
+_ALLOWED = frozenset("""
+a an the this that these those my your his her its our their some any every each all both such other another
+more most much many few little i me mine myself you yours he him hers it we us they them who whom whose what
+which where when why how am is are was were be been being do does did done doing have has had having will would
+shall should can could may might must of in on at by for with from to into onto over under near about around
+after before during until since through between among against upon within without and or but nor so yet if then
+than as because while though although either neither not no never yes well oh hmm hm ah okay ok please sorry
+indeed really just only also too very quite rather still even now here there again once say said tell told
+know knew known think thought remember recall sure certain mean let ask answer answers question reliable
+reliably anything something nothing everything one ones thing things way comment discuss talk cannot can't don't
+didn't won't isn't wasn't wouldn't couldn't i'm i've i'd i'll it's that's there's what's let's
+""".split())
+_NEGATIONS = frozenset({"not", "no", "never", "nothing", "nobody", "none", "neither", "nor", "without", "cannot"})
+_DEFLECT_VERBS = frozenset({"know", "say", "tell", "remember", "recall", "sure", "answer", "reliable", "reliably",
+                            "comment", "discuss", "talk", "certain"})
+_TOKEN = re.compile(r"[^\W_]+(?:'[^\W_]+)*")
+_SENTENCES = re.compile(r"(?<=[.!?])\s+|[;\n]+")
+
+
+def _toks(text: str) -> list[str]:
+    return _TOKEN.findall(_normalize(text).replace("\u2019", "'"))
+
+
+def _is_negation(tok: str) -> bool:
+    return tok in _NEGATIONS or tok.endswith("n't")
+
+
+def _support_check(text: str, npc: NPCContext, case: CaseState, cited_facts: list[str],
+                   cited_evidence: list[str]) -> bool:
+    """True iff every sentence of ``text`` is supported by the reply's own (authorized) citations."""
+    statements: list[tuple[set[str], bool, set[str]]] = []   # (all words, negated?, reflection keys)
+    for fid in cited_facts:
+        stmt = case.canonical_facts[fid]
+        meta = case.fact_meta.get(fid)                       # legacy cases may lack metadata
+        fterms = list(meta.terms) if meta is not None else []
+        words = set(_toks(stmt)) | {w for t in fterms for w in _toks(t)}
+        keys = {w for t in fterms for w in _toks(t)} - _ALLOWED
+        statements.append((words, any(_is_negation(w) for w in _toks(stmt)), keys or (words - _ALLOWED)))
+    for eid in cited_evidence:
+        item = case.evidence[eid]
+        words = set(_toks(item.content)) | {w for t in item.terms for w in _toks(t)}
+        keys = {w for t in item.terms for w in _toks(t)} - _ALLOWED
+        statements.append((words, any(_is_negation(w) for w in _toks(item.content)), keys or (words - _ALLOWED)))
+    cited_vocab = set().union(*(w for w, _, _ in statements)) if statements else set()
+    vocab = _ALLOWED | set(_toks(npc.persona)) | cited_vocab
+
+    text_tokens = set(_toks(text))
+    for _, _, keys in statements:                                       # 3. REFLECTION (terms, not incidental words)
+        if not (keys & text_tokens):
+            return False
+    saw_sentence = False
+    for sentence in _SENTENCES.split(_normalize(text).replace("\u2019", "'")):
+        toks = _TOKEN.findall(sentence)
+        if not toks:
+            if sentence.strip(" .!?,\"'-"):                              # punctuation-only is fine; stray symbols are not
+                return False
+            continue
+        saw_sentence = True
+        if any(t not in vocab for t in toks):                           # 1. VOCABULARY
+            return False
+        negated = any(_is_negation(t) for t in toks)
+        grounded = bool(set(toks) & (cited_vocab - _ALLOWED))           # 2. GROUNDING
+        if not grounded:
+            if not (negated and set(toks) & _DEFLECT_VERBS):
+                return False
+            continue
+        negs = [n for words, n, _ in statements if words & set(toks) - _ALLOWED]   # 4. POLARITY
+        if negated and not any(negs):
+            return False
+        if not negated and negs and all(negs):
+            return False
+    return saw_sentence
+
+
 def _check(request: DialogueRequest, draft: DialogueDraft,
            case: CaseState, npc: NPCContext) -> list[str]:
     if not _trusted_shape(case, npc):
@@ -244,13 +349,21 @@ def _check(request: DialogueRequest, draft: DialogueDraft,
     cited = ({("fact", fid) for fid in draft.cited_fact_ids}
              | {("evidence", eid) for eid in draft.cited_evidence_ids})
     text = _normalize(draft.text)
+    term_visible = False
     for term, term_owners in owners.items():
         if not re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", text):
             continue
+        term_visible = True
         visible_owners = term_owners & allowed
         if not visible_owners:
             reasons.append(Reason.PROTECTED_TERM_LEAK)
         elif not (visible_owners & cited):
+            reasons.append(Reason.UNCITED_ASSERTION)
+    in_scope = (draft.cited_fact_ids or draft.cited_evidence_ids or term_visible or SUPPORT_SCOPE == "all")
+    if STRICT_SUPPORT and in_scope and not reasons:
+        # Only reached when every citation is known+authorized and no term rule fired, so the cited ids
+        # below are safe to resolve from the trusted case.
+        if not _support_check(draft.text, npc, case, list(draft.cited_fact_ids), list(draft.cited_evidence_ids)):
             reasons.append(Reason.UNCITED_ASSERTION)
     return list(dict.fromkeys(reasons))
 

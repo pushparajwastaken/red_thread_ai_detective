@@ -104,3 +104,12 @@ Demo outcomes:
 * The injection heuristic is informational only and small; it is not a classifier.
 * Progression/discovery rules are not defined in `interfaces.md`; helpers are provided but the rule table
   needs a decision (see `LEAD_NOTES.md`).
+## Lead integration update (timeout audit)
+
+- Previously only generation was under the deadline; a hung retrieval/validator blocked the caller, and each call leaked a
+  non-daemon thread-pool worker that also delayed interpreter exit. The whole call now runs on a daemon worker with one deadline
+  (generation -> `GEN_TIMEOUT`, validation -> `VALIDATOR_ERROR`, setup/retrieval -> `SETUP_ERROR`); abandoned workers are capped
+  (`MAX_ABANDONED_WORKERS`) and their late results discarded. A Python thread still cannot be killed; the generator should honour
+  `request.timeout_s`. Tests: `tests/test_timeout_robustness.py` (15), `tests/test_state_integrity.py`.
+- `default_deps()` remains stub-backed for member isolation and is now labelled (`DEFAULT_DEPS_ARE_STUBS`). Production entry point:
+  `src.pipeline.interrogate`. Her original 39 tests still pass unchanged.

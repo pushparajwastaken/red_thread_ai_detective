@@ -4,6 +4,17 @@ from shared.fixture_case import make_case_001
 from shared.contracts import SAFE_FALLBACK_TEXT
 from members.ananya.branching_baseline import answer_branching
 
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def _use_local_dev_fixture(monkeypatch, tmp_path):
+    """These unit tests target the member-local Q001..Q006 development fixture.
+    The canonical shared set (test_cases/benchmark_questions.json) is covered by
+    tests/test_branching_shared_set.py."""
+    import members.ananya.branching_baseline as module
+    monkeypatch.setattr(module, "SHARED_QUESTION_SET", tmp_path / "absent.json")
+
 
 def test_branching_returns_comparable_dialogue_result():
     result = answer_branching(make_case_001(), "gardener", "Q001")
@@ -102,3 +113,10 @@ def test_branching_rejects_authored_branch_that_contains_future_term(monkeypatch
 
     assert result.valid is False
     assert result.used_fallback is True
+
+
+def test_success_path_reports_measured_nonzero_latency_consistently():
+    result = answer_branching(make_case_001(), "gardener", "Q001")
+    assert result.used_fallback is False
+    assert result.metrics.total_ms > 0.0
+    assert result.latency_ms == result.metrics.total_ms

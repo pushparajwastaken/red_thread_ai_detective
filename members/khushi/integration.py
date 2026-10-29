@@ -13,7 +13,12 @@ Design rules enforced here
   evidence. The full CaseState never leaves this module (exclusion by construction).
 * Exactly ONE generator call per turn: no retries, no regeneration loops, so
   latency and cost per turn are bounded.
-* Wall-clock deadline enforced here (the generator is also asked to honour it).
+* ONE wall-clock deadline covers the WHOLE call (setup, retrieval, generation, validation): the
+  pipeline runs on a daemon worker and the caller stops waiting at the deadline. A Python thread cannot
+  be killed, so an uncooperative stage keeps running in the background; that is bounded (see
+  ``MAX_ABANDONED_WORKERS``), never blocks interpreter exit (daemon), and its late result is discarded.
+  Reason on a deadline miss: generation -> GEN_TIMEOUT, validation -> VALIDATOR_ERROR, setup/retrieval ->
+  SETUP_ERROR. The generator is also asked to honour ``request.timeout_s`` (cooperative cancellation).
 * Model tokens are never shown before validation: ``generate_dialogue`` returns a
   complete draft, only ``DialogueResult.text`` reaches the player. Therefore the
   player-visible latency is ``metrics.total_ms``; ``ttft_ms`` is model-side only.
@@ -24,11 +29,10 @@ Design rules enforced here
 from __future__ import annotations
 
 import re
+import threading
 import unicodedata
 import uuid
-from concurrent.futures import ThreadPoolExecutor
-from concurrent.futures import TimeoutError as _FutureTimeout
-from dataclasses import asdict, dataclass, replace
+from dataclasses import asdict, dataclass, fields, replace
 from time import perf_counter
 from typing import Any, Callable, Iterable, Optional
 
@@ -39,6 +43,11 @@ from shared.contracts import (
 
 MAX_QUESTION_CHARS = 500   # caps prompt size (cost, latency) and injection surface
 RETRIEVAL_TOP_K = 3
+# Cap on worker threads that missed their deadline and are still running. At the cap new calls fail fast
+# with the timeout fallback instead of spawning more threads (a stuck backend must not exhaust the process).
+MAX_ABANDONED_WORKERS = 8
+_abandoned = 0
+_abandoned_lock = threading.Lock()
 
 
 # ------------------------------------------------------------ input heuristic
@@ -87,10 +96,17 @@ class Deps:
     flag_input: Callable[[Any], bool] = looks_like_injection
 
 
-def default_deps() -> Deps:
-    """Stubs for modules not delivered yet + Harsh's real validator.
+# Member-development default ONLY. PRODUCTION code must call ``src.pipeline.interrogate`` (real modules).
+# tests/test_production_entry_point.py fails if src/ or scripts/ ever rely on these stub defaults.
+DEFAULT_DEPS_ARE_STUBS = True
 
-    When the lead copies the real modules into src/, change ONLY the imports here.
+
+def default_deps() -> Deps:
+    """MEMBER-DEV defaults: stubs for modules 2-4 + Harsh's real validator. NOT the production wiring.
+
+    The production entry point is ``src.pipeline.interrogate`` / ``src.pipeline.real_deps`` (all real modules).
+    This function is intentionally left stub-backed so a member can run ``interrogate()`` in isolation
+    (the original contribution workflow) and so members/khushi's own tests stay hermetic.
     """
     from members.harsh.validator import make_fallback, validate_dialogue
     from members.khushi.stubs import (
@@ -170,21 +186,55 @@ def _fallback(deps: Any, npc_id: Any, reasons: list[str],
     return _bare_fallback(npc_id, reasons)
 
 
-def _call_with_deadline(fn: Callable, arg: Any, budget_s: float):
-    """Run fn(arg) on a worker thread. Returns (value, None) or (None, reason)."""
+_TIMEOUT, _ERROR, _REFUSED = "timeout", "error", "refused"
+_NO_VALUE = object()
+
+
+def abandoned_workers() -> int:
+    """Number of deadline-missed workers still running (diagnostics / tests)."""
+    with _abandoned_lock:
+        return _abandoned
+
+
+def _call_with_deadline(fn: Callable, arg: Any, budget_s: float, *, name: str = "gen"):
+    """Run fn(arg) on a DAEMON worker thread; wait at most ``budget_s``.
+
+    Returns ``(value, None)`` or ``(None, _TIMEOUT | _ERROR | _REFUSED)``. A worker that misses the deadline is
+    abandoned (counted until it returns); its late result is dropped. When ``MAX_ABANDONED_WORKERS`` are
+    already stuck the call is refused immediately (``_REFUSED``) rather than starting another thread.
+    """
+    global _abandoned
     if budget_s <= 0:
-        return None, Reason.GEN_TIMEOUT
-    ex = ThreadPoolExecutor(max_workers=1, thread_name_prefix="redthread-gen")
-    fut = ex.submit(fn, arg)
-    try:
-        return fut.result(timeout=budget_s), None
-    except _FutureTimeout:
-        return None, Reason.GEN_TIMEOUT
-    except Exception:
-        return None, Reason.GEN_ERROR
-    finally:
-        # A Python thread cannot be killed: the generator must honour timeout_s itself.
-        ex.shutdown(wait=False, cancel_futures=True)
+        return None, _TIMEOUT
+    with _abandoned_lock:
+        if _abandoned >= MAX_ABANDONED_WORKERS:
+            return None, _REFUSED
+    box: dict = {"value": _NO_VALUE, "error": False, "finished": False, "abandoned": False}
+    done = threading.Event()
+
+    def run() -> None:
+        global _abandoned
+        try:
+            box["value"] = fn(arg)
+        except Exception:
+            box["error"] = True
+        finally:
+            with _abandoned_lock:
+                box["finished"] = True
+                if box["abandoned"]:
+                    _abandoned -= 1
+            done.set()
+
+    threading.Thread(target=run, name=f"redthread-{name}", daemon=True).start()
+    done.wait(budget_s)
+    with _abandoned_lock:
+        if not box["finished"]:
+            box["abandoned"] = True
+            _abandoned += 1
+            return None, _TIMEOUT
+    if box["error"] or box["value"] is _NO_VALUE:
+        return None, _ERROR
+    return box["value"], None
 
 
 def _clean_timeout(timeout_s: Any) -> float:
@@ -233,6 +283,7 @@ def _pipeline(case, npc_id, question, presented_evidence_ids, timeout_s, deps, t
     deadline = t0 + _clean_timeout(timeout_s)
 
     # ---- 1. NPC context ---------------------------------------------------
+    trace._stage = "setup"
     s = perf_counter()
     try:
         npc = deps.build_npc_context(case, npc_id)
@@ -245,6 +296,7 @@ def _pipeline(case, npc_id, question, presented_evidence_ids, timeout_s, deps, t
     trace.setup_ms = (perf_counter() - s) * 1000
 
     # ---- 2. evidence retrieval + request ----------------------------------
+    trace._stage = "retrieval"
     s = perf_counter()
     try:
         retrieved = deps.retrieve_evidence(
@@ -267,18 +319,21 @@ def _pipeline(case, npc_id, question, presented_evidence_ids, timeout_s, deps, t
     trace.retrieval_ms = (perf_counter() - s) * 1000
 
     # ---- 3. generation (single call, hard deadline) ------------------------
+    trace._stage = "generation"
     s = perf_counter()
     draft, failure = _call_with_deadline(
-        deps.generate_dialogue, request, deadline - perf_counter())
+        deps.generate_dialogue, request, deadline - perf_counter(), name="gen")
     trace.generation_ms = (perf_counter() - s) * 1000
     if failure is not None:
-        trace.timed_out = failure == Reason.GEN_TIMEOUT
-        return _fallback(deps, npc_id, [failure])
+        reason = Reason.GEN_ERROR if failure == _ERROR else Reason.GEN_TIMEOUT
+        trace.timed_out = reason == Reason.GEN_TIMEOUT
+        return _fallback(deps, npc_id, [reason])
     gen_metrics = getattr(draft, "metrics", None)
     if type(gen_metrics) is TurnMetrics:
         trace.ttft_ms, trace.cost_usd = gen_metrics.ttft_ms, gen_metrics.cost_usd
 
     # ---- 4. validation -----------------------------------------------------
+    trace._stage = "validation"
     s = perf_counter()
     try:
         result = deps.validate_dialogue(request, draft, case, npc)
@@ -319,9 +374,34 @@ def interrogate_traced(case: CaseState, npc_id: str, question: str, *,
     d: Any = deps
     try:
         d = deps or default_deps()
-        result = _pipeline(case, npc_id, question, presented_evidence_ids,
-                           timeout_s, d, trace, t0)
-    except Exception:           # nothing may ever escape to the game loop
+        # The worker owns ``work``; the caller copies it only after a normal finish (or snapshots it at the
+        # deadline), so an abandoned worker can never mutate the trace the caller returns.
+        work = TurnTrace(request_id=trace.request_id, npc_id=trace.npc_id)
+        work._stage = "setup"
+        budget = _clean_timeout(timeout_s)
+
+        def run(_: Any) -> DialogueResult:
+            try:
+                return _pipeline(case, npc_id, question, presented_evidence_ids, timeout_s, d, work, t0)
+            except Exception:       # nothing may ever escape to the game loop
+                return _fallback(d, npc_id, [Reason.SETUP_ERROR])
+
+        result, failure = _call_with_deadline(run, None, budget - (perf_counter() - t0), name="turn")
+        for f in fields(work):
+            setattr(trace, f.name, getattr(work, f.name))
+        if failure is not None:
+            stage = getattr(work, "_stage", "setup")
+            if failure == _ERROR:
+                reason = Reason.SETUP_ERROR
+            elif failure == _REFUSED or stage == "generation":
+                reason = Reason.GEN_TIMEOUT          # at the cap the likely culprit is a stuck generator
+            elif stage == "validation":
+                reason = Reason.VALIDATOR_ERROR
+            else:
+                reason = Reason.SETUP_ERROR
+            trace.timed_out = failure != _ERROR
+            result = _fallback(d, npc_id, [reason])
+    except Exception:
         result = _fallback(d, npc_id, [Reason.SETUP_ERROR])
     try:
         result = _finalize(result, trace, t0)
