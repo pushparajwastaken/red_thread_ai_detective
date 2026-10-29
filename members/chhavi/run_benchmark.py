@@ -72,12 +72,18 @@ def load_target(spec):
 
     return function
 
-
 def load_questions():
-    questions = json.loads(
-        (BASE_DIR / "benchmark_questions.json").read_text(
-            encoding="utf-8-sig"
-        )
+    path = (
+        BASE_DIR.parents[1]
+        / "test_cases"
+        / "benchmark_questions.json"
+    )
+    payload = json.loads(path.read_text(encoding="utf-8-sig"))
+
+    questions = (
+        payload.get("questions")
+        if isinstance(payload, dict)
+        else payload
     )
 
     if not isinstance(questions, list) or not questions:
@@ -97,14 +103,20 @@ def load_questions():
             raise ValueError("Duplicate question_id")
 
         seen.add(item["question_id"])
-        evidence = item.get("presented_evidence_ids", [])
 
+        progression = item.get("progression", 0)
+        if type(progression) is not int or progression < 0:
+            raise ValueError("Invalid progression")
+
+        evidence = item.get("presented_evidence_ids", [])
         if not isinstance(evidence, list) or not all(
             isinstance(value, str) for value in evidence
         ):
             raise ValueError("Invalid presented_evidence_ids")
 
     return questions
+
+
 
 
 def call_target(target, item):
