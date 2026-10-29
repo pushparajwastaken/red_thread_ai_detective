@@ -117,13 +117,12 @@ def load_questions():
     return questions
 
 
-
-
-def call_target(target, item):
+    def call_target(target, item):
     # Fresh case prevents one trial from advancing another's state.
-   case = make_case_001(progression=item.get("progression", 0))
-    
+    case = make_case_001(progression=item.get("progression", 0))
+
     start = perf_counter()
+    
     result = target(
         case,
         item["npc_id"],
