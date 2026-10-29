@@ -1,6 +1,6 @@
 # Ananya — Submission
 
-## Assigned module
+## Assigned Module
 
 Module 9 — Branching Baseline, plus the matched playtest/replayability protocol.
 
@@ -25,28 +25,39 @@ The returned metrics use `mode="branching"` so branching and dynamic records rem
 
 ## Dependencies
 
-No new third-party dependencies. Uses Python standard library plus the repository's existing `shared` contracts/fixture and pytest for tests.
+Uses Python standard library, repository shared contracts/fixtures, and pytest for testing.
 
-## Exact test command
+The benchmark schema validation uses the `jsonschema` dependency.
+
+## Exact Test Commands
 
 From repository root:
 
 ```bash
 python -m pytest members/ananya/test_branching_baseline.py -q
+python -m pytest tests/test_benchmark_questions.py -q
+python -m pytest tests/test_npc_knowledge.py -q
+python -m pytest -q -rs
 ```
 
-## Test status
+## Test Status
 
-Development test suite: 10 tests passing in 0.13s against the current shared/fixture_case.py fixture.
+The complete repository test suite was executed successfully.
 
-## Known limitations
+```text
+32 passed in 0.45s
+```
 
-- The shared `test_cases/` directory is currently empty, so the local question set is a development fixture only.
+All tests passed with no skipped or failed tests after installing the required `jsonschema` dependency.
+
+## Known Limitations
+
+- The branching baseline is intentionally deterministic and fixed-dialogue; it serves as a comparison baseline, not the dynamic dialogue implementation.
 - No participant/playtest results are fabricated; `playtest_results_template.csv` must be populated from actual runs.
-- Engagement/replayability claims must remain limited to collected evidence.
-- The branching baseline is intentionally deterministic and fixed-dialogue; it is a comparison baseline, not the dynamic dialogue implementation.
+- Engagement and replayability claims must remain limited to collected evidence.
+- Benchmark question and NPC knowledge tests validate the baseline against the repository's current test cases. Passing automated tests does not establish real-world engagement or replayability.
 
-## Branch / commit
+## Branch / Commit
 
 - Branch: `feature/ananya-branching-baseline`
-- Commit: `8cb02ab`
+- Integration commit: `50ce755` — Merge `origin/main` into `feature/ananya-branching-baseline`
