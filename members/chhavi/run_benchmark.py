@@ -74,11 +74,7 @@ def load_target(spec):
 
 
 def load_questions():
-    path = (
-        BASE_DIR.parents[1]
-        / "test_cases"
-        / "benchmark_questions.json"
-    )
+    path = BASE_DIR / "benchmark_questions_shared.json"
     payload = json.loads(path.read_text(encoding="utf-8-sig"))
 
     questions = (
