@@ -72,6 +72,7 @@ def load_target(spec):
 
     return function
 
+
 def load_questions():
     path = (
         BASE_DIR.parents[1]
@@ -117,12 +118,12 @@ def load_questions():
     return questions
 
 
-    def call_target(target, item):
+def call_target(target, item):
     # Fresh case prevents one trial from advancing another's state.
     case = make_case_001(progression=item.get("progression", 0))
 
     start = perf_counter()
-    
+
     result = target(
         case,
         item["npc_id"],
@@ -165,9 +166,9 @@ def run_group(condition, target, reset, questions, args, root):
         "python": platform.python_version(),
         "case_id": "case_001",
         "progression_by_question": {
-    item["question_id"]: item.get("progression", 0)
-    for item in questions
-},
+            item["question_id"]: item.get("progression", 0)
+            for item in questions
+        },
         "repeats_per_question": args.repeats,
         "concurrency": 1,
         "questions": questions,
