@@ -1,0 +1,7 @@
+test_id,file,function,class,status,duration_ms,message,category
+TC_BUG_CASE_ENGINE_VS_FIXTURE_001,test_bug_case_engine_vs_fixture.py,test_case_id_matches_fixture,,PASSED,0.57,,unknown
+TC_BUG_CASE_ENGINE_VS_FIXTURE_002,test_bug_case_engine_vs_fixture.py,test_bug_npc_names_drift,,FAILED,36.64,"AssertionError: NPC drift: engine ['aman', 'neha', 'rohan'] != fixture ['cook', 'gardener']",unknown
+TC_BUG_CASE_ENGINE_VS_FIXTURE_003,test_bug_case_engine_vs_fixture.py,test_bug_evidence_set_drift,,FAILED,1.62,"AssertionError: evidence drift: engine ['E001', 'E002', 'E003', 'E004', 'E005', 'E006', 'E007', 'E008', 'E009', 'E010', 'E011', 'E012'] != fixture ['E001', 'E003', 'E009']",unknown
+TC_BUG_NPC_KNOWLEDGE_VS_CONTRACT_001,test_bug_npc_knowledge_vs_contract.py,test_TC_BUGANAND_001_npc_context_is_not_the_contract_type,,FAILED,0.38,"AssertionError: npc_knowledge.NPCContext ((<class 'npc_knowledge.NPCContext'>, <class 'dict'>, <class 'object'>)) is not shared.contracts.NPCContext",unknown
+TC_BUG_NPC_KNOWLEDGE_VS_CONTRACT_002,test_bug_npc_knowledge_vs_contract.py,test_TC_BUGANAND_002_unknown_npc_error_is_a_different_class,,FAILED,0.38,AssertionError: npc_knowledge.UnknownNPCError (id 1312673285920) is not shared.contracts.UnknownNPCError (id 1312716147168),unknown
+TC_BUG_NPC_KNOWLEDGE_VS_CONTRACT_003,test_bug_npc_knowledge_vs_contract.py,test_TC_BUGANAND_003_builder_rejects_the_golden_fixture,,FAILED,0.65,npc_knowledge.UnknownNPCError: 'Unknown NPC: gardener',unknown

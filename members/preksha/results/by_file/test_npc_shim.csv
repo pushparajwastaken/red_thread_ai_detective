@@ -1,0 +1,15 @@
+test_id,file,function,class,status,duration_ms,message,category
+TC_NPC_SHIM_001,test_npc_shim.py,test_TC_SHIM_001_gardener_returns_contract_context,,PASSED,0.19,,npc_shim
+TC_NPC_SHIM_002,test_npc_shim.py,test_TC_SHIM_002_cook_returns_contract_context,,PASSED,0.19,,npc_shim
+TC_NPC_SHIM_003,test_npc_shim.py,test_TC_SHIM_003_gardener_authorized_facts_exact,,PASSED,0.32,,npc_shim
+TC_NPC_SHIM_004,test_npc_shim.py,test_TC_SHIM_004_cook_includes_cover_story,,PASSED,0.32,,npc_shim
+TC_NPC_SHIM_005,test_npc_shim.py,test_TC_SHIM_005_permitted_evidence_matches_grant[gardener-evidence0],,PASSED,0.24,,npc_shim
+TC_NPC_SHIM_006,test_npc_shim.py,test_TC_SHIM_005_permitted_evidence_matches_grant[cook-evidence1],,PASSED,0.25,,npc_shim
+TC_NPC_SHIM_007,test_npc_shim.py,test_TC_SHIM_006_persona_is_copied_from_grant[gardener-A blunt old gardener.],,PASSED,0.2,,npc_shim
+TC_NPC_SHIM_008,test_npc_shim.py,test_TC_SHIM_006_persona_is_copied_from_grant[cook-A nervous cook.],,PASSED,0.18,,npc_shim
+TC_NPC_SHIM_009,test_npc_shim.py,test_TC_SHIM_007_spoilers_are_never_authorized[gardener],,PASSED,0.18,,npc_shim
+TC_NPC_SHIM_010,test_npc_shim.py,test_TC_SHIM_007_spoilers_are_never_authorized[cook],,PASSED,0.3,,npc_shim
+TC_NPC_SHIM_011,test_npc_shim.py,test_TC_SHIM_008_lists_are_independent_copies,,PASSED,0.23,,npc_shim
+TC_NPC_SHIM_012,test_npc_shim.py,test_TC_SHIM_009_unknown_npc_raises_key_error,,PASSED,0.26,,npc_shim
+TC_NPC_SHIM_013,test_npc_shim.py,test_TC_SHIM_010_shim_context_is_accepted_by_validator[gardener-I saw a figure by the greenhouse.-facts0],,PASSED,0.65,,npc_shim
+TC_NPC_SHIM_014,test_npc_shim.py,test_TC_SHIM_010_shim_context_is_accepted_by_validator[cook-I stayed in the kitchen.-facts1],,PASSED,0.47,,npc_shim

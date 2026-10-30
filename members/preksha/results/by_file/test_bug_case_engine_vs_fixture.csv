@@ -1,0 +1,4 @@
+test_id,file,function,class,status,duration_ms,message,category
+TC_BUG_CASE_ENGINE_VS_FIXTURE_001,test_bug_case_engine_vs_fixture.py,test_case_id_matches_fixture,,PASSED,0.57,,unknown
+TC_BUG_CASE_ENGINE_VS_FIXTURE_002,test_bug_case_engine_vs_fixture.py,test_bug_npc_names_drift,,FAILED,36.64,"AssertionError: NPC drift: engine ['aman', 'neha', 'rohan'] != fixture ['cook', 'gardener']",unknown
+TC_BUG_CASE_ENGINE_VS_FIXTURE_003,test_bug_case_engine_vs_fixture.py,test_bug_evidence_set_drift,,FAILED,1.62,"AssertionError: evidence drift: engine ['E001', 'E002', 'E003', 'E004', 'E005', 'E006', 'E007', 'E008', 'E009', 'E010', 'E011', 'E012'] != fixture ['E001', 'E003', 'E009']",unknown

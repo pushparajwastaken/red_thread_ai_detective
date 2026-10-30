@@ -1,0 +1,14 @@
+test_id,file,function,class,status,duration_ms,message,category
+TC_SPOILER_001,test_spoiler.py,test_TC_SPOILER_001_cite_unauthorized_fact[0],,PASSED,0.51,,spoiler
+TC_SPOILER_002,test_spoiler.py,test_TC_SPOILER_001_cite_unauthorized_fact[1],,PASSED,0.62,,spoiler
+TC_SPOILER_003,test_spoiler.py,test_TC_SPOILER_001_cite_unauthorized_fact[2],,PASSED,0.43,,spoiler
+TC_SPOILER_004,test_spoiler.py,test_TC_SPOILER_002_protected_term_without_citation[The drink was poisoned.],,PASSED,0.55,,spoiler
+TC_SPOILER_005,test_spoiler.py,test_TC_SPOILER_002_protected_term_without_citation[It was poison.],,PASSED,0.79,,spoiler
+TC_SPOILER_006,test_spoiler.py,test_TC_SPOILER_002_protected_term_without_citation[Somebody used the BRANDY.],,PASSED,0.65,,spoiler
+TC_SPOILER_007,test_spoiler.py,test_TC_SPOILER_002_protected_term_without_citation[Look at the decanter.],,PASSED,0.51,,spoiler
+TC_SPOILER_008,test_spoiler.py,test_TC_SPOILER_002_protected_term_without_citation[There was arsenic in it.],,PASSED,0.53,,spoiler
+TC_SPOILER_009,test_spoiler.py,test_TC_SPOILER_002_protected_term_without_citation[\uff22\uff32\uff21\uff2e\uff24\uff39 was involved.],,PASSED,0.46,,spoiler
+TC_SPOILER_010,test_spoiler.py,test_TC_SPOILER_003_cite_and_speak_spoiler_reports_both,,PASSED,0.55,,spoiler
+TC_SPOILER_011,test_spoiler.py,test_TC_SPOILER_004_cite_unpermitted_evidence,,PASSED,0.74,,spoiler
+TC_SPOILER_012,test_spoiler.py,test_TC_SPOILER_005_cook_cannot_leak_either,,PASSED,0.51,,spoiler
+TC_SPOILER_013,test_spoiler.py,test_TC_SPOILER_006_fallback_does_not_echo_leaked_text,,PASSED,0.4,,spoiler
