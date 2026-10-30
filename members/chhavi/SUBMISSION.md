@@ -83,8 +83,16 @@ The real comparison uses the shared questions at
 | Dynamic model | qwen2.5:3b-instruct | Local Ollama model |
 | Model ID | 357c53fb659c observed during setup | Model identifier |
 | Hardware | MacBook Air, Mac14,2, Apple M2, 16 GB RAM | Execution machine |
-| requests | Used by Anshul's Ollama adapter | Installed version and current requirements.txt membership require verification |
+| requests | 2.32.5 | Required by the Ollama adapter; not listed in the inspected requirements.txt |
 | jsonschema | Optional test dependency | JSON-schema check skipped in the final offline run |
+
+Additional dependency for real Ollama inference:
+
+```bash
+python3 -m pip install requests==2.32.5
+```
+
+The inspected requirements.txt lists only pytest, without a version pin.
 
 My helper implementation uses Python standard-library modules and
 the project's shared contracts.
@@ -237,8 +245,7 @@ Zero flags are not proof of complete security.
 - Automated scoring is lexical and citation-based.
 - Six scenarios explicitly require human review; completed human review
   is not established by these CSVs.
-- Exact historical timeout/environment settings and the requests version
-  still require verification.
+- Exact historical timeout and environment settings still require verification.
 - Model and validator issues are reported for their owners to review;
   they were not hidden or fixed by weakening validation.
 - No latency target, complete spoiler prevention or player-engagement
