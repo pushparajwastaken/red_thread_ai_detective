@@ -15,6 +15,13 @@ facts `F001 F002 F003 F004 L001`; evidence `E001 E003 E009`; `reveal_at` (`F004`
 discovered evidence = `E001 E003`; signatures of `answer_branching` and `interrogate`; the validator's
 word-boundary term matching; the baseline's loader format.
 
+**Update (case extension for the Sprint 1 case requirement):** `case_001` also contains a third suspect
+(`housekeeper`), facts `F005-F010` and evidence `E002 E004-E008 E010 E011`; every item listed above is unchanged.
+The `protected_fact_ids` / `protected_evidence_ids` of all 30 questions were regenerated, because they are *derived*
+(every case item the NPC may not use) and the case grew; no question text, NPC, progression, presented evidence or
+category changed. A full benchmark re-run on the extended case reproduced the committed outcome columns exactly,
+with 0 leaks.
+
 **Assumptions (not verifiable from the repo):** none of the IDs are assumed. Two judgement calls:
 (a) the baseline's authored answers are my wording; (b) the player-visible question texts are mine.
 
@@ -125,11 +132,13 @@ No latency or cost values are included here; none were measured.
   the directory *above* the repo (verified: `/home/claude/test_cases/...`), so the "shared set first" rule
   never fires from `members/ananya/`. It also expects the name `branching_questions.json`, not
   `benchmark_questions.json`. The harness overrides the constant; the lead should fix it (not done here).
-* **G2 Thin fixture.** 2 NPCs, 5 facts, 3 evidence items. 30 distinct questions are supported, but they
-  exercise roughly 8 distinct fixture behaviours; do not over-read statistical power.
-* **G3 No NPC is granted `F004` or `E009`.** Even at progression 2 neither NPC may know them, so there is
-  no valid positive test of a fact becoming available later. BQ009 instead proves that progression alone
-  does not grant knowledge. A grant for one NPC at `reveal_at=2` is needed for that test.
+* **G2 Thin fixture (partly resolved).** The fixture now has 3 NPCs, 11 facts and 11 evidence items, but all 30
+  questions still target the gardener and cook, so they exercise the same ~8 distinct behaviours; the housekeeper
+  has no benchmark questions yet (Sprint 2). Do not over-read statistical power.
+* **G3 Gardener and cook are still never granted `F004` or `E009`** (so BQ009 still proves that progression alone
+  does not grant knowledge). The positive "fact becomes available later" path now exists in the fixture: the
+  housekeeper is granted `F004` and `E009` at `reveal_at=2`, covered by `tests/test_case_acceptance.py`, not by a
+  benchmark question.
 * **G4 No evidence for the cook**, and no discovered-but-not-granted item except `E001` for the cook.
 * **G5 `UNKNOWN_EVIDENCE_ID` untestable** without inventing an ID; excluded on purpose. Likewise unknown
   NPC cases (would need an invented NPC ID).
