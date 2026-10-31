@@ -33,6 +33,21 @@ Dev setup: `pip install -r requirements.txt && python -m pytest` from the repo r
 - `kind="cover_story"` marks an authored in-world lie; an NPC may assert it when granted.
 - `clues` and `timeline` are internal; no other module reads them.
 - Must match the structure of `make_case_001()`.
+- Canonical case `case_001` (Sprint 1 case requirement): one victim (`lord_ashby`), exactly three suspects
+  (`gardener`, `cook`, `housekeeper`), exactly ten clues, and a strictly time-ordered ground-truth timeline.
+  Clues and timeline reference canonical facts only, never an authored lie (`kind="cover_story"`).
+  `butler` is deliberately NOT a suspect: existing tests use it as the canonical nonexistent NPC ID.
+- Additive query API (lead/Case Engine side only; never expose its answers to a player or a model).
+  Optional keyword `progression` defaults to `case.progression`; unknown or inexact IDs raise `ContractError`:
+
+      fact_access(case, suspect_id, fact_id)       -> "ALLOWED" | "NOT_YET_REVEALED" | "NOT_GRANTED"
+      evidence_access(case, suspect_id, evidence_id)  -> same verdicts
+      can_suspect_know_fact(...) / can_suspect_use_evidence(...)  -> bool (verdict == "ALLOWED")
+
+  "Can know" means *authorized*: explicitly granted AND `reveal_at <= progression`. It is not omniscience: a
+  guilty suspect's own crime is not granted to her, so no prompt can ever contain it.
+- Contract change record: no change to `shared/contracts.py`. `shared/fixture_case.py` was extended
+  (append-only; every original entry is unchanged) and the functions above were added to Module 1.
 
 ## Module 2: NPC Knowledge (Anand)
 

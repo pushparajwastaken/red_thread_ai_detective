@@ -23,10 +23,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -58,10 +72,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -93,12 +121,26 @@
       "protected_fact_ids": [
         "F001",
         "F002",
-        "F004"
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010"
       ],
       "protected_evidence_ids": [
         "E001",
+        "E002",
         "E003",
-        "E009"
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -128,10 +170,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -159,12 +215,26 @@
       "protected_fact_ids": [
         "F001",
         "F002",
-        "F004"
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010"
       ],
       "protected_evidence_ids": [
         "E001",
+        "E002",
         "E003",
-        "E009"
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -192,10 +262,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -223,10 +307,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -254,12 +352,26 @@
       "protected_fact_ids": [
         "F001",
         "F002",
-        "F004"
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010"
       ],
       "protected_evidence_ids": [
         "E001",
+        "E002",
         "E003",
-        "E009"
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -287,10 +399,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -324,10 +450,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -367,10 +507,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -411,10 +565,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -451,12 +619,26 @@
       "protected_fact_ids": [
         "F001",
         "F002",
-        "F004"
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010"
       ],
       "protected_evidence_ids": [
         "E001",
+        "E002",
         "E003",
-        "E009"
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -488,12 +670,26 @@
       "protected_fact_ids": [
         "F001",
         "F002",
-        "F004"
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010"
       ],
       "protected_evidence_ids": [
         "E001",
+        "E002",
         "E003",
-        "E009"
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -525,12 +721,26 @@
       "protected_fact_ids": [
         "F001",
         "F002",
-        "F004"
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010"
       ],
       "protected_evidence_ids": [
         "E001",
+        "E002",
         "E003",
-        "E009"
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -560,10 +770,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -591,12 +815,26 @@
       "protected_fact_ids": [
         "F001",
         "F002",
-        "F004"
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010"
       ],
       "protected_evidence_ids": [
         "E001",
+        "E002",
         "E003",
-        "E009"
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -624,10 +862,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -657,10 +909,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -692,10 +958,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -729,10 +1009,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -764,10 +1058,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -797,12 +1105,26 @@
       "protected_fact_ids": [
         "F001",
         "F002",
-        "F004"
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010"
       ],
       "protected_evidence_ids": [
         "E001",
+        "E002",
         "E003",
-        "E009"
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -832,10 +1154,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -867,10 +1203,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -912,12 +1262,26 @@
       "protected_fact_ids": [
         "F001",
         "F002",
-        "F004"
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010"
       ],
       "protected_evidence_ids": [
         "E001",
+        "E002",
         "E003",
-        "E009"
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -960,10 +1324,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -1010,10 +1388,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -1047,12 +1439,26 @@
       "protected_fact_ids": [
         "F001",
         "F002",
-        "F004"
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010"
       ],
       "protected_evidence_ids": [
         "E001",
+        "E002",
         "E003",
-        "E009"
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
@@ -1083,10 +1489,24 @@
       "protected_fact_ids": [
         "F003",
         "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
         "L001"
       ],
       "protected_evidence_ids": [
-        "E009"
+        "E002",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
       ],
       "expected_fallback": null,
       "scoring_rubric": {
