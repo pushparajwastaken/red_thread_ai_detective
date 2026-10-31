@@ -76,7 +76,7 @@ def test_TC_PROG_003_f004_allowed_from_reveal(progression):
 def test_TC_PROG_004_e009_boundary(progression, blocked):
     """Granted E009 (reveal_at=2) flips from AUTH_FUTURE to valid at 2."""
     case = _case(progression, extra_evidence=["E009"])
-    result = _run(case, "The lab found arsenic.", evidence=["E009"])
+    result = _run(case, "Arsenic in the brandy decanter.", evidence=["E009"])
     if blocked:
         _assert_fallback(result, Reason.AUTH_FUTURE)
     else:

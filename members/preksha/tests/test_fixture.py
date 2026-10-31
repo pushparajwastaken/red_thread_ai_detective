@@ -10,8 +10,10 @@ import pytest
 from shared.contracts import CaseState
 from shared.fixture_case import make_case_001
 
-REVEAL_AT = {"F001": 0, "F002": 0, "F003": 0, "F004": 2, "L001": 0}
-
+REVEAL_AT = {
+    "F001": 0, "F002": 0, "F003": 0, "F004": 2, "L001": 0,
+    "F005": 1, "F006": 1, "F007": 0, "F008": 1, "F009": 1, "F010": 2,
+}
 
 def test_TC_FIXTURE_001_identity_and_inventory():
     """Fixture identity: lowercase case_id and the exact ID inventories."""
@@ -20,9 +22,11 @@ def test_TC_FIXTURE_001_identity_and_inventory():
     assert case.case_id == "case_001"
     assert case.progression == 0
     assert set(case.canonical_facts) == set(REVEAL_AT)
-    assert set(case.evidence) == {"E001", "E003", "E009"}
-    assert set(case.npc_grants) == {"gardener", "cook"}
-
+    assert set(case.evidence) == {
+        "E001", "E002", "E003", "E004", "E005", "E006",
+        "E007", "E008", "E009", "E010", "E011",
+    }
+    assert set(case.npc_grants) == {"gardener", "cook", "housekeeper"}
 
 @pytest.mark.parametrize("progression", [0, 1, 2, 5])
 def test_TC_FIXTURE_002_progression_passthrough(progression):
@@ -65,13 +69,20 @@ def test_TC_FIXTURE_006_no_dangling_ids():
     assert set(case.discovered_evidence_ids) <= evidence
 
 
-def test_TC_FIXTURE_007_spoilers_are_never_granted():
-    """F004 and E009 (future plot) are granted to no NPC."""
+def test_TC_FIXTURE_007_spoilers_require_progression():
+    """F004 and E009 are granted to the housekeeper but gated until progression 2."""
     case = make_case_001()
-    granted_facts = {f for g in case.npc_grants.values() for f in g.fact_ids}
-    granted_evid = {e for g in case.npc_grants.values() for e in g.evidence_ids}
-    assert "F004" not in granted_facts
-    assert "E009" not in granted_evid
+
+    housekeeper = case.npc_grants["housekeeper"]
+
+    assert "F004" in housekeeper.fact_ids
+    assert "E009" in housekeeper.evidence_ids
+
+    assert case.reveal_at("F004") == 2
+    assert case.evidence["E009"].reveal_at == 2
+
+    assert case.progression < case.reveal_at("F004")
+    assert case.progression < case.evidence["E009"].reveal_at
 
 
 def test_TC_FIXTURE_008_hostile_evidence_is_inert_data():

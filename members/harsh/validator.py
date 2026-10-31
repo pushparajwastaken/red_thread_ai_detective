@@ -94,8 +94,10 @@ def make_fallback(npc_id: str, reasons: list[str],
 
 def _normalize(text: str) -> str:
     # Text normalization ONLY. IDs remain exact and case-sensitive.
-    return " ".join(unicodedata.normalize("NFKC", text).casefold().split())
-
+    normalized = unicodedata.normalize("NFKC", text).casefold()
+    # Fold common Cyrillic homoglyphs used to evade protected-term matching.
+    normalized = normalized.replace("\u0456", "i")  # Cyrillic small letter і
+    return " ".join(normalized.split())
 
 def _terms(value: object) -> bool:
     return type(value) is list and all(type(t) is str and bool(_normalize(t)) for t in value)

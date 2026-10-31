@@ -239,6 +239,17 @@ def test_unknown_provider_returns_error(make_request, monkeypatch):
         }),
         "x" * (dg.MAX_COMPLETION_CHARS + 1),
     ],
+    ids=[
+        "not-json",
+        "json-array",
+        "missing-both-citations",
+        "blank-text",
+        "fact-ids-not-list",
+        "evidence-ids-not-list",
+        "missing-evidence-ids",
+        "missing-fact-ids",
+        "oversized-output",
+    ],
 )
 def test_malformed_output_fails_closed(make_request, raw):
     dg.set_mock_script("req-1", raw)

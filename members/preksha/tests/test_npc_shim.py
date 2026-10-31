@@ -89,7 +89,7 @@ def test_TC_SHIM_009_unknown_npc_raises_key_error():
 
 @pytest.mark.parametrize("npc_id,text,facts", [
     ("gardener", "I saw a figure by the greenhouse.", ["F001"]),
-    ("cook", "I stayed in the kitchen.", ["L001"]),
+    ("cook", "I never left the kitchen all evening.", ["L001"]),
 ])
 def test_TC_SHIM_010_shim_context_is_accepted_by_validator(npc_id, text, facts):
     """Positive control: validate_dialogue accepts a shim context."""

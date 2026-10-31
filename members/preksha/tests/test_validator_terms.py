@@ -73,7 +73,11 @@ def test_TC_TERMS_003_multiword_term_is_protected_for_gardener():
 
 def test_TC_TERMS_004_multiword_term_cited_is_accepted():
     """Positive control: cook cites F003 and may say 'lady ashby'."""
-    result = _validate("cook", "Lady Ashby looked upset.", facts=["F003"])
+    result = _validate(
+        "cook",
+        "Lady Ashby argued with Lord Ashby about the will.",
+        facts=["F003"],
+    )
     _assert_valid(result)
     assert result.cited_fact_ids == ["F003"]
 

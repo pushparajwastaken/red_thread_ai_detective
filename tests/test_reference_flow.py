@@ -81,8 +81,6 @@ def test_scenario_outcome_codes(s):
         assert res.text == SAFE_FALLBACK_TEXT
         assert res.cited_fact_ids == [] and res.cited_evidence_ids == []
     assert not any(ID_IN_REASON.search(r) for r in res.reasons), "reason codes must not contain IDs"
-
-
 def test_every_required_security_category_is_covered():
     required = {"authorization", "spoiler", "unsupported_claim", "direct_injection", "indirect_injection",
                 "malformed_output", "validator_failure", "timeout", "fallback", "e2e"}
@@ -179,11 +177,16 @@ def test_only_integration_helpers_advance_state_deterministically():
 
 # ------------------------------------------------------------------ robustness: never raises
 @pytest.mark.parametrize("case,npc,q", [
-    (None, "gardener", "hi"), ("case_001", "gardener", "hi"), (load_case("case_001"), None, "hi"),
-    (load_case("case_001"), "gardener", None), (load_case("case_001"), "gardener", 123),
-    (load_case("case_001"), "", "hi"), (load_case("case_001"), "gardener", "\x00" * 10_000),
-    (load_case("case_001"), "gardener", "é" * 100_000),
-])
+    (None, "gardener", "hi"),
+    ("case_001", "gardener", "hi"),
+    (load_case("case_001"), None, "hi"),
+    (load_case("case_001"), "gardener", None),
+    (load_case("case_001"), "gardener", 123),
+    (load_case("case_001"), "", "hi"),
+    (load_case("case_001"), "gardener", "\x00" * 10_000),
+    (load_case("case_001"), "gardener", "\u00e9" * 100_000),
+], ids=["none-case", "case-id", "none-npc", "none-query",
+        "numeric-query", "empty-npc", "null-bytes", "long-unicode"])
 def test_interrogate_never_raises_and_returns_safe_fallback_on_bad_input(case, npc, q):
     res = interrogate(case, npc, q)
     assert isinstance(res, DialogueResult)

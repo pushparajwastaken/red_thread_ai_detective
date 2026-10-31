@@ -89,8 +89,8 @@ def test_TC_IDS_007_empty_string_id_is_schema_invalid(kind):
 
 def test_TC_IDS_008_exact_ids_are_accepted():
     """Positive control: exact, authorized IDs validate and are echoed."""
-    result = _validate("I saw a figure by the greenhouse.",
-                       facts=["F001"], evidence=["E001"])
+    result = _validate("I saw a figure by the greenhouse. A torn glove was found by the greenhouse door.",
+                   facts=["F001"], evidence=["E001"])
     assert Reason.OK in result.reasons, result.reasons
     assert result.used_fallback is False and result.valid is True
     assert result.cited_fact_ids == ["F001"]

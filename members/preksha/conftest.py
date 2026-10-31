@@ -147,6 +147,12 @@ def _write_csv(path: Path, rows: list[dict]):
 
 
 def pytest_sessionfinish(session, exitstatus):
+    global _session_start, _run_id
+
+    if _session_start is None:
+        _session_start = datetime.now()
+        _run_id = _session_start.strftime("%Y%m%d_%H%M%S")
+
     if not _results:
         return
 

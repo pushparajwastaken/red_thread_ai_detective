@@ -75,8 +75,8 @@ def test_TC_UNCITED_005_cook_cover_story_needs_citation():
 
 @pytest.mark.parametrize("npc_id,text,facts,evidence", [
     ("gardener", "I saw a figure by the greenhouse.", ["F001"], []),
-    ("gardener", "A glove lay by the door.", [], ["E001"]),
-    ("cook", "I stayed in the kitchen.", ["L001"], []),
+    ("gardener", "A torn glove was found.", [], ["E001"]),
+    ("cook", "I never left the kitchen all evening.", ["L001"], []),
     ("gardener", "I would rather not say.", [], []),
 ], ids=["fact_cited", "evidence_cited", "cover_story_cited", "no_terms_no_cites"])
 def test_TC_UNCITED_006_supported_or_termless_replies_pass(npc_id, text, facts, evidence):
