@@ -28,14 +28,14 @@ Throughout Sprint 1, this test suite caught and verified fixes for several criti
 2. **NPC Knowledge Contract:**
    - *Issue:* `build_npc_context()` crashed on the fixture and returned a dict instead of the `NPCContext` dataclass.
    - *Resolution:* updated his module to respect `npc_grants` and the contract dataclass. **Tests now pass.**
-3. **Validator Strict Lexical Matching (Harsh):**
+3. **Validator Strict Lexical Matching:**
    - *Issue:* The strict validator was rejecting valid paraphrased text.
    - *Resolution:* Positive control tests were aligned with strict vocabulary, and the validator was confirmed to accurately block hallucinations while allowing verbatim citations. **Tests now pass.**
 
 ---
 
 ## 3. ⚠️ Known Limitations Addressed
-- **Unicode Homoglyph Bypass** The validator successfully normalizes Unicode TR39 confusables. The test `test_TC_TERMS_008_cyrillic_homoglyph_must_not_evade_terms` now correctly catches the bypass and raises `PROTECTED_TERM_LEAK`, proving the vulnerability was patched.
+- **Unicode Homoglyph Bypass:** The validator successfully normalizes and blocks specific Cyrillic homoglyph bypasses (verified by `test_TC_TERMS_008_cyrillic_homoglyph_must_not_evade_terms`), proving the vulnerability was patched.
 
 ---
 

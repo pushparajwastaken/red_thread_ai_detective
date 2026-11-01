@@ -39,11 +39,10 @@ members/preksha/
 │   ├── by_category/               # CSVs aggregated by DoD test categories
 │   ├── by_file/                   # CSVs containing per-test-file results
 │   └── logs/                      # Raw run logs (if captured via script)
-└── tests/                         # 16 active test files mapped to DoD requirements
+└── tests/                         # 17 active test files mapped to DoD requirements
     ├── test_authorization.py      # Rejects unauthorized facts/evidence
     ├── test_case_engine_load.py   # Verifies CASE_001_ID loading logic
     ├── test_contracts.py          # Validates trusted/untrusted boundaries
-    ├── test_demo.py               # basic sanity check
     ├── test_e2e.py                # Full pipeline integration
     ├── test_fixture.py            # Verifies fixture invariant structure
     ├── test_make_fallback.py      # Tests SAFE_FALLBACK_TEXT generation
@@ -83,4 +82,4 @@ During Sprint 1, this test suite caught and verified fixes for several critical 
 
 1. **Case Engine Fixture Drift:** **Fixed.** `case_001` now perfectly matches the golden fixture.
 2. **NPC Knowledge Contract:** **Fixed.** `build_npc_context()` now returns the correct `NPCContext` dataclass and handles the fixture properly.
-3. **Validator Strict Lexical Matching & Homoglyphs:** **Fixed.** The validator now successfully blocks TR39 confusables (Cyrillic `wіll`) and correctly handles strict citations.
+3. **Validator Strict Lexical Matching & Homoglyphs (Harsh):** **Fixed.** The validator now successfully normalizes and blocks specific Cyrillic homoglyph bypasses (Cyrillic `wіll`), verified by test coverage, and correctly handles strict citations.

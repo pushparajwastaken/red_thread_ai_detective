@@ -1,15 +1,18 @@
 """End-to-end tests (TC_E2E_*), source: case_engine.load_case(CASE_001_ID).
 
-Rules enforced (full pipeline, offline mock provider):
- * load_case -> make_npc_context -> DialogueRequest -> generate_dialogue
+Rules enforced (mocked generator-to-validator pipeline):
+ * load_case -> make_npc_context -> DialogueRequest -> mock generate_dialogue
    -> validate_dialogue yields an accepted result for NPC 'gardener'.
  * An accepted result: valid True, used_fallback False, Reason.OK in reasons,
    citations drawn only from what the NPC is authorized to use.
  * The pipeline never mutates the loaded case.
-The mock reply is scripted (verbatim fact text, one authorized citation) so the
-test exercises the real generator parser and validator, not mock wording.
-Uses Richa's real case data, NOT the make_case_001() fixture.
+NOTE: This tests the integration of the Case Engine, NPC shim, mocked Generator,
+and Validator. It does NOT test the final Dialogue Orchestrator (Module 6, Sprint 2).
+Specifically, it uses the production path `case_engine.load_case()` 
+(whose data now perfectly matches the golden fixture) rather than calling 
+the fixture directly.
 """
+
 import copy
 import json
 

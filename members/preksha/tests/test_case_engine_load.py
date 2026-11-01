@@ -1,13 +1,10 @@
 """Case-engine load tests (TC_CASEENG_*), source: case_engine.load_case().
 
-Rule enforced: load_case(CASE_001_ID) returns a contract CaseState. Richa's
-engine accepts ONLY its own CASE_001_ID constant ("case_001", lowercase) and
-defines the NPCs gardener / cook / housekeeper and evidence E001..E011.
-
-This file NEVER touches shared.fixture_case.make_case_001(): the fixture
-(gardener, cook, E001/E003/E009) is a different data source.
-Drift / negative cases live in docs/bug_evidence/test_bug_case_engine_vs_fixture.py.
+Rule enforced: load_case(CASE_001_ID) returns a valid contract CaseState.
+engine defines the NPCs gardener / cook / housekeeper and evidence E001..E011.
+These tests verify the engine's internal data structure directly.
 """
+
 import pytest
 
 from shared.contracts import CaseState, EvidenceItem, NPCGrant
