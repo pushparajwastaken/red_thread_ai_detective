@@ -1,0 +1,45 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.0, pytest-8.3.3, pluggy-1.6.0 -- C:\Users\iambe\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\iambe\.gemini\antigravity\scratch\red_thread_ai_detective
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-0.24.0, web3-6.20.4
+asyncio: mode=Mode.STRICT, default_loop_scope=None
+collecting ... collected 34 items
+
+members/devansh/test_adversarial_security.py::TestDirectInjection::test_direct_injection_ignore_all_instructions_caught PASSED [  2%]
+members/devansh/test_adversarial_security.py::TestDirectInjection::test_direct_injection_authority_impersonation_caught PASSED [  5%]
+members/devansh/test_adversarial_security.py::TestDirectInjection::test_direct_injection_fullwidth_unicode_normalized_and_caught PASSED [  8%]
+members/devansh/test_adversarial_security.py::TestDirectInjection::test_direct_injection_oversized_payload_truncated_and_safe PASSED [ 11%]
+members/devansh/test_adversarial_security.py::TestIndirectInjection::test_indirect_injection_stored_evidence_e003_caught PASSED [ 14%]
+members/devansh/test_adversarial_security.py::TestIndirectInjection::test_indirect_injection_presented_evidence_e003_caught PASSED [ 17%]
+members/devansh/test_adversarial_security.py::TestIndirectInjection::test_indirect_injection_unpermitted_evidence_injection_filtered PASSED [ 20%]
+members/devansh/test_adversarial_security.py::TestSpoilerExtraction::test_spoiler_future_fact_f004_uncited_caught_as_protected_leak PASSED [ 23%]
+members/devansh/test_adversarial_security.py::TestSpoilerExtraction::test_spoiler_future_fact_f004_cited_caught_as_unauthorized_fact PASSED [ 26%]
+members/devansh/test_adversarial_security.py::TestSpoilerExtraction::test_spoiler_future_evidence_e009_citation_caught PASSED [ 29%]
+members/devansh/test_adversarial_security.py::TestSpoilerExtraction::test_spoiler_future_evidence_presented_by_player_dropped PASSED [ 32%]
+members/devansh/test_adversarial_security.py::TestUnauthorizedClaims::test_unauthorized_fact_cross_npc_leak_caught PASSED [ 35%]
+members/devansh/test_adversarial_security.py::TestUnauthorizedClaims::test_unauthorized_fact_citation_caught PASSED [ 38%]
+members/devansh/test_adversarial_security.py::TestUnauthorizedClaims::test_uncited_assertion_of_authorized_fact_caught PASSED [ 41%]
+members/devansh/test_adversarial_security.py::TestFallbackInvariance::test_fallback_invariants_across_all_attack_vectors[compromised] PASSED [ 44%]
+members/devansh/test_adversarial_security.py::TestFallbackInvariance::test_fallback_invariants_across_all_attack_vectors[compromised_cited] PASSED [ 47%]
+members/devansh/test_adversarial_security.py::TestFallbackInvariance::test_fallback_invariants_across_all_attack_vectors[cites_future_evidence] PASSED [ 50%]
+members/devansh/test_adversarial_security.py::TestFallbackInvariance::test_fallback_invariants_across_all_attack_vectors[follows_evidence_inj] PASSED [ 52%]
+members/devansh/test_adversarial_security.py::TestFallbackInvariance::test_fallback_invariants_across_all_attack_vectors[uncited] PASSED [ 55%]
+members/devansh/test_adversarial_security.py::TestFallbackInvariance::test_fallback_invariants_across_all_attack_vectors[cites_unknown_fact] PASSED [ 58%]
+members/devansh/test_adversarial_security.py::TestFallbackInvariance::test_fallback_invariants_across_all_attack_vectors[malformed] PASSED [ 61%]
+members/devansh/test_adversarial_security.py::TestFallbackInvariance::test_fallback_invariants_across_all_attack_vectors[too_long] PASSED [ 64%]
+members/devansh/test_adversarial_security.py::TestFallbackInvariance::test_fallback_invariants_across_all_attack_vectors[bad_metrics] PASSED [ 67%]
+members/devansh/test_adversarial_security.py::TestFallbackInvariance::test_fallback_invariants_across_all_attack_vectors[timeout] PASSED [ 70%]
+members/devansh/test_adversarial_security.py::TestFallbackInvariance::test_fallback_invariants_across_all_attack_vectors[error] PASSED [ 73%]
+members/devansh/test_adversarial_security.py::TestObfuscationEvasionLimits::test_fullwidth_unicode_is_caught_by_normalization PASSED [ 76%]
+members/devansh/test_adversarial_security.py::TestObfuscationEvasionLimits::test_documented_lexical_limits[leet_leak] PASSED [ 79%]
+members/devansh/test_adversarial_security.py::TestObfuscationEvasionLimits::test_documented_lexical_limits[cyrillic_leak] PASSED [ 82%]
+members/devansh/test_adversarial_security.py::TestObfuscationEvasionLimits::test_documented_lexical_limits[hyphen_leak] PASSED [ 85%]
+members/devansh/test_adversarial_security.py::TestObfuscationEvasionLimits::test_documented_lexical_limits[zero_width_leak] PASSED [ 88%]
+members/devansh/test_adversarial_security.py::TestObfuscationEvasionLimits::test_documented_lexical_limits[spaced_leak] PASSED [ 91%]
+members/devansh/test_adversarial_security.py::TestObfuscationEvasionLimits::test_documented_lexical_limits[reversed_leak] PASSED [ 94%]
+members/devansh/test_adversarial_security.py::TestObfuscationEvasionLimits::test_documented_lexical_limits[inflection_leak] PASSED [ 97%]
+members/devansh/test_adversarial_security.py::TestObfuscationEvasionLimits::test_documented_lexical_limits[paraphrased_leak] PASSED [100%]
+
+============================= 34 passed in 0.30s ==============================
