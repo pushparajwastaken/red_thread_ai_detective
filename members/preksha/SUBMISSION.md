@@ -27,7 +27,7 @@ Dependencies: `pytest` (already in `requirements.txt`). No external APIs are cal
 ```bash
 cd members/preksha
 python -m pytest -v
-
+```
 ## 3. ✅ Definition of Done (DoD) Checklist
 - [x] Tests categories: `authorization`, `spoiler`, `unsupported_claim`, `malformed_output`, `validator_failure`, `timeout`, `fallback`, `e2e`.
 - [x] Asserts `DialogueResult.reasons` and `used_fallback`, never relying solely on message text.
