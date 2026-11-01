@@ -138,6 +138,7 @@ def pytest_runtest_makereport(item, call):
 
 
 def _write_csv(path: Path, rows: list[dict]):
+    path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = ["test_id", "file", "function", "class",
                   "status", "duration_ms", "message", "category"]
     with open(path, "w", newline="", encoding="utf-8") as f:
